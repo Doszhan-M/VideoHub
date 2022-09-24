@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14.2
+    restart: on-failure
+    volumes:
+      - ./conf/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./pgdata:/var/lib/postgresql/data
+    env_file:
+      - .env
+

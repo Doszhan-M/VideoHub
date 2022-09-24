@@ -1,0 +1,11 @@
+docker exec -it backend_pk_backend_1 bash 
+
+python3 manage.py makemigrations
+python3 manage.py migrate
+
+python3 manage.py makemigrations --noinput
+python3 manage.py collectstatic --noinput
+
+
+python3 manage.py createcachetable
+python3 manage.py createsuperuser
