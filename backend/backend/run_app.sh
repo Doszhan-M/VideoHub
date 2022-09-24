@@ -2,8 +2,8 @@
 
 
 python3 manage.py migrate
-# python3 manage.py createcachetable
-# python3 manage.py collectstatic --noinput
+python3 manage.py createcachetable
+python3 manage.py collectstatic --noinput
 
 if [ "$DEPLOY" = "TRUE" ]; then
     echo "------------------------------------------------------------------------------------"
@@ -16,7 +16,7 @@ else
     echo "------------------------------------------------------------------------------------"
     echo "RUNNING TEST"
     echo "------------------------------------------------------------------------------------"
-    gunicorn --workers 1 --threads 1 root.wsgi --bind [::]:8000 --reload --log-level=debug \
+    gunicorn --workers 2 --threads 2 root.wsgi --bind [::]:8000 --reload --log-level=debug \
      --access-logfile '-' --error-logfile '-' \
      --access-logformat "%(m)s: %(U)s - %(s)s"
 fi

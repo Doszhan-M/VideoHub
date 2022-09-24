@@ -9,6 +9,8 @@ services:
       - ./pgdata:/var/lib/postgresql/data
     env_file:
       - .env
+    logging:
+      driver: "none"
 
   backend:
     build:
