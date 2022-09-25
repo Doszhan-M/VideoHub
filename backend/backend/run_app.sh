@@ -9,7 +9,7 @@ if [ "$DEPLOY" = "TRUE" ]; then
     echo "------------------------------------------------------------------------------------"
     echo "RUNNING DEPLOY"
     echo "------------------------------------------------------------------------------------"
-    gunicorn --workers 3 --threads 3 root.wsgi --bind [::]:8000 --log-level=debug \
+    gunicorn --workers 4 --threads 4 root.wsgi --bind [::]:8000 --log-level=debug \
      --access-logfile '-' --error-logfile '-' \
      --access-logformat "%(m)s: %(U)s - %(s)s"
 else
