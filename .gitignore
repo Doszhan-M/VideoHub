@@ -4,3 +4,4 @@
 *.log*
 **/pgdata/
 **/redis_data/
+test.py
