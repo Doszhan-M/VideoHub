@@ -31,3 +31,15 @@ services:
       - .env
     depends_on:
       - postgres
+
+  celery_backend:
+    build:
+      context: ./backend
+      dockerfile: ./celery.dockerfile
+    restart: on-failure
+    volumes:
+      - ./backend/backend:/backend/
+    env_file:
+      - .env
+    depends_on:
+      - backend
