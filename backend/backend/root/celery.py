@@ -1,4 +1,5 @@
 import os
+from logging import getLogger
 
 from celery import Celery
 from celery.schedules import crontab
@@ -10,20 +11,12 @@ app = Celery('root')
 app.config_from_object('django.conf:settings', namespace='CELERY')
 app.conf.timezone = 'Asia/Almaty'
 app.autodiscover_tasks()
-
-
-@app.task(bind=True)
-def debug_task(self):
-    print(f'Request: {self.request!r}')
-    
-
-# CUSTOM CELERY LOGGING
-@setup_logging.connect  
-def setup_celery_logging(**kwargs):  
-    return getLogger('celery') 
     
     
 ### CELERY BEAT
 app.conf.beat_schedule = {  
-
+    'test': {
+        'task': 'accounts.tasks.test',
+        'schedule': 300,
+    },
 }
