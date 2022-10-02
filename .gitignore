@@ -4,4 +4,5 @@
 *.log*
 **/pgdata/
 **/redis_data/
+celerybeat-schedule
 test.py
