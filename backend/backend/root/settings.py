@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'storages',
     
     'accounts',
+    'main',
 ]
 
 MIDDLEWARE = [

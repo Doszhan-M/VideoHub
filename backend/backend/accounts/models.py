@@ -15,6 +15,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=150, blank=True)
     last_name = models.CharField(max_length=150, blank=True)
     date_joined = models.DateTimeField(default=timezone.now)
+    is_banned = models.BooleanField(default=False)
 
     objects = CustomUserManager()
 
