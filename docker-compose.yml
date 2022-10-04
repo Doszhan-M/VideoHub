@@ -9,13 +9,14 @@ services:
       - ./pgdata:/var/lib/postgresql/data
     env_file:
       - .env
+
     logging:
       driver: "none"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready"]
-      interval: 60s
-      timeout: 5s
-      retries: 5
+      interval: 1s
+      timeout: 1s
+      retries: 15
       start_period: 5s
 
   backend:
@@ -30,7 +31,8 @@ services:
     env_file:
       - .env
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
 
   celery_backend:
     build:
