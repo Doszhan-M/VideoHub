@@ -64,3 +64,4 @@ class LikeVideo(models.Model):
 
     def __str__(self):
         return self.user + self.video 
+    
