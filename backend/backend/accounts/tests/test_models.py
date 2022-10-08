@@ -18,14 +18,12 @@ class UserTest(TestCase):
         """ Check custom phone number validation.
         """
         with self.assertRaises(ValidationError):
-            self.user1.full_clean()
             self.user1.save()
         self.assertEqual(User.objects.count(), 0)
         
     def test_email_lowercase(self):
         """ Check that email is saved in lowercase.
         """
-        self.user2.full_clean()
         self.user2.save()
         self.assertEqual(self.user2.email, 'test@test.com')
         

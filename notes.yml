@@ -14,4 +14,4 @@ Group --- aws_django_s3_group
 Access key ID --- AKIA6NYOVUP4X5TKKPMU
 Secret access key --- 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
 
-mediastatic
+mkcert --cert-file ./certs/nginx.crt --key-file ./certs/nginx.key video.localhost
