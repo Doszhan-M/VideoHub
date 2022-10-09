@@ -1,5 +1,9 @@
 version: '3.8'
 
+volumes:
+  elasticdata:
+
+
 services:
   nginx:
     image: nginx:1.23.1
@@ -16,7 +20,7 @@ services:
     logging:
       driver: "none"
     extra_hosts:
-    - "host.docker.internal:host-gateway"
+      - "host.docker.internal:host-gateway"
     depends_on:
       - backend
 
@@ -72,19 +76,19 @@ services:
     logging:
       driver: "none"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready"]
+      test: [ "CMD-SHELL", "pg_isready" ]
       interval: 1s
       timeout: 1s
       retries: 15
       start_period: 1s
-      
+
   redis:
     image: redis:7.0.0
     restart: on-failure
     logging:
       driver: none
     healthcheck:
-      test: ["CMD", "redis-cli","ping"]
+      test: [ "CMD", "redis-cli", "ping" ]
       interval: 60s
       timeout: 5s
       retries: 5
@@ -92,7 +96,7 @@ services:
 
   flower_backend:
     image: mher/flower
-    command: ["celery", "flower", "--url-prefix=flower_backend"]
+    command: [ "celery", "flower", "--url-prefix=flower_backend" ]
     restart: on-failure
     environment:
       - DEBUG=1
@@ -106,3 +110,14 @@ services:
       - 5555:5555
     depends_on:
       - celery_backend
+
+  elastic:
+    build: elastic/
+    restart: on-failure
+    environment:
+      - xpack.security.enabled=false
+      - "discovery.type=single-node"
+    ports:
+      - 9200:9200
+    volumes:
+      - elasticdata:/usr/share/elasticsearch/data

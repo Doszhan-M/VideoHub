@@ -20,7 +20,6 @@ admin.site.register(User)
 admin.site.unregister(models.OutstandingToken)
 admin.site.register(models.OutstandingToken, NewOutstandingTokenAdmin)
 
-# user1 = User.objects.create(phone='87017075566', email='test@test.com', password='testpass')
 
 try:
     DjangoUser = get_user_model()
