@@ -16,7 +16,7 @@ class Channel(models.Model):
         
     def save(self, *args, **kwargs):
         if len(self.title) == 0 :
-            self.title = self.user.first_name   
+            self.title = self.owner.first_name   
         super(Channel, self).save(*args, **kwargs)
         
     def __str__(self):
@@ -54,14 +54,24 @@ class SubscribeChannel(models.Model):
     channel = models.ForeignKey(Channel, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    class Meta:
+        constraints = [models.UniqueConstraint(
+            fields=['user', 'channel'],
+            name='user_and_channel_unique',)]
+        
     def __str__(self):
-        return self.user + self.channel 
-    
+        return f'{self.user.__str__()} + {self.channel.__str__()}'
+
     
 class LikeVideo(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     video = models.ForeignKey(Video, on_delete=models.CASCADE)
-
+    
+    class Meta:
+        constraints = [models.UniqueConstraint(
+            fields=['user', 'video'],
+            name='user_and_video_unique',)]
+        
     def __str__(self):
-        return self.user + self.video 
+        return f'{self.user.__str__()} + {self.video.__str__()}'
     

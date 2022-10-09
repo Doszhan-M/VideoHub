@@ -1,38 +1,93 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
-from django.core.exceptions import ValidationError
 
-from ..models import Channel
+from ..models import (
+    Channel, Video, Comment, SubscribeChannel,
+    LikeVideo,
+)
 
 
 User = get_user_model()
 
 
 class ChannelTest(TestCase):
-    ''' User model testing
+    ''' Channel model testing
     '''
-    
+
+    def setUp(self):
+        self.user = User.objects.create(
+            email='tesT@teSt.com', first_name='test_user', password='testpass')
+        self.channel = Channel.objects.create(owner=self.user, description='my channel')
+
+    def test_channel_title(self):
+        """ Check channel_title if it not set.
+        """
+        self.assertEqual(self.channel.title, self.user.first_name)
+
+    def test_str(self):
+        """ Check string representation.
+        """
+        self.assertEqual(self.channel.__str__(), 'test_user')
+
+
+class VideoTest(TestCase):
+    ''' Video model testing
+    '''
+
     def setUp(self):
         self.user = User.objects.create(email='tesT@teSt.com', password='testpass')
-        self.channel = Channel(phone='87017075566', email='test@test.com', password='testpass')
-        
-    def test_phone_format(self):
-        """ Check custom phone number validation.
-        """
-        with self.assertRaises(ValidationError):
-            self.user1.full_clean()
-            self.user1.save()
-        self.assertEqual(User.objects.count(), 0)
-        
-    def test_email_lowercase(self):
-        """ Check that email is saved in lowercase.
-        """
-        self.user2.full_clean()
-        self.user2.save()
-        self.assertEqual(self.user2.email, 'test@test.com')
-        
+        self.channel = Channel.objects.create(owner=self.user, description='my channel')
+        self.video = Video.objects.create(elastic_id='qwerty', channel=self.channel, title='test', )
+
     def test_str(self):
-        """ Check if string representation returns email.
+        """ Check string representation.
         """
-        self.assertEqual(self.user1.__str__(), 'test@test.com')
+        self.assertEqual(self.video.__str__(), 'test')
+
+
+class CommentTest(TestCase):
+    ''' Comment model testing
+    '''
+
+    def setUp(self):
+        self.user = User.objects.create(email='tesT@teSt.com', password='testpass')
+        self.channel = Channel.objects.create(owner=self.user, description='my channel')
+        self.video = Video.objects.create(elastic_id='qwerty', channel=self.channel, title='test', )
+        self.comment = Comment.objects.create(text='test text', user=self.user, video=self.video)
+
+    def test_str(self):
+        """ Check string representation.
+        """
+        self.assertEqual(self.comment.__str__(), 'test text')
+        
+
+class SubscribeChannelTest(TestCase):
+    ''' SubscribeChannel model testing
+    '''
+
+    def setUp(self):
+        self.user = User.objects.create(email='tesT@teSt.com', password='testpass')
+        self.channel = Channel.objects.create(owner=self.user, title='my channel')
+        self.subscribe = SubscribeChannel.objects.create(user=self.user, channel=self.channel)
+
+    def test_str(self):
+        """ Check string representation.
+        """
+        self.assertEqual(self.subscribe.__str__(), 'test@test.com + my channel')
+
+
+class LikeVideoChannelTest(TestCase):
+    ''' LikeVideo model testing
+    '''
+
+    def setUp(self):
+        self.user = User.objects.create(email='tesT@teSt.com', password='testpass')
+        self.channel = Channel.objects.create(owner=self.user, title='my channel')
+        self.video = Video.objects.create(elastic_id='qwerty', channel=self.channel, title='test', )
+        self.like = LikeVideo.objects.create(user=self.user, video=self.video)
+
+    def test_str(self):
+        """ Check string representation.
+        """
+        self.assertEqual(self.like.__str__(), 'test@test.com + test') 
         
