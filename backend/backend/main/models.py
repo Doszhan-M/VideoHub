@@ -24,7 +24,6 @@ class Channel(models.Model):
 
 
 class Video(models.Model):
-    elastic_id = models.CharField(max_length=100, db_index=True)
     channel = models.ForeignKey(Channel, on_delete=models.CASCADE)
     title = models.CharField(max_length=256,)
     video_file = models.FileField(

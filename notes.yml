@@ -5,14 +5,7 @@ python3 manage.py test
 python3 manage.py makemigrations
 python3 manage.py migrate
 
-
-doszhan.work@gmail.com
-doszhan.work
-^!2j4N3yW/n9R8B
-
-User --- aws_django_user
-Group --- aws_django_s3_group
-Access key ID --- AKIA6NYOVUP4X5TKKPMU
-Secret access key --- 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
+python manage.py search_index --rebuild
+python manage.py search_index --create [--models [app[.model] app[.model] ...]]
 
 mkcert --cert-file ./certs/nginx.crt --key-file ./certs/nginx.key video.localhost

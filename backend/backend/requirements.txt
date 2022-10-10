@@ -6,9 +6,12 @@ django-admin-menu==1.6
 djangorestframework==3.13.1
 django-cors-headers==3.13.0
 djangorestframework-simplejwt==4.8.0
+django-elasticsearch-dsl==7.2.2
 django-storages==1.13.1
 djoser==2.1.0
 drf-yasg==1.21.3
+elasticsearch==7
+elasticsearch-dsl==7.4.0
 gunicorn == 20.1.0
 packaging==21.3
 psycopg2-binary==2.9.3

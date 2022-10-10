@@ -8,9 +8,10 @@ from .yasg import urlpatterns as yasg_urls
 
 urlpatterns = [     
     path('admin/', admin.site.urls),
-    path('auth/', include('djoser.urls')),
-    path('auth/', include('djoser.urls.jwt')),
-    path('accounts/', include('accounts.urls'))
+    path('api/web/auth/', include('djoser.urls')),
+    path('api/web/auth/', include('djoser.urls.jwt')),
+    path('api/web/accounts/', include('accounts.urls')),
+    path('api/web/', include('main.urls'))
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += yasg_urls
