@@ -20,3 +20,5 @@ class SearchVideo(ListAPIView):
         search = VideoDocument.search().query(query)
         queryset = search.to_queryset()
         return queryset
+
+

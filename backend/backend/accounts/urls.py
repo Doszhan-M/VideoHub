@@ -1,13 +1,13 @@
 from django.urls import path
 
 from .views import (
-    SessionLogin, SessionCheck, SessionLogout, GetCsrf
+    LoginAuth0, SessionCheck, SessionLogout, GenerateCsrf
 )
 
 
 urlpatterns = [
-    path("session_login/", SessionLogin.as_view(), name="session_login"),
+    path("authO/login/", LoginAuth0.as_view(), name="session_login"),
     path("session_logout/", SessionLogout.as_view(), name="session_logout"),
     path("check_session/", SessionCheck.as_view(), name="check_session"),
-    path("get_csrf/", GetCsrf.as_view(), name="get_csrf"),
+    path("csrf/", GenerateCsrf.as_view(), name="csrf"),
 ]

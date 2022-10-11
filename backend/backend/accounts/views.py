@@ -2,28 +2,26 @@
 from rest_framework.views import APIView
 from django.middleware.csrf import get_token
 from rest_framework.response import Response
+from django.http import HttpResponseRedirect
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import authenticate, login, logout
 from rest_framework.authentication import SessionAuthentication
 
 from .exceptions import ProvideError, CredentialsError
+from .managers.sso import SsoManager
 
 
-class SessionLogin(APIView):
-    ''' Session based login
+class LoginAuth0(APIView):
+    ''' Authorize the user if he passed
+    SSO authentication 
     '''
+
     def get(self, request, *args, **kwargs):
-        email = request.data.get('email', None)
-        password = request.data.get('password', None)
-        email = 'admin@admin.kz'
-        password = 'scENoUsemArl'
-        if email is None or password is None:
-            raise ProvideError
-        user = authenticate(email=email, password=password)
-        if user is None:
-            raise CredentialsError
-        login(request, user)
-        return Response({'detail': f'logged in as {user}'})
+        sso = SsoManager(request)
+        # user = sso.get_or_create_user()
+        # login(request, user)
+        # sso.store_session_id(request.session.cache_key)
+        return HttpResponseRedirect(sso.redirect_url)
     
     
 class SessionLogout(APIView):
@@ -42,8 +40,11 @@ class SessionCheck(APIView):
         return Response(f'isAuthenticated {request.user}')
 
 
-class GetCsrf(APIView):
-    
-    def get(self, request):
-        return Response({'X-CSRFToken' : get_token(request)})
+class GenerateCsrf(APIView):
+    ''' Вернуть токен CSRF, необходимый для формы POST
+    '''
+
+    def get(self, request, *args, **kwargs):
+        response = {'X-CSRFToken': get_token(request)}
+        return Response(response)
     
