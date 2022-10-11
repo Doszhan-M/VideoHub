@@ -37,7 +37,7 @@ class VideoTest(TestCase):
     def setUp(self):
         self.user = User.objects.create(email='tesT@teSt.com', password='testpass')
         self.channel = Channel.objects.create(owner=self.user, description='my channel')
-        self.video = Video.objects.create(elastic_id='qwerty', channel=self.channel, title='test', )
+        self.video = Video.objects.create(channel=self.channel, title='test', )
 
     def test_str(self):
         """ Check string representation.
@@ -52,7 +52,7 @@ class CommentTest(TestCase):
     def setUp(self):
         self.user = User.objects.create(email='tesT@teSt.com', password='testpass')
         self.channel = Channel.objects.create(owner=self.user, description='my channel')
-        self.video = Video.objects.create(elastic_id='qwerty', channel=self.channel, title='test', )
+        self.video = Video.objects.create(channel=self.channel, title='test', )
         self.comment = Comment.objects.create(text='test text', user=self.user, video=self.video)
 
     def test_str(self):
@@ -83,7 +83,7 @@ class LikeVideoChannelTest(TestCase):
     def setUp(self):
         self.user = User.objects.create(email='tesT@teSt.com', password='testpass')
         self.channel = Channel.objects.create(owner=self.user, title='my channel')
-        self.video = Video.objects.create(elastic_id='qwerty', channel=self.channel, title='test', )
+        self.video = Video.objects.create(channel=self.channel, title='test', )
         self.like = LikeVideo.objects.create(user=self.user, video=self.video)
 
     def test_str(self):
