@@ -4,10 +4,9 @@ from django.middleware.csrf import get_token
 from rest_framework.response import Response
 from django.http import HttpResponseRedirect
 from rest_framework.permissions import IsAuthenticated
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import login, logout
 from rest_framework.authentication import SessionAuthentication
 
-from .exceptions import ProvideError, CredentialsError
 from .managers.sso import SsoManager
 
 
@@ -18,18 +17,19 @@ class LoginAuth0(APIView):
 
     def get(self, request, *args, **kwargs):
         sso = SsoManager(request)
-        # user = sso.get_or_create_user()
-        # login(request, user)
-        # sso.store_session_id(request.session.cache_key)
+        user = sso.get_or_create_user()
+        login(request, user)
         return HttpResponseRedirect(sso.redirect_url)
     
     
-class SessionLogout(APIView):
-    ''' Session based login
+class LogoutAuth0(APIView):
+    ''' Logout user if he logout from SSO
     '''
-    def get(self, request, *args, **kwargs):
+
+    def get(self, request) -> Response:
         logout(request)
-        return Response({'detail': 'Successfully logged out.'})
+        return HttpResponseRedirect('/')
+
 
 
 class SessionCheck(APIView):
@@ -37,11 +37,19 @@ class SessionCheck(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        return Response(f'isAuthenticated {request.user}')
+        return Response({'isAuthenticated' : request.user})
 
 
+class SessionId(APIView):
+    ''' Get session_id and new csrf
+    '''
+    def get(self, request, *args, **kwargs):
+        session_id = SsoManager.get_session_id(request)
+        return Response(session_id)
+    
+    
 class GenerateCsrf(APIView):
-    ''' Вернуть токен CSRF, необходимый для формы POST
+    ''' Return CSRF token required for form POST
     '''
 
     def get(self, request, *args, **kwargs):

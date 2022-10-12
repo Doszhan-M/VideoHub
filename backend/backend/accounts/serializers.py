@@ -17,3 +17,4 @@ class RegistrationSerializer(UserCreateSerializer):
 class UserMeSerializer(UserSerializer):
     class Meta(UserSerializer.Meta):
         fields = ('email', 'phone', )
+        
