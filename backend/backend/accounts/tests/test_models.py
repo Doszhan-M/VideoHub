@@ -11,8 +11,8 @@ class UserTest(TestCase):
     '''
     
     def setUp(self):
-        self.user1 = User(phone='87017075566', email='test@test.com', password='testpass')
-        self.user2 = User(email='tesT@teSt.com', password='testpass')
+        self.user1 = User(phone='87017075566', email='test@test.com', password='testpass', sub='test_sub')
+        self.user2 = User(email='tesT@teSt.com', password='testpass', sub='test_sub')
         
     def test_phone_format(self):
         """ Check custom phone number validation.

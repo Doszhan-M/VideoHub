@@ -16,7 +16,7 @@ class ChannelTest(TestCase):
 
     def setUp(self):
         self.user = User.objects.create(
-            email='tesT@teSt.com', first_name='test_user', password='testpass')
+            email='tesT@teSt.com', first_name='test_user', password='testpass', sub='test_sub')
         self.channel = Channel.objects.create(owner=self.user, description='my channel')
 
     def test_channel_title(self):
@@ -35,7 +35,7 @@ class VideoTest(TestCase):
     '''
 
     def setUp(self):
-        self.user = User.objects.create(email='tesT@teSt.com', password='testpass')
+        self.user = User.objects.create(email='tesT@teSt.com', password='testpass', sub='test_sub')
         self.channel = Channel.objects.create(owner=self.user, description='my channel')
         self.video = Video.objects.create(channel=self.channel, title='test', )
 
@@ -50,7 +50,7 @@ class CommentTest(TestCase):
     '''
 
     def setUp(self):
-        self.user = User.objects.create(email='tesT@teSt.com', password='testpass')
+        self.user = User.objects.create(email='tesT@teSt.com', password='testpass', sub='test_sub')
         self.channel = Channel.objects.create(owner=self.user, description='my channel')
         self.video = Video.objects.create(channel=self.channel, title='test', )
         self.comment = Comment.objects.create(text='test text', user=self.user, video=self.video)
@@ -66,7 +66,7 @@ class SubscribeChannelTest(TestCase):
     '''
 
     def setUp(self):
-        self.user = User.objects.create(email='tesT@teSt.com', password='testpass')
+        self.user = User.objects.create(email='tesT@teSt.com', password='testpass', sub='test_sub')
         self.channel = Channel.objects.create(owner=self.user, title='my channel')
         self.subscribe = SubscribeChannel.objects.create(user=self.user, channel=self.channel)
 
@@ -81,7 +81,7 @@ class LikeVideoChannelTest(TestCase):
     '''
 
     def setUp(self):
-        self.user = User.objects.create(email='tesT@teSt.com', password='testpass')
+        self.user = User.objects.create(email='tesT@teSt.com', password='testpass', sub='test_sub')
         self.channel = Channel.objects.create(owner=self.user, title='my channel')
         self.video = Video.objects.create(channel=self.channel, title='test', )
         self.like = LikeVideo.objects.create(user=self.user, video=self.video)

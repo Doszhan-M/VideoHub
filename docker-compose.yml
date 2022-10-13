@@ -7,6 +7,7 @@ volumes:
 services:
   nginx:
     image: nginx:1.23.1
+    restart: on-failure
     ports:
       - target: 443
         published: 443

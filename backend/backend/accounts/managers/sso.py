@@ -61,7 +61,6 @@ class SsoManager():
         '''
         try:
             user = User.objects.get(sub=self.sso_data['sub'])
-            print(user)
         except User.DoesNotExist:
             user_data = {
                 'sub': self.sso_data.get('sub'),

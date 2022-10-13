@@ -32,7 +32,7 @@ class Video(models.Model):
                 allowed_extensions=['MOV', 'avi', 'mp4', 'webm', 'mkv'])])
     description = models.TextField(blank=True)
     hashtag = models.TextField(blank=True)
-    upload_date = models.DateField(default=timezone.now)
+    upload_date = models.DateTimeField(default=timezone.now)
     likes = models.ManyToManyField(User, blank=True, through='LikeVideo',
                                      through_fields=('video', 'user'),)
     def __str__(self):

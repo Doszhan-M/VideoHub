@@ -6,7 +6,7 @@ from django.db.models.signals import (
 from .models import User
 
 
-@receiver(post_save, sender=User)
+# @receiver(post_save, sender=User)
 def signal_test(sender, instance: User, created, update_fields, *args, **kwargs):
     ''' Test signal.
     '''
