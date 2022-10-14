@@ -15,16 +15,27 @@ class AdminUpdatedFields(admin.ModelAdmin):
             super().save_model(request, obj, form, change)
 
 
+class LikeVideoInline(admin.TabularInline):
+    model = LikeVideo
+    extra = 1
+
+
 class VideoDash(AdminUpdatedFields):
-    list_display = ( 'title', 'channel', 'upload_date')
+    list_display = ( 'title', 'channel', 'upload_date', 'id',)
     list_display_links = ('channel', 'title', 'upload_date')
     search_fields = ('channel', 'title',)
     list_filter = ['channel',]
+    inlines = (LikeVideoInline,)
+    
+    
+class CommentDash(AdminUpdatedFields):
+    list_display = ( 'user', 'video', 'create', 'id',)
+    list_display_links = ('user', 'video', 'create', 'id',)
     
     
 admin.site.register(Video, VideoDash)
 admin.site.register(Channel)
-admin.site.register(Comment)
+admin.site.register(Comment, CommentDash)
 admin.site.register(LikeVideo)
 admin.site.register(SubscribeChannel)
 
