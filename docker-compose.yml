@@ -66,23 +66,6 @@ services:
       - backend
       - redis
 
-  postgres:
-    image: postgres:14.2
-    restart: on-failure
-    volumes:
-      - ./conf/init.sql:/docker-entrypoint-initdb.d/init.sql
-      - ./pgdata:/var/lib/postgresql/data
-    env_file:
-      - .env
-    logging:
-      driver: "none"
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready" ]
-      interval: 1s
-      timeout: 1s
-      retries: 15
-      start_period: 1s
-
   redis:
     image: redis:7.0.0
     restart: on-failure
@@ -122,3 +105,20 @@ services:
       - 9200:9200
     volumes:
       - elasticdata:/usr/share/elasticsearch/data
+
+  # postgres:
+  #   image: postgres:14.2
+  #   restart: on-failure
+  #   volumes:
+  #     - ./conf/init.sql:/docker-entrypoint-initdb.d/init.sql
+  #     - ./pgdata:/var/lib/postgresql/data
+  #   env_file:
+  #     - .env
+  #   logging:
+  #     driver: "none"
+  #   healthcheck:
+  #     test: [ "CMD-SHELL", "pg_isready" ]
+  #     interval: 1s
+  #     timeout: 1s
+  #     retries: 15
+  #     start_period: 1s
