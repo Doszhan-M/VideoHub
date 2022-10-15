@@ -1,4 +1,1 @@
- 2022-10-15 15:51:39,684  INFO - gunicorn.error - Worker reloading: /backend/root/settings.py modified
- 2022-10-15 15:51:39,684  INFO - gunicorn.error - Worker reloading: /backend/root/settings.py modified
- 2022-10-15 15:51:40,520  INFO - gunicorn.error - Worker exiting (pid: 10)
- 2022-10-15 15:51:40,598  INFO - gunicorn.error - Worker exiting (pid: 11)
+ 2022-10-15 16:06:48,661  INFO - gunicorn.access - GET: /api/web/search/all_videos/ - 200
