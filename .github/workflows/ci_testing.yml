@@ -1,4 +1,4 @@
-name: Project CI
+name: Project Testing
 
 on:
   push:
@@ -19,7 +19,8 @@ jobs:
 
   testing:
     runs-on: ubuntu-latest
+    needs: [build]
 
     steps:
     - name: Start backend test
-      run: docker ps
+      run: docker exec videohosting_backend_1 bash -c "python3 manage.py test"
