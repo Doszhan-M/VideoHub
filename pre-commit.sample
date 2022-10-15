@@ -6,10 +6,12 @@ docker exec videohosting_backend_1 bash -c "python3 manage.py test"
 
 RESULT=$?
 if [ $RESULT -ne 0 ]; then
+    RED='\033[0;31m'
+    NC='\033[0m' # No Color
     echo ""
     echo ""
     echo "------------------------------------------------------------------------"
-    echo "The Tests Have Failed! Cancelling Push!"
+    echo "The ${RED}Tests Have Failed!${NC}Cancelling Push!"
     echo "------------------------------------------------------------------------"
     echo ""
     echo ""
