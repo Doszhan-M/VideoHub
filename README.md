@@ -1,4 +1,4 @@
-![Build Status](https://github.com/Doszhan-M/video.hosting/actions/workflows/testing.yml/badge.svg?branch=master)
+![Build Status](https://github.com/Doszhan-M/video.hosting/actions/workflows/ci_testing.yml/badge.svg?branch=master)
 
 
 # Название проекта: 

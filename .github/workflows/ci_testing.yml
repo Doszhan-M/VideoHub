@@ -8,19 +8,12 @@ on:
 
 jobs:
 
-  build:
+  build_and_testing:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
-    - name: Start all services
-      run: docker-compose up --build -d
-
-
-  testing:
-    runs-on: ubuntu-latest
-    needs: [build]
-
-    steps:
-    - name: Start backend test
-      run: docker exec videohosting_backend_1 bash -c "python3 manage.py test"
+    - name: Start all services and testing
+      run: |
+        docker-compose up --build -d
+        docker exec videohosting_backend_1 bash -c "python3 manage.py test"
