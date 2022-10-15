@@ -1,7 +1,7 @@
 **/.idea/
 **/venv/
 **/__pycache__/
-*.log*
+# *.log*
 **/pgdata/
 **/elasticdata/
 **/redis_data/
