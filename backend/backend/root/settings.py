@@ -222,69 +222,69 @@ ELASTICSEARCH_DSL = {
     },
 }
 
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "file": {
-            "format": " {asctime}  {levelname} - {name} - {message}",
-            "style": "{",
-        },
-        "console": {
-            "format": " {asctime}- {message} - {levelname} - {name}",
-            'datefmt' : "%H:%M:%S",
-            "style": "{",
-        },
-        'color': {
-            '()': 'colorlog.ColoredFormatter',
-            'format': '%(yellow)s%(asctime)-8s%(reset)s - %(log_color)s%(levelname)-1s%(reset)s - %(message)s',
-            'datefmt' : "%H:%M:%S",
-            'log_colors': {
-                'DEBUG':    'bold_black',
-                'INFO':     'green',
-                'WARNING':  'light_yellow',
-                'ERROR':    'bold_red',
-                'CRITICAL': 'red,bg_white',
-            },
-        }
-    },
-    "handlers": {
-        "file": {
-            "level": "INFO",
-            "class": "logging.handlers.RotatingFileHandler",
-            "filename": "logs/debug.log",
-            "formatter": "file",
-            "maxBytes": 1024 * 1024 * 10,  # 1024*1024*10,  # 10 MB
-            "backupCount": 10,
-        },
-        "console": {
-            "level": "INFO",
-            "class": "logging.StreamHandler",
-            "formatter": "color",
-        },
-        "sql_console": {
-            "level": "DEBUG",
-            "class": "logging.StreamHandler",
-        },
-    },
-    "loggers": {
-        "django": {
-            "handlers": ["file", "console", ],
-            "level": "INFO",
-            "propagate": True,
-        },
-        "gunicorn": {
-            "handlers": ["file", "console", ],  # 'gelf',],
-            "level": "INFO",
-            "propagate": True,
-        },
-        # 'django.db.backends': { # sql запросы
-        #     'level': 'DEBUG',
-        #     'handlers': ["sql_console"],
-        #     "propagate": False,
-        # }
-    },
-}
+# LOGGING = {
+#     "version": 1,
+#     "disable_existing_loggers": False,
+#     "formatters": {
+#         "file": {
+#             "format": " {asctime}  {levelname} - {name} - {message}",
+#             "style": "{",
+#         },
+#         "console": {
+#             "format": " {asctime}- {message} - {levelname} - {name}",
+#             'datefmt' : "%H:%M:%S",
+#             "style": "{",
+#         },
+#         'color': {
+#             '()': 'colorlog.ColoredFormatter',
+#             'format': '%(yellow)s%(asctime)-8s%(reset)s - %(log_color)s%(levelname)-1s%(reset)s - %(message)s',
+#             'datefmt' : "%H:%M:%S",
+#             'log_colors': {
+#                 'DEBUG':    'bold_black',
+#                 'INFO':     'green',
+#                 'WARNING':  'light_yellow',
+#                 'ERROR':    'bold_red',
+#                 'CRITICAL': 'red,bg_white',
+#             },
+#         }
+#     },
+#     "handlers": {
+#         "file": {
+#             "level": "INFO",
+#             "class": "logging.handlers.RotatingFileHandler",
+#             "filename": "logs/debug.log",
+#             "formatter": "file",
+#             "maxBytes": 1024 * 1024 * 10,  # 1024*1024*10,  # 10 MB
+#             "backupCount": 10,
+#         },
+#         "console": {
+#             "level": "INFO",
+#             "class": "logging.StreamHandler",
+#             "formatter": "color",
+#         },
+#         "sql_console": {
+#             "level": "DEBUG",
+#             "class": "logging.StreamHandler",
+#         },
+#     },
+#     "loggers": {
+#         "django": {
+#             "handlers": ["file", "console", ],
+#             "level": "INFO",
+#             "propagate": True,
+#         },
+#         "gunicorn": {
+#             "handlers": ["file", "console", ],  # 'gelf',],
+#             "level": "INFO",
+#             "propagate": True,
+#         },
+#         # 'django.db.backends': { # sql запросы
+#         #     'level': 'DEBUG',
+#         #     'handlers': ["sql_console"],
+#         #     "propagate": False,
+#         # }
+#     },
+# }
 
 
 # ADMIN PANEL SETTINGS
