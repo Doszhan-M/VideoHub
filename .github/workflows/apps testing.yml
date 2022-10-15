@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Project CI
 
 on:
   push:
@@ -9,12 +9,17 @@ on:
 jobs:
 
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: |
-        docker -v
-        docker-compose -v
+    - name: Start all services
+      run: docker-compose up --build -d
+
+
+  testing:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Start backend test
+      run: docker ps
