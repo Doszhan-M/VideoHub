@@ -53,18 +53,18 @@ services:
       - backend
       - redis
 
-  beat_backend:
-    build:
-      context: ./backend
-      dockerfile: ./beat.dockerfile
-    restart: on-failure
-    volumes:
-      - ./backend/backend:/backend/
-    env_file:
-      - .env
-    depends_on:
-      - backend
-      - redis
+  # beat_backend:
+  #   build:
+  #     context: ./backend
+  #     dockerfile: ./beat.dockerfile
+  #   restart: on-failure
+  #   volumes:
+  #     - ./backend/backend:/backend/
+  #   env_file:
+  #     - .env
+  #   depends_on:
+  #     - backend
+  #     - redis
 
   redis:
     image: redis:7.0.0
@@ -78,23 +78,6 @@ services:
       retries: 5
       start_period: 3s
 
-  flower_backend:
-    image: mher/flower
-    command: [ "celery", "flower", "--url-prefix=flower_backend" ]
-    restart: on-failure
-    environment:
-      - DEBUG=1
-      - CELERY_BROKER=${CELERY_BROKER_URL}
-      - CELERY_BACKEND=${CELERY_RESULT_BACKEND}
-      - CELERY_ENABLE_UTC=True
-      - FLOWER_BASIC_AUTH=root:fQbxHqbR
-    logging:
-      driver: "none"
-    ports:
-      - 5555:5555
-    depends_on:
-      - celery_backend
-
   elastic:
     build: elastic/
     restart: on-failure
@@ -105,6 +88,23 @@ services:
       - 9200:9200
     volumes:
       - elasticdata:/usr/share/elasticsearch/data
+
+  # flower_backend:
+  #   image: mher/flower
+  #   command: [ "celery", "flower", "--url-prefix=flower_backend" ]
+  #   restart: on-failure
+  #   environment:
+  #     - DEBUG=1
+  #     - CELERY_BROKER=${CELERY_BROKER_URL}
+  #     - CELERY_BACKEND=${CELERY_RESULT_BACKEND}
+  #     - CELERY_ENABLE_UTC=True
+  #     - FLOWER_BASIC_AUTH=root:fQbxHqbR
+  #   logging:
+  #     driver: "none"
+  #   ports:
+  #     - 5555:5555
+  #   depends_on:
+  #     - celery_backend
 
   # postgres:
   #   image: postgres:14.2

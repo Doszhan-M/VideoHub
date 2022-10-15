@@ -101,6 +101,11 @@ class LikeVideo(GenericAPIView):
         instance.likes.add(request.user)
         return Response(status=status.HTTP_200_OK)
 
+    def get_serializer_class(self):
+        if getattr(self, 'swagger_fake_view', False):
+            return VideoSerializer
+        return super().get_serializer_class()
+
 
 class CreateComment(CreateAPIView):
     ''' Create comment for video
@@ -119,6 +124,8 @@ class VideoComments(ListAPIView):
     serializer_class = CommentSerializer
 
     def get_queryset(self):
+        if getattr(self, 'swagger_fake_view', False):
+            return Comment.objects.none()
         queryset = Comment.objects.filter(
             video=self.kwargs['pk']).order_by('-create')
         return queryset
@@ -137,6 +144,11 @@ class SubscribeVideoChannel(GenericAPIView):
                                         user=request.user)
         return Response(status=status.HTTP_200_OK)
 
+    def get_serializer_class(self):
+        if getattr(self, 'swagger_fake_view', False):
+            return VideoSerializer
+        return super().get_serializer_class()
+    
 
 class SubscribedVideos(ListAPIView):
     ''' Get all videos from subscribes
