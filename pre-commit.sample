@@ -6,9 +6,12 @@ docker exec videohosting_backend_1 bash -c "python3 manage.py test"
 
 RESULT=$?
 if [ $RESULT -ne 0 ]; then
+    echo ""
+    echo ""
     echo "------------------------------------------------------------------------"
     echo "The Tests Have Failed! Cancelling Push!"
     echo "------------------------------------------------------------------------"
+    echo ""
     echo ""
     echo "If you _really_ want to push this code push with the --no-verify switch"
     echo ""
