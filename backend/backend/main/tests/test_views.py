@@ -37,7 +37,7 @@ class VideoApi(APITestCase):
         '''
         url = reverse('main:search_video', kwargs={'query': 'test'})
         response = api_client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.json()[0]['title'], 'test video0')
 
     def test_get_all_videos(self):
