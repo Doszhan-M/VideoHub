@@ -249,14 +249,14 @@ LOGGING = {
         }
     },
     "handlers": {
-        "file": {
-            "level": "INFO",
-            "class": "logging.handlers.RotatingFileHandler",
-            "filename": "logs/debug.log",
-            "formatter": "file",
-            "maxBytes": 1024 * 1024 * 10,  # 1024*1024*10,  # 10 MB
-            "backupCount": 10,
-        },
+        # "file": {
+        #     "level": "INFO",
+        #     "class": "logging.handlers.RotatingFileHandler",
+        #     "filename": "logs/debug.log",
+        #     "formatter": "file",
+        #     "maxBytes": 1024 * 1024 * 10,  # 1024*1024*10,  # 10 MB
+        #     "backupCount": 10,
+        # },
         "console": {
             "level": "INFO",
             "class": "logging.StreamHandler",
@@ -269,7 +269,7 @@ LOGGING = {
     },
     "loggers": {
         "gunicorn": {
-            "handlers": ["console", "file"],
+            "handlers": ["console",], # "file"],
             "level": "INFO",
             "propagate": True,
         },
