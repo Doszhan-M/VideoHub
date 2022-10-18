@@ -66,6 +66,19 @@ services:
   #     - backend
   #     - redis
 
+  websocket:
+    build:
+      context: ./websocket
+      dockerfile: ./websocket.dockerfile
+    restart: on-failure
+    env_file:
+      - .env
+    volumes:
+      - ./websocket/websocket_app:/websocket_app
+    ports:
+      - "8001:8000"
+
+
   redis:
     image: redis:7.0.0
     restart: on-failure
