@@ -5,5 +5,8 @@ class UserSubMiddleware:
 
     def __call__(self, request):
         response = self.get_response(request)
-        response['X-User'] = request.user.sub
+
+        if request.user.is_authenticated:
+            response['X-User'] = request.user.sub
         return response
+

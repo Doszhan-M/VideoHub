@@ -17,3 +17,7 @@ https://dev-ge0s31km.us.auth0.com/v2/logout?client_id=4ap6Vuy6rEcpNAkzQ2IMzFTcTh
 
 
 chmod ug+x .git/hooks/*
+
+
+ws://127.0.0.1:8001/websocket/private_chat/items/
+wss://video.localhost/websocket/private_chat/items/

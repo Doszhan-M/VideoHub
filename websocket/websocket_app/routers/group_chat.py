@@ -2,8 +2,8 @@
 from pydantic import BaseModel
 from fastapi.templating import Jinja2Templates
 from fastapi import (
-    APIRouter, WebSocket, WebSocketDisconnect, 
-    Request, Response)
+    APIRouter,  WebSocketDisconnect, 
+    WebSocket, Request, Response)
 
 from managers.socket import SocketManager
 
