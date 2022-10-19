@@ -1,4 +1,5 @@
 
+import email
 from rest_framework.views import APIView
 from django.middleware.csrf import get_token
 from rest_framework.response import Response
@@ -7,8 +8,8 @@ from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import login, logout
 from rest_framework.authentication import SessionAuthentication
 
+from .models import User
 from .managers.sso import SsoManager
-
 
 class LoginAuth0(APIView):
     ''' Authorize the user if he passed
@@ -55,4 +56,11 @@ class GenerateCsrf(APIView):
     def get(self, request, *args, **kwargs):
         response = {'X-CSRFToken': get_token(request)}
         return Response(response)
-    
+
+class UserId(APIView):
+    ''' Get user id by email
+    '''
+    def get(self, request, *args, **kwargs):
+        email = email
+        user_id = User.objects.get(email=email)
+        return Response(user_id)
