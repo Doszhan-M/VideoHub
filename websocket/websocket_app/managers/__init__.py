@@ -1,1 +1,2 @@
-from managers import socket
+from managers import group_socket
+from managers import private_socket

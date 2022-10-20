@@ -16,9 +16,6 @@ from .serializers import (
     CreateCommentSerializer, CommentSerializer,)
 from .models import Video, Comment, SubscribeChannel
 
-from django.conf import settings
-from django.contrib.auth import get_user_model
-from importlib import import_module  
 
 class SearchVideo(ListAPIView):
     ''' Search video
@@ -26,13 +23,6 @@ class SearchVideo(ListAPIView):
     serializer_class = VideoSerializer
 
     def get_queryset(self, *args, **kwargs):
-        session_data = 'mve308h4dxoi4k5m7pu625jj7n0y4t93'
-        django_session_engine = import_module(settings.SESSION_ENGINE)
-        session = django_session_engine.SessionStore(session_data)
-        uid = session.get('_auth_user_id')
-        user = get_user_model().objects.get(id=uid)
-        print(user)
-        
         value = self.kwargs['query']
         query = Q('multi_match', query=value,
                   fields=[

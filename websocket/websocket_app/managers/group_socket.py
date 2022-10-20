@@ -3,7 +3,7 @@ from typing import List
 from fastapi import WebSocket
 
 
-class SocketManager:
+class ConnectionManager:
     
     def __init__(self):
         self.active_connections: List[(WebSocket, str)] = []

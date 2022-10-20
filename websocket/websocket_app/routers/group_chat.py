@@ -5,11 +5,11 @@ from fastapi import (
     APIRouter,  WebSocketDisconnect, 
     WebSocket, Request, Response)
 
-from managers.socket import SocketManager
+from managers.group_socket import ConnectionManager
 
 
 router = APIRouter()
-manager = SocketManager()
+manager = ConnectionManager()
 templates = Jinja2Templates(directory="templates")
 
 

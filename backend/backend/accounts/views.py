@@ -57,10 +57,12 @@ class GenerateCsrf(APIView):
         response = {'X-CSRFToken': get_token(request)}
         return Response(response)
 
+
 class UserId(APIView):
     ''' Get user id by email
     '''
     def get(self, request, *args, **kwargs):
-        email = email
-        user_id = User.objects.get(email=email)
+        email = request.query_params['email']
+        user_id = User.objects.get(email=email).id
         return Response(user_id)
+    
