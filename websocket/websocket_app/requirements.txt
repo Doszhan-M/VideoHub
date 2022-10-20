@@ -1,4 +1,6 @@
 aiohttp==3.8.3
+aiosqlite==0.17.0
 colorlog == 6.6.0
+databases==0.6.1
 fastapi[all]==0.85.0
-requests==2.28.1
+SQLAlchemy==1.4.42
