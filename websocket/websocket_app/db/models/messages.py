@@ -9,5 +9,4 @@ class Message(Base):
     id = Column(Integer, primary_key=True)
     user = Column(String, nullable=False)
     message = Column(String, nullable=False)
-    index = Column(Integer, nullable=False)
     chat_id = Column(Integer, nullable=False)

@@ -8,9 +8,9 @@ router = APIRouter()
 
 
 @router.post("/message_create")
-async def create_message(user: str, message: str, index: int, chat_id: int,
+async def create_message(user: str, message: str, chat_id: int,
                          message_dal: MessageDAL = Depends(get_message_dal)):
-    return await message_dal.create_message(user, message, index, chat_id,)
+    return await message_dal.create_message(user, message, chat_id,)
 
 
 @router.get("/message/{chat_id}")
