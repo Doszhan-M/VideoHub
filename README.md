@@ -102,6 +102,7 @@ video - видео к которому относиться лайк
 
 # Websocket: 
 - поднять отдельный сервис на fastapi
+### swagger: http://hostname/websocket/docs
 
 ### Чат:
 - групповой чат
