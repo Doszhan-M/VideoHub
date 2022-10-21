@@ -18,8 +18,8 @@ services:
     volumes:
       - ./conf/default.conf:/etc/nginx/conf.d/default.conf
       - ./certs:/etc/nginx/certs
-    logging:
-      driver: "none"
+    # logging:
+    #   driver: "none"
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:

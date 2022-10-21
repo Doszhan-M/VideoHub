@@ -1,4 +1,5 @@
 import os
+from jwt import decode
 from pathlib import Path
 from datetime import timedelta
 
@@ -30,7 +31,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'storages',
     'django_elasticsearch_dsl',
-    
+
     'accounts',
     'main',
 ]
@@ -88,26 +89,17 @@ else:
             'NAME': 'sqlite.db',
         }
     }
-    
+
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator', },
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator', },
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator', },
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator', }, ]
 
 AUTH_USER_MODEL = 'accounts.User'
 
-SESSION_ENGINE = "django.contrib.sessions.backends.cache" 
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 CSRF_COOKIE_SAMESITE = 'Strict'
 SESSION_COOKIE_SAMESITE = 'Strict'
 CSRF_COOKIE_HTTPONLY = True
@@ -121,18 +113,18 @@ CORS_EXPOSE_HEADERS = ['Content-Type', 'X-CSRFToken']
 CORS_ALLOW_CREDENTIALS = True
 
 REST_FRAMEWORK = {
-    'DEFAULT_RENDERER_CLASSES': ['rest_framework.renderers.JSONRenderer',],
+    'DEFAULT_RENDERER_CLASSES': ['rest_framework.renderers.JSONRenderer', ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination', 
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
 }
 
 DJOSER = {
     'SERIALIZERS': {
-         'user_create': 'accounts.serializers.RegistrationSerializer',
-         'current_user': 'accounts.serializers.UserMeSerializer',
+        'user_create': 'accounts.serializers.RegistrationSerializer',
+        'current_user': 'accounts.serializers.UserMeSerializer',
     }
 }
 
@@ -159,11 +151,17 @@ USE_I18N = True
 USE_TZ = True
 
 if os.getenv("USE_S3") == 'TRUE':
-    AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
-    AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+    AWS_ACCESS_KEY_ID = decode(
+        os.getenv("AWS_ACCESS_KEY_ID"),
+        os.getenv("SECRET_KEY"),
+        algorithms=["HS256"])['AWS_ACCESS_KEY_ID']
+    AWS_SECRET_ACCESS_KEY = decode(
+        os.getenv("AWS_SECRET_ACCESS_KEY"),
+        os.getenv("SECRET_KEY"),
+        algorithms=["HS256"])['AWS_SECRET_ACCESS_KEY']
     AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
     AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400',}
+    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400', }
     # static
     AWS_LOCATION = 'static'
     STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
@@ -181,7 +179,6 @@ else:
     # media
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -233,13 +230,13 @@ LOGGING = {
         },
         "console": {
             "format": " {asctime}- {message} - {levelname} - {name}",
-            'datefmt' : "%H:%M:%S",
+            'datefmt': "%H:%M:%S",
             "style": "{",
         },
         'color': {
             '()': 'colorlog.ColoredFormatter',
             'format': '%(yellow)s%(asctime)-8s%(reset)s - %(log_color)s%(levelname)-1s%(reset)s - %(message)s',
-            'datefmt' : "%H:%M:%S",
+            'datefmt': "%H:%M:%S",
             'log_colors': {
                 'DEBUG':    'bold_black',
                 'INFO':     'green',
@@ -270,7 +267,7 @@ LOGGING = {
     },
     "loggers": {
         "gunicorn": {
-            "handlers": ["console",], # "file"],
+            "handlers": ["console", ],  # "file"],
             "level": "INFO",
             "propagate": True,
         },
@@ -297,7 +294,7 @@ ADMIN_STYLE = {
     'focus-color': '#eaeaea',
     'focus-text': '#666',
     'primary-button': '#26904A',
-    'primary-button-text':' white',
+    'primary-button-text': ' white',
     'secondary-button': '#999',
     'secondary-button-text': 'white',
     'link-color': '#4285AC',

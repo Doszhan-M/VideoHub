@@ -11,6 +11,7 @@ from rest_framework.authentication import SessionAuthentication
 from .models import User
 from .managers.sso import SsoManager
 
+
 class LoginAuth0(APIView):
     ''' Authorize the user if he passed
     SSO authentication 

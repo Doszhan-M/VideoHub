@@ -12,8 +12,7 @@ from managers.private_socket import ConnectionManager
 router = APIRouter()
 manager = ConnectionManager()
 templates = Jinja2Templates(directory="templates")
-        
-
+    
 
 
 @router.websocket("/ws/{my_email}/{companion_email}")

@@ -59,6 +59,7 @@ class SsoManager():
     def get_or_create_user(self) -> User:
         ''' Create or get user by sso sub.
         '''
+        print(self.sso_data['sub'])
         try:
             user = User.objects.get(sub=self.sso_data['sub'])
         except User.DoesNotExist:
