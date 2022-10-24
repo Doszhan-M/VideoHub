@@ -7,7 +7,7 @@ from .yasg import urlpatterns as yasg_urls
 
 
 urlpatterns = [     
-    path('admin/', admin.site.urls),
+    path('api/web/admin/', admin.site.urls),
     path('api/web/auth/', include('djoser.urls')),
     path('api/web/auth/', include('djoser.urls.jwt')),
     path('api/web/accounts/', include('accounts.urls')),

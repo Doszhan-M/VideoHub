@@ -9,10 +9,19 @@
   "python.formatting.provider": "autopep8",
   "python.formatting.autopep8Args": [
     "--max-line-length",
-    "90",
+    "75",
     "--experimental"
   ],
   "editor.snippetSuggestions": "top",
+
+  "liveSassCompile.settings.formats": [
+    {
+      "format": "compressed",
+      "extensionName": ".min.css",
+      "savePath": "/frontend/frontend_dev/src/styles/css"
+      // "savePath": "/distributor/distributor_app/dashboard/src/styles/css"
+    },
+  ],
 
   // - - - Настройки cSpell - - - - - - - - - - - - -
   "cSpell.language": "en,ru",

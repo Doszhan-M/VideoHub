@@ -8,11 +8,13 @@ User = get_user_model()
 
 
 class Channel(models.Model):
-    owner = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_channel')
+    owner = models.OneToOneField(
+        User, on_delete=models.CASCADE, related_name='user_channel')
     title = models.CharField(max_length=256,)
     description = models.CharField(max_length=256, blank=True)
     subscribers = models.ManyToManyField(
-        User, blank=True, through='SubscribeChannel', through_fields=('channel', 'user'),
+        User, blank=True, through='SubscribeChannel',
+        through_fields=('channel', 'user'),
         related_name='channel_subscribers')
 
     def save(self, *args, **kwargs):
@@ -25,7 +27,8 @@ class Channel(models.Model):
 
 
 class Video(models.Model):
-    channel = models.ForeignKey(Channel, on_delete=models.CASCADE, related_name='video_channel')
+    channel = models.ForeignKey(
+        Channel, on_delete=models.CASCADE, related_name='video_channel')
     title = models.CharField(max_length=256,)
     video_file = models.FileField(
         upload_to='videos/',

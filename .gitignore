@@ -3,7 +3,6 @@
 **/__pycache__/
 *.log*
 **/pgdata/
-**/elasticdata/
-**/redis_data/
+**/node_modules/
 celerybeat-schedule
 test.py
