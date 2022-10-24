@@ -10,10 +10,10 @@ function App() {
 
     return (
         <Routes>
-            {/* <Route path="/" element={<Main  {...{ all_tasks, setAllTasks }}/>}>
-                <Route index element={<CommonTable tasks={all_tasks}/>} />
-                <Route path="task/:id" element={<DetailedTable />} />
-            </Route> */}
+            <Route path="/" element={<Main  {...{ all_tasks, setAllTasks }}/>}>
+                {/* <Route index element={<CommonTable tasks={all_tasks}/>} />
+                <Route path="task/:id" element={<DetailedTable />} /> */}
+            </Route>
         </Routes>
     );
 }

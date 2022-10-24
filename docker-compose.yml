@@ -103,7 +103,7 @@ services:
       - 9200:9200
     volumes:
       - elasticdata:/usr/share/elasticsearch/data
-    mem_limit: 4g
+    mem_limit: 2g
     
   # flower_backend:
   #   image: mher/flower

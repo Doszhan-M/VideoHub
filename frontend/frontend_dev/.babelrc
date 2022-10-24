@@ -1,24 +1,23 @@
-    {
-        "presets": [
-            "@babel/preset-react",
-            [
-                "@babel/preset-env",
-                {
-                    "targets": {
-                        "browsers": "last 2 versions"
-                    },
-                    "modules": false,
-                    "loose": false
-                }
-            ]
-        ],
-        "plugins": [
-        ],
-        "env": {
-            "test": {
-                "plugins": [
-                    "transform-es2015-modules-commonjs"
-                ]
+{
+    "presets": [
+        "@babel/preset-react",
+        [
+            "@babel/preset-env",
+            {
+                "targets": {
+                    "browsers": "last 2 versions"
+                },
+                "modules": false,
+                "loose": false
             }
+        ]
+    ],
+    "plugins": [],
+    "env": {
+        "test": {
+            "plugins": [
+                "transform-es2015-modules-commonjs"
+            ]
         }
     }
+}

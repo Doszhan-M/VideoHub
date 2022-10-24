@@ -1,5 +1,6 @@
-const path = require('path')
-const HtmlWebpackPlugin = require("html-webpack-plugin")
+const path = require('path');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 
 module.exports = {
@@ -12,7 +13,7 @@ module.exports = {
     },
     resolve: {
         extensions: [".js", ".jsx"]
-      },
+    },
     output: {
         path: path.resolve(__dirname, "../frontend_prod"),
         publicPath: '',
@@ -29,31 +30,40 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use:["style-loader", "css-loader"]
+                use: ["style-loader", "css-loader"]
             },
             {
                 test: /\.(png|svg|mp4|ico|jpe?g|gif)$/,
                 include: /src/,
                 use: [
-                  {
-                    loader: 'file-loader',
-                    options: {
-                      name: '[name].[ext]',
-                      outputPath: 'images/',
-                      publicPath: 'images/'
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'images/',
+                            publicPath: 'images/'
+                        }
                     }
-                  }
                 ]
-              },
+            },
         ]
     },
 
     plugins: [
-        new HtmlWebpackPlugin (
+        new HtmlWebpackPlugin(
             {
                 template: "./src/index.html",
-                favicon: "./src/img/favicon.ico"
+                favicon: "./src/images/icons/favicon-96x96.png"
             }
         ),
+        new CopyWebpackPlugin({
+            patterns: [
+              { from: "src/images/icons", to: "images/icons/" },
+              "src/manifest.json",
+            ],
+            options: {
+              concurrency: 100,
+            },
+          }),
     ]
 }

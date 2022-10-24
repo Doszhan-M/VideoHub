@@ -15,16 +15,16 @@ const Main = (props) => {
         });
     }
 
-    useEffect(() => allTasks(), [])
+    // useEffect(() => allTasks(), [])
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-          allTasks();
-        }, 3000);
-        return () => {
-          clearInterval(interval);
-        };
-      }, [])
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //       allTasks();
+    //     }, 3000);
+    //     return () => {
+    //       clearInterval(interval);
+    //     };
+    //   }, [])
 
     return (
         <main>
