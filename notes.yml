@@ -8,7 +8,7 @@ python3 manage.py migrate
 python manage.py search_index --rebuild
 python manage.py search_index --create [--models [app[.model] app[.model] ...]]
 
-mkcert --cert-file ./certs/nginx.crt --key-file ./certs/nginx.key video.localhost
+mkcert --cert-file ./nginx/certs/nginx.crt --key-file ./nginx/certs/nginx.key video.localhost asus-tuf-f17
 
 
 https://dev-ge0s31km.us.auth0.com/authorize?response_type=code&client_id=4ap6Vuy6rEcpNAkzQ2IMzFTcThpWKqTN&redirect_uri=https://video.localhost/api/web/accounts/authO/login/&scope=openid%20profile%20email&state=https://video.localhost/api/web/search/video/test/
