@@ -19,7 +19,7 @@ function Header(props) {
     return (
         <header>
             <div className="title">
-                Video Dashboard
+                Video!!!!!! Dashboard
             </div>
             <div className="header_box">
                 <div className="main_status">

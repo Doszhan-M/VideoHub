@@ -1,27 +1,12 @@
 const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 
 module.exports = {
-    mode: "development",
+    mode: "production",
     entry: "./src/index.js",
-    devServer: {
-        static: path.resolve(__dirname, "./public"),
-        liveReload: true,
-        hot: true,
-        open: false,
-        historyApiFallback: true,
-        port: 8080,
-        allowedHosts: "all",
-        client: {
-            webSocketURL: {
-                hostname: '127.0.0.1',
-                pathname: '/ws',
-                port: 8080,
-                protocol: 'ws',
-              },
-          },
-    },
     resolve: {
         extensions: [".js", ".jsx"]
     },
@@ -45,7 +30,7 @@ module.exports = {
             },
             {
                 test: /\.(png|svg|mp4|ico|jpe?g|gif)$/,
-                include: /src/,
+                include: /public/,
                 use: [
                     {
                         loader: 'file-loader',
@@ -67,6 +52,27 @@ module.exports = {
                 title: 'Video Hosting PWA',
                 favicon: "./public/images/icons/favicon-96x96.png"
             }
-        )
+        ),
+        new WorkboxPlugin.GenerateSW({
+            clientsClaim: true,
+            skipWaiting: true
+
+        }),
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: "public",
+                    to: "",
+                    globOptions: {
+                        ignore: [
+                            '**/public/index.html',
+                        ]
+                    }
+                },
+            ],
+            options: {
+                concurrency: 100,
+            },
+        }),
     ]
 }
