@@ -126,6 +126,7 @@
     "unvisible_rows",
     "uvicorn",
     "videohosting",
+    "videohub",
     "websockets",
     "whitenoise",
     "whitesmoke",
