@@ -23,7 +23,10 @@ module.exports = {
           },
     },
     resolve: {
-        extensions: [".js", ".jsx"]
+        extensions: [".js", ".jsx"],
+        modules: [
+            path.join(__dirname, './node_modules')
+          ]
     },
     output: {
         path: path.resolve(__dirname, "../frontend_prod"),
