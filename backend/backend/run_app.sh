@@ -4,7 +4,7 @@
 python3 manage.py migrate
 python3 manage.py createcachetable
 # python3 manage.py collectstatic --noinput
-python manage.py search_index --rebuild --parallel --force-color
+# python3 manage.py search_index --rebuild --parallel --force-color
 
 if [ "$DEPLOY" = "TRUE" ]; then
     echo "------------------------------------------------------------------------------------"

@@ -36,6 +36,9 @@ services:
       - "8000:8000"
     env_file:
       - .env
+    depends_on:
+      elastic:
+        condition: service_healthy
 
   celery_backend:
     build:
@@ -99,7 +102,13 @@ services:
     volumes:
       - elasticdata:/usr/share/elasticsearch/data
     mem_limit: 2g
-    
+    healthcheck:
+      test: curl -fs http://127.0.0.1:9200/_cat/health || exit 1
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 30s
+
   # flower_backend:
   #   image: mher/flower
   #   command: [ "celery", "flower", "--url-prefix=flower_backend" ]

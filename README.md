@@ -2,7 +2,7 @@
 
 
 # Название проекта: 
-## Video Hosting SkillFactory
+## Video Hub SkillFactory
 <br>
 
 ### swagger: http://hostname/swagger/

@@ -67,7 +67,7 @@ module.exports = {
         new HtmlWebpackPlugin(
             {
                 template: "./public/index.html",
-                title: 'Video Hosting PWA',
+                title: 'Video Hub PWA',
                 favicon: "./public/images/icons/favicon-96x96.png"
             }
         )
