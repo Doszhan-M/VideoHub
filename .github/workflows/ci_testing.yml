@@ -16,4 +16,5 @@ jobs:
     - name: Start all services and testing
       run: |
         docker-compose up --build -d
+        sleep 30s
         docker exec videohosting_backend_1 bash -c "python3 manage.py test"

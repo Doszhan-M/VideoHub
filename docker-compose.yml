@@ -78,7 +78,6 @@ services:
     ports:
       - "8001:8000"
 
-
   redis:
     image: redis:7.0.0
     restart: always
@@ -108,7 +107,6 @@ services:
       timeout: 3s
       retries: 5
       start_period: 30s
-
   # flower_backend:
   #   image: mher/flower
   #   command: [ "celery", "flower", "--url-prefix=flower_backend" ]
