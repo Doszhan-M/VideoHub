@@ -17,9 +17,11 @@ services:
         published: 80
         mode: host
     volumes:
-      - ./nginx/conf/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/conf/default-dev.conf:/etc/nginx/conf.d/default.conf
       - ./nginx/certs:/etc/nginx/certs
       - ./frontend/frontend_prod:/frontend_prod
+    logging:
+      driver: "none"
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
@@ -36,6 +38,9 @@ services:
       - "8000:8000"
     env_file:
       - .env
+    # depends_on:
+    #   postgres:
+    #     condition: service_healthy
 
   celery_backend:
     build:
@@ -75,7 +80,6 @@ services:
     ports:
       - "8001:8000"
 
-
   redis:
     image: redis:7.0.0
     restart: always
@@ -99,7 +103,6 @@ services:
     volumes:
       - elasticdata:/usr/share/elasticsearch/data
     mem_limit: 2g
-    
   # flower_backend:
   #   image: mher/flower
   #   command: [ "celery", "flower", "--url-prefix=flower_backend" ]
@@ -116,3 +119,20 @@ services:
   #     - 5555:5555
   #   depends_on:
   #     - celery_backend
+
+  # postgres:
+  #   image: postgres:14.2
+  #   restart: always
+  #   volumes:
+  #     - ./nginx/init.sql:/docker-entrypoint-initdb.d/init.sql
+  #     - ./pgdata:/var/lib/postgresql/data
+  #   env_file:
+  #     - .env
+  #   logging:
+  #     driver: "none"
+  #   healthcheck:
+  #     test: [ "CMD-SHELL", "pg_isready" ]
+  #     interval: 1s
+  #     timeout: 1s
+  #     retries: 15
+  #     start_period: 1s
