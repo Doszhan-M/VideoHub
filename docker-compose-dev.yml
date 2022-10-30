@@ -17,7 +17,7 @@ services:
         published: 80
         mode: host
     volumes:
-      - ./nginx/conf/default-dev.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/conf/default-dev.conf:/etc/nginx/conf.d/default-dev.conf
       - ./nginx/certs:/etc/nginx/certs
     logging:
       driver: "none"

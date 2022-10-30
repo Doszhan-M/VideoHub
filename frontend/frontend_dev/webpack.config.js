@@ -24,9 +24,6 @@ module.exports = {
     },
     resolve: {
         extensions: [".js", ".jsx"],
-        modules: [
-            path.join(__dirname, './node_modules')
-          ]
     },
     module: {
         rules: [
@@ -41,20 +38,21 @@ module.exports = {
                 test: /\.css$/,
                 use: ["style-loader", "css-loader"]
             },
-            {
-                test: /\.(png|svg|mp4|ico|jpe?g|gif)$/,
-                include: /src/,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: '[name].[ext]',
-                            outputPath: 'images/',
-                            publicPath: 'images/'
-                        }
-                    }
-                ]
-            },
+            // {
+            //     test: /\.(png|svg|mp4|ico|jpe?g|gif)$/,
+            //     include: /public/,
+            //     use: [
+            //         {
+            //             loader: 'file-loader',
+            //             options: {
+            //                 name: '[name].[ext]',
+            //                 outputPath: 'images/',
+            //                 publicPath: 'images/'
+            //             }, 
+
+            //         }
+            //     ]
+            // },
         ]
     },
 

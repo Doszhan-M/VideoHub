@@ -1,40 +1,31 @@
 import React from "react";
 import "../styles/css/header.min.css";
 
+import { FaBell } from 'react-icons/fa';
+
 
 function Header(props) {
 
-    let processed = 0
-    let success = 0
-    let failed = 0
-    let processing = 0
 
-    props.tasks.forEach(function (item, i, arr) {
-        processed = processed + item[0].processed
-        success = success + item[0].success
-        failed = failed + item[0].failed
-        processing = processing + item[0].processing
-    });
-    
     return (
         <header>
             <div className="title">
-                Video!!!!!! Dashboard
+                Video Hub
             </div>
-            <div className="header_box">
-                <div className="main_status">
-                    Processed: {processed}
+            <div className="search">
+                <input type="text" placeholder="Search"/>
+            </div>
+            <div className="right_block">
+                <div className="user">
+                    <img className="user_img" src="https://images.unsplash.com/photo-1587918842454-870dbd18261a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=943&q=80"></img>
+                    <div className="username">TestUser</div>
                 </div>
-                <div className="main_status">
-                    Success: {success}
-                </div>
-                <div className="main_status">
-                    Failed: {failed}
-                </div>
-                <div className="main_status">
-                    Processing: {processing}
+                <div className="notification">
+                    <FaBell/>
+                    <span className="badge" style={{backgroundColor: "red"}}>2</span>
                 </div>
             </div>
+
         </header>
     )
 }

@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom"
-import "../styles/css/main.min.css";
 import {useSelector, useDispatch} from "react-redux"
 
+import "../styles/css/layout.min.css";
 import Header from "./header"
 import api from "../api"
 import {addTodo} from "../store/todoSlice"
 
 
-const Main = (props) => {
+const Layout = (props) => {
 
     const allTasks = () => {
         api.fetchAllTasks().then(response => {
@@ -42,4 +42,4 @@ const Main = (props) => {
     )
 }
 
-export { Main }
+export { Layout }

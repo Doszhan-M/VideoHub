@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Routes, Route,} from "react-router-dom"
 
-import { Main } from "./components/main"
+import { Layout } from "./components/layout"
 
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
 
     return (
         <Routes>
-            <Route path="/" element={<Main  {...{ all_tasks, setAllTasks }}/>}>
+            <Route path="/" element={<Layout  {...{ all_tasks, setAllTasks }}/>}>
                 {/* <Route index element={<CommonTable tasks={all_tasks}/>} />
                 <Route path="task/:id" element={<DetailedTable />} /> */}
             </Route>
