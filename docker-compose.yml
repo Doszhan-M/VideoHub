@@ -19,7 +19,7 @@ services:
     volumes:
       - ./nginx/conf/default.conf:/etc/nginx/conf.d/default.conf
       - ./nginx/certs:/etc/nginx/certs
-      - ./frontend/frontend_prod:/frontend_prod
+      - ./frontend/frontend_build:/frontend_build
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:

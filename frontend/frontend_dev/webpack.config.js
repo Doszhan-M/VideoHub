@@ -28,11 +28,6 @@ module.exports = {
             path.join(__dirname, './node_modules')
           ]
     },
-    output: {
-        path: path.resolve(__dirname, "../frontend_prod"),
-        publicPath: '',
-        filename: "bundle.js",
-    },
     module: {
         rules: [
             {

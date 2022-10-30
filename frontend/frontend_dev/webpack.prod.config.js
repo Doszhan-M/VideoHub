@@ -11,7 +11,7 @@ module.exports = {
         extensions: [".js", ".jsx"]
     },
     output: {
-        path: path.resolve(__dirname, "../frontend_prod"),
+        path: path.resolve(__dirname, "../frontend_build"),
         publicPath: '',
         filename: "bundle.js",
     },
