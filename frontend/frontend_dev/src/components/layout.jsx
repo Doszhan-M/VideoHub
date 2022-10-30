@@ -1,11 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { useEffect } from "react";
 import { Outlet } from "react-router-dom"
-import {useSelector, useDispatch} from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 
 import "../styles/css/layout.min.css";
+
 import Header from "./header"
+import Sidebar from "./sidebar"
+
 import api from "../api"
-import {addTodo} from "../store/todoSlice"
+import { addTodo } from "../store/todoSlice"
 
 
 const Layout = (props) => {
@@ -21,8 +25,8 @@ const Layout = (props) => {
     const dispatch = useDispatch()
 
 
-    useEffect(() => dispatch(addTodo('test')), [])
-    
+    // useEffect(() => dispatch(addTodo('test')), [])
+
     console.log(todos)
 
     // useEffect(() => {
@@ -36,8 +40,13 @@ const Layout = (props) => {
 
     return (
         <main>
-            <Header tasks={props.all_tasks}/>
-            <Outlet />
+            <Header tasks={props.all_tasks} />
+            <div className="container">
+                <Sidebar />
+                <div className="pages">
+                    <Outlet />
+                </div>
+            </div>
         </main>
     )
 }
