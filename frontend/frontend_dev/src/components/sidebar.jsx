@@ -1,6 +1,8 @@
 import React from "react";
 import "../styles/css/sidebar.min.css";
 
+import Chat from "./chat"
+
 import { AiFillHome } from 'react-icons/ai';
 import { AiTwotoneFire } from 'react-icons/ai';
 import { AiFillLike } from 'react-icons/ai';
@@ -23,7 +25,7 @@ function Sidebar(props) {
                 </ul>
             </div>
             <div className="groupe_chat">
-
+                <Chat/>
             </div>
         </aside>
     )

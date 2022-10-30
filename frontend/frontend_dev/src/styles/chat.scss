@@ -1,0 +1,49 @@
+.chat {
+    background-color: #252836;
+    border-radius: 20px;
+    padding: 0 20px;
+    max-height: 414px;
+    overflow: auto;
+
+    .chat-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+        font-size: 16px;
+        font-weight: 600;
+        color: #fff;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        background-color: #252836;
+        left: 0;
+        z-index: 1;
+        border-bottom: 1px solid rgb(128 129 145 / 24%);
+
+        .anim {
+            animation: bottom .8s 0s both;
+        }
+
+        .people {
+                display: flex;
+
+            svg {
+                margin-right: 5px;
+                width: 15px;
+                flex-shrink: 0;
+            }
+
+            span {
+                margin-left: auto;
+                color: #808191;
+                font-size: 12px;
+                display: flex;
+                align-items: center;
+
+
+            }
+        }
+
+    }
+}
