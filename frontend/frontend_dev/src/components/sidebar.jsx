@@ -17,7 +17,7 @@ function Sidebar(props) {
             <div className="sidebar">
                 <ul>
                     <li><div className="side_title">Menu</div></li>
-                    <li><AiFillHome/><span>Promote</span></li>
+                    <li><AiFillHome/><span>Discover</span></li>
                     <li><AiTwotoneFire/><span>Trending</span></li>
                     <li><AiFillLike/><span>Most Popular</span></li>
                     <li><AiFillEye/><span>Subscribe</span></li>

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Routes, Route,} from "react-router-dom"
+import { Routes, Route, } from "react-router-dom"
 
-import { Layout } from "./components/layout"
+import Layout from "./components/layout"
+import Discover from "./pages/discover"
 
 
 function App() {
@@ -10,9 +11,8 @@ function App() {
 
     return (
         <Routes>
-            <Route path="/" element={<Layout  {...{ all_tasks, setAllTasks }}/>}>
-                {/* <Route index element={<CommonTable tasks={all_tasks}/>} />
-                <Route path="task/:id" element={<DetailedTable />} /> */}
+            <Route path="/" element={<Layout  {...{ all_tasks, setAllTasks }} />}>
+                <Route index element={<Discover tasks={all_tasks} />} />
             </Route>
         </Routes>
     );
