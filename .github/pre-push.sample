@@ -1,7 +1,7 @@
 #!/bin/bash 
 
 
-docker-compose up -d
+docker-compose --file docker-compose-dev.yml up --build  
 docker exec videohub_backend_1 bash -c "python3 manage.py test"
 
 RESULT=$?

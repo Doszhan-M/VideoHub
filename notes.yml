@@ -1,4 +1,4 @@
-docker-compose --file docker-compose-prod.yml up --build
+docker-compose --file docker-compose-dev.yml up --build
 docker exec -it videohosting_backend_1 bash 
 
 python3 manage.py test
