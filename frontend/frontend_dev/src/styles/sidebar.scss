@@ -15,7 +15,8 @@ aside {
         height: 40%;
         font-size: 19px;
         font-weight: 500;
-        padding: 30px;        
+        padding: 30px;
+
         li {
             display: flex;
             justify-content: flex-start;
@@ -33,7 +34,9 @@ aside {
 
             span {
                 margin-left: 20px
-            };
+            }
+
+            ;
         }
     }
 
