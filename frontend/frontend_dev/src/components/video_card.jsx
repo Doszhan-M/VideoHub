@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/css/video_line.min.css";
+import "../styles/css/video_card.min.css";
 
 import HoverVideoPlayer from 'react-hover-video-player';
 

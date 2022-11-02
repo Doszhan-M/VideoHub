@@ -3,8 +3,7 @@ aside {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 370px;
-    height: 100%;
+    width: 24%;
     padding: 10px;
 
     .sidebar {
@@ -16,6 +15,7 @@ aside {
         font-size: 19px;
         font-weight: 500;
         padding: 30px;
+        height: 100%;
 
 
         li {
@@ -41,7 +41,7 @@ aside {
         }
 
         li:first-child {
-            height: 25px;
+            // height: 25px;
         }
         li:last-child {
             margin: 5px 5px -15px 5px;

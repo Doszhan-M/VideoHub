@@ -1,15 +1,15 @@
 .chat {
+    margin-top: 15px;
     background-color: #252836;
     border-radius: 20px;
     padding: 0 20px;
-    max-height: 600px;
-    overflow-y:scroll;
-    overflow-x:hidden;
+    max-height: 33em;
+    overflow-y: scroll;
+    overflow-x: hidden;
 
     &::-webkit-scrollbar {
         width: 6px;
         border-radius: 10px;
-
     }
 
     &::-webkit-scrollbar-thumb {
@@ -111,7 +111,7 @@
         position: relative;
         flex-shrink: 0
     }
-    
+
     .author-img__wrapper svg {
         width: 16px;
         padding: 2px;
@@ -130,7 +130,7 @@
         transition: .4s;
         bottom: -25px
     }
-    
+
     .video-author svg {
         background-color: #0aa0f7;
         color: #fff;
@@ -150,24 +150,25 @@
         top: 0;
         left: 0
     }
-    
+
     .video-p .author-img {
         border: 0
     }
-    
+
     .video-p-wrapper {
         display: flex;
         align-items: center
     }
-    
+
     .video-p-wrapper .author-img {
         border: 0
     }
-    
+
     .video-p-wrapper svg {
         width: 20px;
         padding: 4px
     }
+
     .author-img {
         width: 52px;
         height: 52px;
@@ -177,22 +178,26 @@
         -o-object-fit: cover;
         object-fit: cover
     }
+
     .video-p .author-img {
         border: 0
     }
+
     .video-p-wrapper .author-img {
         border: 0
     }
+
     .msg__name {
         font-size: 13px
     }
+
     .video-p-name {
         margin-bottom: 8px;
         color: #fff;
         display: flex;
         align-items: center
     }
-    
+
     .video-p-name:after {
         content: "";
         width: 6px;
@@ -202,13 +207,15 @@
         margin-left: 8px;
         display: inline-block
     }
-    
+
     .video-p-name.offline:after {
         background-color: #ff7551
     }
+
     .video-p-name.offline:after {
         background-color: #ff7551
     }
+
     .msg__content {
         line-height: 1.4em;
         max-width: 26ch;
@@ -218,6 +225,7 @@
         color: #808191;
 
     }
+
     .video-p-sub {
         font-size: 12px
     }
