@@ -35,11 +35,11 @@ class LogoutAuth0(APIView):
 
 
 class SessionCheck(APIView):
-    authentication_classes = [SessionAuthentication]
-    permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        return Response({'isAuthenticated' : request.user})
+        if request.user.is_authenticated:
+            return Response({'isAuthenticated' : True})
+        return Response({'isAuthenticated' : False})
 
 
 class SessionId(APIView):

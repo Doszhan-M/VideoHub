@@ -9,34 +9,20 @@ import Header from "./header"
 import Sidebar from "./sidebar"
 
 import api from "../api"
-import { addTodo } from "../store/todoSlice"
+import { checkAuth } from "../store/userSlice"
 
 
 const Layout = (props) => {
-
-    const allTasks = () => {
-        api.fetchAllTasks().then(response => {
-            props.setAllTasks(response.data)
-        });
-    }
-
-    const todos = useSelector(state => state.todos.todos)
-
     const dispatch = useDispatch()
+    
+    useEffect(() => {
+        api.check_session().then(response => {
+            let authStatus = response.data.isAuthenticated
+            dispatch(checkAuth(authStatus))
+        });
+    }, []);
 
 
-    // useEffect(() => dispatch(addTodo('test')), [])
-
-    console.log(todos)
-
-    // useEffect(() => {
-    //     const interval = setInterval(() => {
-    //       allTasks();
-    //     }, 3000);
-    //     return () => {
-    //       clearInterval(interval);
-    //     };
-    //   }, [])
 
     return (
         <main>

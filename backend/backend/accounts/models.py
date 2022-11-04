@@ -15,6 +15,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     first_name = models.CharField(max_length=150, blank=True)
     last_name = models.CharField(max_length=150, blank=True)
+    avatar = models.ImageField(upload_to='images/avatar/', blank=True, null=True)
     date_joined = models.DateTimeField(default=timezone.now)
     is_banned = models.BooleanField(default=False)
     email_verified = models.BooleanField(default=False)

@@ -3,6 +3,8 @@ from djoser.serializers import UserCreateSerializer, UserSerializer
 
 
 class RegistrationSerializer(UserCreateSerializer):
+    
+    
     class Meta(UserCreateSerializer.Meta):
         fields = ('email', 'phone', 'password', )
 
@@ -15,6 +17,7 @@ class RegistrationSerializer(UserCreateSerializer):
 
 
 class UserMeSerializer(UserSerializer):
+    
     class Meta(UserSerializer.Meta):
-        fields = ('email', 'phone', )
+        fields = ('email', 'phone', 'avatar', 'first_name')
         

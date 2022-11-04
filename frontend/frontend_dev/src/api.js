@@ -1,18 +1,30 @@
 import axios from "axios"
 
 
- const fetchAllTasks = async () => {
-    const result = await axios.get(`/distributor/all_tasks_statuses`).then(response => {
-        return response
+const check_session = async () => {
+    const url = `/api/web/accounts/check_session/`
+    const response = await axios.get(url).then(response => {
+        return response;
     })
-    return result
+    return response
 }
 
- const fetchExtendedTaskResult = async (iin_bin) => {
-    const result = await axios.get(`/distributor/extended_task_result?iin_bin=${iin_bin}`).then(response => {
+const csrf = async () => {
+    const url = `/api/web/accounts/csrf/`
+    const response = await axios.get(url).then(response => {
         return response
     })
-    return result
+    return response
 }
 
-export default {fetchAllTasks, fetchExtendedTaskResult}
+const getMe = async () => {
+    const url = `/api/web/auth/users/me/`
+    const response = await axios.get(url).then(response => {
+        return response
+    })
+    return response
+}
+
+
+
+export default { check_session, csrf, getMe }
