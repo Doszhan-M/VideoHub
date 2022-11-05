@@ -8,7 +8,7 @@ import "../styles/css/layout.min.css";
 import Header from "./header"
 import Sidebar from "./sidebar"
 
-import api from "../api"
+import api from "../api/requests"
 import { checkAuth } from "../store/userSlice"
 
 

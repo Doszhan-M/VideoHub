@@ -6,7 +6,7 @@ import "../styles/css/header.min.css";
 import { FaBell } from 'react-icons/fa';
 import { RiVideoUploadLine, RiLoginBoxLine } from 'react-icons/ri';
 
-import api from "../api"
+import api from "../api/requests"
 import { loginUrl, loginUrlRedirectVideoEdit } from "../utils/env_variables"
 import { userInfo } from "../store/userSlice"
 
@@ -16,7 +16,6 @@ function Header(props) {
     const isAuth = useSelector(state => state.user.isAuth)
     const username = useSelector(state => state.user.username)
     const avatar = useSelector(state => state.user.avatar)
-    console.log(avatar)
 
     const getUserData = () => {
         api.getMe().then(response => {

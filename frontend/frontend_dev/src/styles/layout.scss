@@ -18,6 +18,10 @@ html {
         background-color: rgba(21, 20, 26, .63);
         border-radius: 10px;
     }
+    h4 {
+        color: rgb(45, 119, 184);
+        margin-top: 1%;
+    }
 }
 
 main {
@@ -46,6 +50,7 @@ main {
             // margin-top: 2%;
         }
     }
+
 
     @-webkit-keyframes bottom {
         0% {

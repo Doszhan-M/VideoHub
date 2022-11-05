@@ -4,7 +4,7 @@ from rest_framework import status
 from django.db.models.query import QuerySet
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.generics import (
     ListAPIView, RetrieveAPIView, CreateAPIView,
     DestroyAPIView, UpdateAPIView, GenericAPIView,
@@ -47,7 +47,10 @@ class GetVideo(RetrieveAPIView):
     '''
     queryset = Video.objects.all()
     serializer_class = VideoSerializer
-
+    
+    
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 class CreateVideo(CreateAPIView):
     ''' Create video
