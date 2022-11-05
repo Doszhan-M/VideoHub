@@ -7,6 +7,17 @@
 
 html {
     background-color: #1f1d2b;
+
+    &::-webkit-scrollbar {
+        width: 8px;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+
+        background-color: rgba(21, 20, 26, .63);
+        border-radius: 10px;
+    }
 }
 
 main {

@@ -26,7 +26,7 @@ function Header(props) {
     }
     const authStatus = () => {
         if (isAuth) {
-            {getUserData()}
+            { getUserData() }
             return <div>
                 <img className="user_img" src={avatar}></img>
                 <div className="username"><NavLink to={`/profile`}>{username}</NavLink></div>
@@ -55,7 +55,7 @@ function Header(props) {
     return (
         <header>
             <div className="title">
-                Video Hub
+                <NavLink to={`/`}>Video Hub</NavLink>                
             </div>
             <div className="search">
                 <input type="text" placeholder="Search" />
