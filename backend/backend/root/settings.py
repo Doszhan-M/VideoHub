@@ -144,7 +144,7 @@ CELERY_ENABLE_UTC = True
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = os.getenv("TZ")
 
 USE_I18N = True
 

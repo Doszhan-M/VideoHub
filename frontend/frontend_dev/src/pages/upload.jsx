@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import "../styles/css/video_edit.min.css";
 
 import api from "../api/requests"
-import {
-    DotLoaderOverlay, LineLoaderOverlay
-} from 'react-spinner-overlay'
+import {DotLoaderOverlay} from 'react-spinner-overlay'
 
-function VideoEdit(props) {
+
+function Upload(props) {
     const [selectedFile, setSelectedFile] = useState(null);
     const [loading, setLoading] = useState(false)
 
@@ -61,4 +60,4 @@ function VideoEdit(props) {
         </div>
     )
 }
-export default VideoEdit;
+export default Upload;

@@ -38,21 +38,6 @@ module.exports = {
                 test: /\.css$/,
                 use: ["style-loader", "css-loader"]
             },
-            // {
-            //     test: /\.(png|svg|mp4|ico|jpe?g|gif)$/,
-            //     include: /public/,
-            //     use: [
-            //         {
-            //             loader: 'file-loader',
-            //             options: {
-            //                 name: '[name].[ext]',
-            //                 outputPath: 'images/',
-            //                 publicPath: 'images/'
-            //             }, 
-
-            //         }
-            //     ]
-            // },
         ]
     },
 

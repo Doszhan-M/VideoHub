@@ -3,7 +3,8 @@ import { Routes, Route, } from "react-router-dom"
 
 import Layout from "./components/layout"
 import Discover from "./pages/discover"
-import VideoEdit from "./pages/video_edit"
+import Upload from "./pages/upload"
+import VideoDetail from "./pages/video"
 
 
 function App() {
@@ -27,7 +28,8 @@ function App() {
         <Routes>
             <Route path="/" element={<Layout  {...{ all_tasks, setAllTasks }} />}>
                 <Route index element={<Discover/>} />
-                <Route path="video_edit" element={<VideoEdit/>} />
+                <Route path="upload" element={<Upload/>} />
+                <Route path="video/:id" element={<VideoDetail/>} />
             </Route>
         </Routes>
     );
