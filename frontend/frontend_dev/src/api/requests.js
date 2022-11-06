@@ -46,6 +46,19 @@ const uploadVideo = async (formData) => {
     return response
 }
 
+const getVideo = async (id) => {
+    const url = `/api/web/get_video/${id}`
+    const response = await axios(
+        {
+            method: "get",
+            url: url,
+        }
+    ).then(response => {
+        return response.data
+    })
+    return response
+}
 
 
-export default { check_session, csrf, getMe, uploadVideo }
+
+export default { check_session, csrf, getMe, uploadVideo, getVideo }

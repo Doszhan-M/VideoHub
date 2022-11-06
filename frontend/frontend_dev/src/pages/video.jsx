@@ -13,7 +13,7 @@ function VideoPage(props) {
     return (
         <div className="page_video">
             <div className="video_detail_container">
-                <VideoDetail/>
+                <VideoDetail id={id}/>
             </div>
             <div className="private_chat_container">
                 <Chat/>

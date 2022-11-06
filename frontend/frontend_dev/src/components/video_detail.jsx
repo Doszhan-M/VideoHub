@@ -1,22 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/css/video_detail.min.css";
 import { FaHeart, FaTelegramPlane } from 'react-icons/fa';
 
 import api from "../api/requests"
-import HoverVideoPlayer from 'react-hover-video-player';
 
 
 
 function VideoDetail(props) {
+    const id = props.id
+
+    const [videoLink, setVideoLink] = useState('')
+    const [userAvatar, setUserAvatar] = useState('')
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await api.getVideo(id)
+            console.log(response)
+            const link = response.video_file + "#t=0.9"
+            setVideoLink(link)
+            setUserAvatar(response.user_avatar)
+            console.log(response.user_avatar)
+        }
+        fetchData()
+    }, [id,]);
 
 
     return (
         <div className="video_detail" controls>
-            <video controls>
-                <source src="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/1080/Big_Buck_Bunny_1080_10s_1MB.mp4#t=0.1" type="video/mp4" />
-            </video>
+            <video controls src={videoLink} preload="true" loop></video>
             <div className="details">
-                <img src="https://images.pexels.com/photos/1680172/pexels-photo-1680172.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;w=500"></img>
+                <img src={userAvatar}></img>
                 <div className="author">Andy William</div>
                 <div className="button_wrapper">
                     <button className="share">

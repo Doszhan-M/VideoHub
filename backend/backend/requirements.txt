@@ -4,6 +4,7 @@ colorlog == 6.6.0
 django==4.1.3
 django-admin-menu==1.6
 djangorestframework==3.13.1
+django-cleanup==6.0.0
 django-cors-headers==3.13.0
 djangorestframework-simplejwt==4.8.0
 django-elasticsearch-dsl==7.2.2

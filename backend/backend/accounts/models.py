@@ -1,5 +1,9 @@
+from os import listdir
+from random import choice
+
 from django.db import models
 from django.utils import timezone
+from django.core.files import File
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import AbstractBaseUser,  PermissionsMixin
 
@@ -35,5 +39,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.email
 
     def save(self, *args, **kwargs):
+        if not self.avatar:
+            all_avatars = listdir("./accounts/avatars")
+            avatar = './accounts/avatars/' + choice(all_avatars)
+            
+            self.avatar = File(open(avatar, 'rb'))
         self.full_clean()
         super(User, self).save(*args, **kwargs)

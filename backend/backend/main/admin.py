@@ -21,7 +21,7 @@ class LikeVideoInline(admin.TabularInline):
 
 
 class VideoDash(AdminUpdatedFields):
-    list_display = ( 'title', 'channel', 'upload_date', 'id',)
+    list_display = ( 'id', 'title', 'channel', 'upload_date', 'id',)
     list_display_links = ('channel', 'title', 'upload_date')
     search_fields = ('channel', 'title',)
     list_filter = ['channel',]
