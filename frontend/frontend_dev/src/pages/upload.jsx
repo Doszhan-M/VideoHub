@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/css/video_edit.min.css";
+import "../styles/css/update.min.css";
 
 import api from "../api/requests"
 import {DotLoaderOverlay} from 'react-spinner-overlay'

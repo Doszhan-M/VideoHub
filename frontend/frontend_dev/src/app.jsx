@@ -4,7 +4,7 @@ import { Routes, Route, } from "react-router-dom"
 import Layout from "./components/layout"
 import Discover from "./pages/discover"
 import Upload from "./pages/upload"
-import VideoDetail from "./pages/video"
+import VideoPage from "./pages/video"
 
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
             <Route path="/" element={<Layout  {...{ all_tasks, setAllTasks }} />}>
                 <Route index element={<Discover/>} />
                 <Route path="upload" element={<Upload/>} />
-                <Route path="video/:id" element={<VideoDetail/>} />
+                <Route path="video/:id" element={<VideoPage/>} />
             </Route>
         </Routes>
     );
