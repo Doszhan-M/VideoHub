@@ -24,3 +24,5 @@ ws://127.0.0.1:8001/websocket/private_chat/items/
 wss://video.localhost/websocket/private_chat/items/
 
 sudo vim /etc/nginx/sites-enabled/
+
+

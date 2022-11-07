@@ -1,9 +1,10 @@
-FROM python:3.10.2
+FROM python:3.11.0
 
 
 EXPOSE 8000
 
-RUN useradd -ms /bin/bash celery
+ENV TZ=Asia/Almaty
+RUN useradd -ms /bin/bash backend
 
 WORKDIR /backend/
 
@@ -12,12 +13,12 @@ ENV PYTHONUNBUFFERED 1
 
 RUN pip install --upgrade pip
 
-COPY backend/requirements.txt /backend/requirements.txt
+COPY backend/requirements.txt ./
 RUN pip install -r requirements.txt
 
-COPY backend/ /home/backend/
+COPY backend/ ./
 
-RUN chown -R celery:celery /backend/
-USER celery
+RUN chown -R backend:backend ./
+USER backend
 
 ENTRYPOINT celery -A root worker -l INFO

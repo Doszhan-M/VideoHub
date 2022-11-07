@@ -19,7 +19,7 @@ class Channel(models.Model):
 
     def save(self, *args, **kwargs):
         if len(self.title) == 0:
-            self.title = self.owner.first_name
+            self.title = self.owner.first_name + " channel"
         super(Channel, self).save(*args, **kwargs)
 
     def __str__(self):

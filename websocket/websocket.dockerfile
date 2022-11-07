@@ -13,12 +13,12 @@ RUN pip install --upgrade pip
 
 WORKDIR /websocket_app/
 
-COPY ./websocket_app/requirements.txt /websocket_app/requirements.txt
+COPY ./websocket_app/requirements.txt ./
 RUN pip install -r requirements.txt
 
-COPY websocket_app/ /websocket_app
+COPY websocket_app/ ./
 
-RUN chown -R appuser:appuser /websocket_app/
+RUN chown -R appuser:appuser ./
 USER appuser
 
 ENTRYPOINT [ "./run_app.sh" ]

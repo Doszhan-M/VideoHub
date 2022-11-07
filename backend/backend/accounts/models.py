@@ -42,7 +42,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         if not self.avatar:
             all_avatars = listdir("./accounts/avatars")
             avatar = './accounts/avatars/' + choice(all_avatars)
-            
             self.avatar = File(open(avatar, 'rb'))
         self.full_clean()
         super(User, self).save(*args, **kwargs)
