@@ -17,17 +17,17 @@ class ChannelTest(TestCase):
     def setUp(self):
         self.user = User.objects.create(
             email='tesT@teSt.com', first_name='test_user', password='testpass', sub='test_sub')
-        self.channel = Channel.objects.create(owner=self.user, description='my channel')
+        self.channel = self.user.user_channel
 
     def test_channel_title(self):
         """ Check channel_title if it not set.
         """
-        self.assertEqual(self.channel.title, self.user.first_name)
+        self.assertEqual(self.channel.title, self.user.first_name + " channel")
 
     def test_str(self):
         """ Check string representation.
         """
-        self.assertEqual(self.channel.__str__(), 'test_user')
+        self.assertEqual(self.channel.__str__(), 'test_user channel')
 
 
 class VideoTest(TestCase):
@@ -36,7 +36,7 @@ class VideoTest(TestCase):
 
     def setUp(self):
         self.user = User.objects.create(email='tesT@teSt.com', password='testpass', sub='test_sub')
-        self.channel = Channel.objects.create(owner=self.user, description='my channel')
+        self.channel = self.user.user_channel
         self.video = Video.objects.create(channel=self.channel, title='test', )
 
     def test_str(self):
@@ -51,7 +51,7 @@ class CommentTest(TestCase):
 
     def setUp(self):
         self.user = User.objects.create(email='tesT@teSt.com', password='testpass', sub='test_sub')
-        self.channel = Channel.objects.create(owner=self.user, description='my channel')
+        self.channel = self.user.user_channel
         self.video = Video.objects.create(channel=self.channel, title='test', )
         self.comment = Comment.objects.create(text='test text', user=self.user, video=self.video)
 
@@ -67,13 +67,13 @@ class SubscribeChannelTest(TestCase):
 
     def setUp(self):
         self.user = User.objects.create(email='tesT@teSt.com', password='testpass', sub='test_sub')
-        self.channel = Channel.objects.create(owner=self.user, title='my channel')
+        self.channel = self.user.user_channel
         self.subscribe = SubscribeChannel.objects.create(user=self.user, channel=self.channel)
 
     def test_str(self):
         """ Check string representation.
         """
-        self.assertEqual(self.subscribe.__str__(), 'test@test.com + my channel')
+        self.assertEqual(self.subscribe.__str__(), 'test@test.com +  channel')
 
 
 class LikeVideoChannelTest(TestCase):
@@ -82,7 +82,7 @@ class LikeVideoChannelTest(TestCase):
 
     def setUp(self):
         self.user = User.objects.create(email='tesT@teSt.com', password='testpass', sub='test_sub')
-        self.channel = Channel.objects.create(owner=self.user, title='my channel')
+        self.channel = self.user.user_channel
         self.video = Video.objects.create(channel=self.channel, title='test', )
         self.like = LikeVideo.objects.create(user=self.user, video=self.video)
 

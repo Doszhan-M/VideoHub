@@ -21,7 +21,7 @@ class VideoApi(APITestCase):
 
     def setUp(self) -> None:
         self.user = User.objects.create(email='test@test.com', password='testpass', sub='test_sub')
-        self.channel = Channel.objects.create(owner=self.user, description='test channel')
+        self.channel = self.user.user_channel
         self.video0 = Video.objects.create(channel=self.channel, title='test video0', )
         self.video1 = Video.objects.create(channel=self.channel, title='test video1', )
         self.comment = Comment.objects.create(user=self.user, video=self.video0)
