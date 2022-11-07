@@ -19,6 +19,7 @@ function Header(props) {
 
     const getUserData = () => {
         api.getMe().then(response => {
+            console.log(response.data)
             dispatch(userInfo(response.data))
         });
 

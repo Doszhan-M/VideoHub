@@ -9,6 +9,7 @@ const userSlice = createSlice({
         email: '',
         avatar: '',
         username: '',
+        channel_id: null,
     },
     reducers: {
         checkAuth(state, action) {
@@ -18,6 +19,7 @@ const userSlice = createSlice({
             state.email = action.payload.email;
             state.avatar = action.payload.avatar;
             state.username = action.payload.first_name;
+            state.channel_id = action.payload.user_channel;
         },
     },
 });

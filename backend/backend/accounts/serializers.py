@@ -19,5 +19,6 @@ class RegistrationSerializer(UserCreateSerializer):
 class UserMeSerializer(UserSerializer):
     
     class Meta(UserSerializer.Meta):
-        fields = ('email', 'phone', 'avatar', 'first_name')
+        fields = ('email', 'phone', 'avatar', 
+                  'first_name', 'user_channel')
         
