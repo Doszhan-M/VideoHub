@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import "../styles/css/update.min.css";
+import { useNavigate } from 'react-router-dom'
 
 import api from "../api/requests"
-import {DotLoaderOverlay} from 'react-spinner-overlay'
+import { DotLoaderOverlay } from 'react-spinner-overlay'
 
 
 function Upload(props) {
     const [selectedFile, setSelectedFile] = useState(null);
     const [loading, setLoading] = useState(false)
+    let navigate = useNavigate();
 
-    const handleSubmit = async (event) => {
+    const uploadVideo = async (event) => {
         event.preventDefault();
         setLoading(true)
+
         const title = event.target.elements.title.value
         const desc = event.target.elements.desc.value
         const videoFile = selectedFile
@@ -23,14 +26,27 @@ function Upload(props) {
         formData.append("video_file", videoFile);
         formData.append("hashtag", htag);
 
-        const responseStatusCode = await api.uploadVideo(formData).then(
-            response => { 
-                console.log(response)
-                return response.status });
-        if (responseStatusCode == 201) {
+        const createResponse = await api.uploadVideo(formData).then(
+            response => {
+                console.log(response.data.id)
+                return response
+            }).catch(function (error) {
+                return error.response
+            });
+
+        if (createResponse) {
+            if (createResponse.status == 201) {
+                setLoading(false)
+                console.log(video_id)
+                return navigate(`/video/${createResponse.data.id}`);
+            } else {
+                setLoading(false)
+            }
+        } else {
             setLoading(false)
         }
     }
+
     const handleFileSelect = (event) => {
         setSelectedFile(event.target.files[0])
     }
@@ -41,7 +57,7 @@ function Upload(props) {
 
             <h1>Upload Video</h1>
             <div className="video_form">
-                <form method="post" encType="multipart/form-data" onSubmit={handleSubmit}>
+                <form method="post" encType="multipart/form-data" onSubmit={uploadVideo}>
                     <label htmlFor="title">Title</label>
                     <input type="text" id="title" name="firstname" placeholder="Your video title.." required="required"></input>
 

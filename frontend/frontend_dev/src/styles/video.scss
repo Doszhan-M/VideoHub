@@ -22,7 +22,8 @@
         align-items: center;
 
         .chat {
-            width: 70%;
+            align-self: flex-end;
+            width: 90%;
         }
     }
 }

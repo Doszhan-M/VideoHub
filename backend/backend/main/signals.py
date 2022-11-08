@@ -15,5 +15,6 @@ def remove_file_from_s3(sender, instance, **kwargs):
 
 
 @receiver(post_save, sender=User)
-def create_channel(sender, instance, **kwargs):
-    Channel.objects.create(owner=instance)
+def create_channel(sender, instance, created, ** kwargs):
+    if created:
+        Channel.objects.create(owner=instance)

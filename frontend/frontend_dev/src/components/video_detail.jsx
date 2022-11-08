@@ -7,7 +7,7 @@ import { Link } from "react-router-dom"
 
 import api from "../api/requests"
 import { userInfo } from "../store/userSlice"
-
+import { TelegramShareButton } from "react-share";
 
 
 function VideoDetail(props) {
@@ -19,15 +19,19 @@ function VideoDetail(props) {
     const [userAvatar, setUserAvatar] = useState('')
     const [userName, setUserName] = useState('')
     const [video_channel_id, setVideoChannelId] = useState('')
+    const [title, setTitle] = useState('')
+    const [description, setDescription] = useState('')
+    const [upload_date, setUploadDate] = useState('')
 
-    // TODO: manage link
 
     const checkChannelOwner = () => {
         if (isAuth & authUserChannelId == video_channel_id) {
-            return <button className="like">
-                <BsFillGearFill />
-                <Link to={`/edit/${id}`}>Manage</Link>
-            </button>
+            return <div className="like">
+                <Link to={`/edit/${id}`}>
+                    <BsFillGearFill />
+                    <span>Manage</span>
+                </Link>
+            </div>
         } else {
             return <button className="like">
                 <FaHeart />
@@ -45,15 +49,14 @@ function VideoDetail(props) {
             setUserAvatar(response.user_avatar)
             setUserName(response.username)
             setVideoChannelId(response.channel)
+            setTitle(response.title)
+            setDescription(response.description)
+            setUploadDate(response.upload_date)
         }
         fetchVideoData()
     }, [id,]);
 
-
     useEffect(() => { checkChannelOwner() }, [authUserChannelId,]);
-
-
-
 
     return (
         <div className="video_detail" controls>
@@ -62,18 +65,18 @@ function VideoDetail(props) {
                 <img src={userAvatar}></img>
                 <div className="author">{userName}</div>
                 <div className="button_wrapper">
-                    <button className="share">
-                        <FaTelegramPlane />
-                        <span>Share</span>
-                    </button>
+                    <div className="share">
+                        <TelegramShareButton url={window.location.href}>
+                            <FaTelegramPlane />
+                            <span>Share</span>
+                        </TelegramShareButton>
+                    </div>
                     {checkChannelOwner()}
                 </div>
             </div>
-            <h2>Basic how to ride your skateboard comfortly</h2>
-            <div className="description">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus illum tempora consequuntur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis earum velit accusantium maiores qui sit quas, laborum voluptatibus vero quidem tempore facilis voluptate tempora deserunt!
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus laborum qui dolorum fugiat eius accusantium repellendus illum tempora consequuntur. Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-            </div>
+            <h2>{title}</h2>
+            <div className="description">{description}</div>
+            <div className="load_date">upload date {upload_date}</div>
             <div className="comment_blog">
                 <form method="post">
                     <div className="form__group field">

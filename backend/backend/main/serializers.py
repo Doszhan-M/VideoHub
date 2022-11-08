@@ -4,7 +4,7 @@ from django.conf import settings
 from rest_framework.exceptions import ValidationError
 from rest_framework.serializers import (
     ModelSerializer, FileField, PrimaryKeyRelatedField,
-    CharField, SerializerMethodField)
+    CharField, DateTimeField)
 
 from .models import Video, Channel, Comment
 
@@ -15,6 +15,7 @@ class VideoSerializer(ModelSerializer):
     channel = PrimaryKeyRelatedField(queryset=Channel.objects.all(), required=False)
     username = CharField(source="channel.owner.first_name", read_only=True)
     user_avatar = CharField(source="channel.owner.avatar.url")
+    upload_date = DateTimeField(format="%d-%m-%Y")
     
     class Meta:
         model = Video
@@ -30,9 +31,7 @@ class UpdateCreateVideoSerializer(ModelSerializer):
 
     class Meta:
         model = Video
-        fields = (
-            'title', 'description', 'video_file',
-            'hashtag', 'upload_date', 'likes')
+        exclude = ("channel", )
 
     def validate_video_file(self, value):
         file_extension = splitext(value.name)[-1].lower()
@@ -40,6 +39,7 @@ class UpdateCreateVideoSerializer(ModelSerializer):
         if file_extension not in extensions:
             raise ValidationError
         return value
+    
     
 class CommentSerializer(ModelSerializer):
 
