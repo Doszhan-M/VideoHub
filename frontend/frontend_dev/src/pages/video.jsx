@@ -10,13 +10,15 @@ function VideoPage(props) {
 
     const { id } = useParams()
 
+    // TODO:  слева сделать ваши видео если getMe, иначе чат и внизу related videos
+
     return (
         <div className="page_video">
             <div className="video_detail_container">
-                <VideoDetail id={id}/>
+                <VideoDetail id={id} />
             </div>
             <div className="private_chat_container">
-                <Chat/>
+                <Chat />
             </div>
         </div>
     )

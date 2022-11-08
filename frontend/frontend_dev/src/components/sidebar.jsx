@@ -12,6 +12,8 @@ import { AiFillUpCircle } from 'react-icons/ai';
 
 function Sidebar(props) {
 
+    // TODO: высоту chat сделать через calc
+
     return (
         <aside>
             <div className="sidebar">
