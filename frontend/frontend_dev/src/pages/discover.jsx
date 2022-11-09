@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/css/discover.min.css";
 
-import VideoLine from "../components/video_card"
+import VideoLine from "../components/video_line"
 
 
 function Discover(props) {

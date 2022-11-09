@@ -59,6 +59,20 @@ const getVideo = async (id) => {
     return response
 }
 
+const getUserVideos = async () => {
+    const url = `/api/web/user_videos/`
+    const response = await axios(
+        {
+            method: "get",
+            url: url,
+            withCredentials: true,
+        }
+    ).then(response => {
+        return response.data
+    })
+    return response
+}
 
 
-export default { check_session, csrf, getMe, uploadVideo, getVideo }
+
+export default { check_session, csrf, getMe, uploadVideo, getVideo, getUserVideos }

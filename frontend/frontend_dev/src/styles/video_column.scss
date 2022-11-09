@@ -1,0 +1,11 @@
+.video_detail_column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    .title {
+        margin-top: 10px;
+        font-size: 27px;
+    }
+}

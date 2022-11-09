@@ -3,7 +3,8 @@ from django.urls import path
 from .views import (
     SearchVideo, All_Videos, GetVideo, CreateVideo,
     DeleteVideo, UpdateVideo, LikeVideo, CreateComment,
-    VideoComments, SubscribeVideoChannel, SubscribedVideos
+    VideoComments, SubscribeVideoChannel, SubscribedVideos,
+    UserVideos
 )
 
 
@@ -22,5 +23,6 @@ urlpatterns = [
     path("video_comments/<int:pk>/", VideoComments.as_view(), name="video_comments"),
     path("subscribe_channel/<int:pk>/", SubscribeVideoChannel.as_view(), name="subscribe_channel"),
     path("subscribed_videos/", SubscribedVideos.as_view(), name="subscribed_videos"),
+    path("user_videos/", UserVideos.as_view(), name="user_videos"),
 
 ]

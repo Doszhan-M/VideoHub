@@ -18,14 +18,14 @@ function VideoDetail(props) {
     const [videoLink, setVideoLink] = useState('')
     const [userAvatar, setUserAvatar] = useState('')
     const [userName, setUserName] = useState('')
-    const [video_channel_id, setVideoChannelId] = useState('')
+    const [videoChannelId, setVideoChannelId] = useState('')
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [upload_date, setUploadDate] = useState('')
 
 
     const checkChannelOwner = () => {
-        if (isAuth & authUserChannelId == video_channel_id) {
+        if (isAuth & authUserChannelId == videoChannelId) {
             return <div className="like">
                 <Link to={`/edit/${id}`}>
                     <BsFillGearFill />
@@ -43,7 +43,6 @@ function VideoDetail(props) {
     useEffect(() => {
         const fetchVideoData = async () => {
             const response = await api.getVideo(id)
-            console.log(response)
             const link = response.video_file + "#t=0.9"
             setVideoLink(link)
             setUserAvatar(response.user_avatar)

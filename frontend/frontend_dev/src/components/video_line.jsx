@@ -1,10 +1,10 @@
 import React from "react";
-import "../styles/css/video_card.min.css";
+import "../styles/css/video_line.min.css";
 
 import HoverVideoPlayer from 'react-hover-video-player';
 
 
-function VideoCard(props) {
+function VideoLine(props) {
 
     return (
         <div className="video anim">
@@ -26,4 +26,4 @@ function VideoCard(props) {
         </div>
     )
 }
-export default VideoCard;
+export default VideoLine;

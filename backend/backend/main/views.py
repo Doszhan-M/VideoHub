@@ -6,65 +6,75 @@ from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.generics import (
-    ListAPIView, RetrieveAPIView, CreateAPIView,
-    DestroyAPIView, UpdateAPIView, GenericAPIView,
+    ListAPIView,
+    RetrieveAPIView,
+    CreateAPIView,
+    DestroyAPIView,
+    UpdateAPIView,
+    GenericAPIView,
 )
 
 from .documents import VideoDocument
 from .serializers import (
-    VideoSerializer, UpdateCreateVideoSerializer,
-    CreateCommentSerializer, CommentSerializer,)
+    VideoSerializer,
+    UpdateCreateVideoSerializer,
+    CreateCommentSerializer,
+    CommentSerializer,
+)
 from .models import Video, Comment, SubscribeChannel
 
 
 class SearchVideo(ListAPIView):
-    ''' Search video
-    '''
+    """Search video"""
+
     serializer_class = VideoSerializer
 
     def get_queryset(self, *args, **kwargs):
-        value = self.kwargs['query']
-        query = Q('multi_match', query=value,
-                  fields=[
-                      'title',
-                      'description',
-                      'hashtag',
-                  ], fuzziness='auto')
+        value = self.kwargs["query"]
+        query = Q(
+            "multi_match",
+            query=value,
+            fields=[
+                "title",
+                "description",
+                "hashtag",
+            ],
+            fuzziness="auto",
+        )
         search = VideoDocument.search().query(query)
         queryset = search.to_queryset()
         return queryset
 
 
 class All_Videos(ListAPIView):
-    ''' Get all video
-    '''
-    queryset = Video.objects.all().order_by('-upload_date')
+    """Get all video"""
+
+    queryset = Video.objects.all().order_by("-upload_date")
     serializer_class = VideoSerializer
 
 
 class GetVideo(RetrieveAPIView):
-    ''' Get video by id
-    '''
+    """Get video by id"""
+
     queryset = Video.objects.all()
     serializer_class = VideoSerializer
-    
+
 
 class CreateVideo(CreateAPIView):
-    ''' Create video
-    '''
+    """Create video"""
+
     queryset = Video.objects.all()
     serializer_class = UpdateCreateVideoSerializer
     parser_classes = (MultiPartParser,)
     permission_classes = (IsAuthenticated,)
 
     def perform_create(self, serializer):
-        serializer.save(
-            channel=self.request.user.user_channel)
+        serializer.save(channel=self.request.user.user_channel)
 
 
 class DeleteVideo(DestroyAPIView):
-    ''' Delete video
-    '''
+    """Delete video"""
+
     queryset = Video.objects.all()
     permission_classes = (IsAuthenticated,)
 
@@ -77,8 +87,8 @@ class DeleteVideo(DestroyAPIView):
 
 
 class UpdateVideo(UpdateAPIView):
-    ''' Update video
-    '''
+    """Update video"""
+
     queryset = Video.objects.all()
     serializer_class = UpdateCreateVideoSerializer
     permission_classes = (IsAuthenticated,)
@@ -91,8 +101,8 @@ class UpdateVideo(UpdateAPIView):
 
 
 class LikeVideo(GenericAPIView):
-    ''' Like video
-    '''
+    """Like video"""
+
     queryset = Video.objects.all()
     permission_classes = (IsAuthenticated,)
 
@@ -102,14 +112,14 @@ class LikeVideo(GenericAPIView):
         return Response(status=status.HTTP_200_OK)
 
     def get_serializer_class(self):
-        if getattr(self, 'swagger_fake_view', False):
+        if getattr(self, "swagger_fake_view", False):
             return VideoSerializer
         return super().get_serializer_class()
 
 
 class CreateComment(CreateAPIView):
-    ''' Create comment for video
-    '''
+    """Create comment for video"""
+
     queryset = Comment.objects.all()
     serializer_class = CreateCommentSerializer
     permission_classes = (IsAuthenticated,)
@@ -119,40 +129,38 @@ class CreateComment(CreateAPIView):
 
 
 class VideoComments(ListAPIView):
-    ''' Get all comments for video
-    '''
+    """Get all comments for video"""
+
     serializer_class = CommentSerializer
 
     def get_queryset(self):
-        if getattr(self, 'swagger_fake_view', False):
+        if getattr(self, "swagger_fake_view", False):
             return Comment.objects.none()
-        queryset = Comment.objects.filter(
-            video=self.kwargs['pk']).order_by('-create')
+        queryset = Comment.objects.filter(video=self.kwargs["pk"]).order_by("-create")
         return queryset
 
 
 class SubscribeVideoChannel(GenericAPIView):
-    ''' Subscribe to video's channel
-    '''
+    """Subscribe to video's channel"""
+
     queryset = Video.objects.all()
     serializer_class = None
     permission_classes = (IsAuthenticated,)
 
     def get(self, request, pk):
         video = self.get_object()
-        SubscribeChannel.objects.create(channel=video.channel,
-                                        user=request.user)
+        SubscribeChannel.objects.create(channel=video.channel, user=request.user)
         return Response(status=status.HTTP_200_OK)
 
     def get_serializer_class(self):
-        if getattr(self, 'swagger_fake_view', False):
+        if getattr(self, "swagger_fake_view", False):
             return VideoSerializer
         return super().get_serializer_class()
-    
+
 
 class SubscribedVideos(ListAPIView):
-    ''' Get all videos from subscribes
-    '''
+    """Get all videos from subscribes"""
+
     serializer_class = VideoSerializer
 
     def get_queryset(self):
@@ -162,4 +170,16 @@ class SubscribedVideos(ListAPIView):
             channel = subscribe.channel
             channel_videos = Video.objects.filter(channel=channel)
             queryset.union(channel_videos)
+        return queryset
+
+
+class UserVideos(ListAPIView):
+    """Get all videos to authenticated user"""
+
+    serializer_class = VideoSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        channel_id = self.request.user.user_channel
+        queryset = Video.objects.filter(channel=channel_id)
         return queryset

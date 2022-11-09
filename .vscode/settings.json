@@ -4,10 +4,11 @@
     "statusBar.background": "#333333",
   },
   // - - - Настройки pythonPath - - - - - - - - - - 
-  "python.defaultInterpreterPath": "./venv/bin/python",
-  // - - - Настройки autopep8 - - - - - - - - - - 
+  "python.defaultInterpreterPath": "./venv/bin/python3",
+  // - - - Настройки formatter - - - - - - - - - - 
   "python.formatting.provider": "black",
-
+  "editor.formatOnSave": true,
+  // - - - Настройки liveSassCompile - - - - - - - - - - 
   "liveSassCompile.settings.formats": [
     {
       "format": "compressed",
@@ -16,7 +17,6 @@
       // "savePath": "/distributor/distributor_app/dashboard/src/styles/css"
     },
   ],
-
   // - - - Настройки cSpell - - - - - - - - - - - - -
   "cSpell.language": "en,ru",
   "cSpell.words": [
