@@ -15,10 +15,6 @@
         transform-origin: center
     }
 
-    .video:hover .video-time {
-        display: none
-    }
-
     .video:hover .video-author {
         bottom: -65px;
         transform: scale(0.6);
@@ -28,18 +24,6 @@
 
     .video:hover .video-by {
         opacity: 0
-    }
-
-    .video-time {
-        position: absolute;
-        background: rgba(21, 13, 13, .44);
-        color: rgba(255, 255, 255, .85);
-        padding: 3px 8px;
-        font-size: 12px;
-        border-radius: 6px;
-        top: 10px;
-        z-index: 1;
-        right: 8px;
     }
 
     .video-wrapper {

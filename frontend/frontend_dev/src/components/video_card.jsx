@@ -8,7 +8,6 @@ function VideoCard(props) {
 
     return (
         <div className="video anim">
-            <div className="video-time">8 min</div>
             <div className="video-wrapper">
                 <HoverVideoPlayer videoSrc="https://player.vimeo.com/external/436572488.sd.mp4?s=eae5fb490e214deb9ff532dd98d101efe94e7a8b&amp;profile_id=139&amp;oauth2_token_id=57447761" />
                 <div className="author-img__wrapper video-author">

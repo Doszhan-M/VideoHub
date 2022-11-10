@@ -58,7 +58,7 @@ class GetVideo(RetrieveAPIView):
 
     queryset = Video.objects.all()
     serializer_class = VideoSerializer
-
+    
 
 class CreateVideo(CreateAPIView):
     """Create video"""
@@ -67,7 +67,7 @@ class CreateVideo(CreateAPIView):
     serializer_class = UpdateCreateVideoSerializer
     parser_classes = (MultiPartParser,)
     permission_classes = (IsAuthenticated,)
-
+    
     def perform_create(self, serializer):
         serializer.save(channel=self.request.user.user_channel)
 
