@@ -21,11 +21,3 @@ def remove_file_from_s3(sender, instance, **kwargs):
 def create_channel(sender, instance, created, **kwargs):
     if created:
         Channel.objects.create(owner=instance)
-
-
-# @receiver(pre_save, sender=Video)
-# def set_imagekit_url(sender, instance: Video, **kwargs):
-#     if not instance.imagekit_url:
-#         aws_url = instance.video_file.url
-#         instance.imagekit_url = aws_url
-#         instance.save(update_fields=["imagekit_url"])
