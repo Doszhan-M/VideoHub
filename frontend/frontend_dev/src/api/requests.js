@@ -86,6 +86,19 @@ const getRelatedVideos = async (id) => {
     return response
 }
 
+const discoverVideos = async (id) => {
+    const url = `/api/web/discover_videos/`
+    const response = await axios(
+        {
+            method: "get",
+            url: url,
+        }
+    ).then(response => {
+        return response.data
+    })
+    return response
+}
+
 
 
 export default { 
@@ -95,5 +108,6 @@ export default {
     uploadVideo, 
     getVideo, 
     getUserVideos, 
-    getRelatedVideos 
+    getRelatedVideos, 
+    discoverVideos
 }

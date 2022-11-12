@@ -1,3 +1,4 @@
+from random import choices
 from elasticsearch_dsl import Q
 
 from rest_framework import status
@@ -62,7 +63,7 @@ class GetVideo(RetrieveAPIView):
     def get(self, request, *args, **kwargs):
         instance = self.get_object()
         instance.views += 1
-        instance.save(update_fields=['views'])
+        instance.save(update_fields=["views"])
         return self.retrieve(request, *args, **kwargs)
 
 
@@ -192,7 +193,7 @@ class UserVideos(ListAPIView):
 
 
 class RelatedVideos(ListAPIView):
-    """Get all videos to authenticated user"""
+    """Get all videos for id"""
 
     serializer_class = VideoSerializer
 
@@ -201,4 +202,17 @@ class RelatedVideos(ListAPIView):
         video = Video.objects.get(id=id)
         channel = video.channel
         queryset = Video.objects.filter(channel=channel)
+        return queryset
+
+
+class DiscoverVideos(ListAPIView):
+    """Get 2 random videos"""
+
+    serializer_class = VideoSerializer
+
+    def get_queryset(self):
+        all_ids = Video.objects.all()
+        queryset = set(choices(all_ids, k=2))
+        if len(queryset) < 2:
+            queryset = self.get_queryset()
         return queryset

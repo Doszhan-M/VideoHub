@@ -28,23 +28,17 @@ function Upload(props) {
 
         const createResponse = await api.uploadVideo(formData).then(
             response => {
-                console.log(response.data.id)
                 return response
             }).catch(function (error) {
                 return error.response
             });
-
-        if (createResponse) {
-            if (createResponse.status == 201) {
-                setLoading(false)
-                console.log(video_id)
-                return navigate(`/video/${createResponse.data.id}`);
-            } else {
-                setLoading(false)
-            }
+        if (createResponse.status == 201) {
+            setLoading(false)
+            return navigate(`/video/${createResponse.data.id}`);
         } else {
             setLoading(false)
         }
+
     }
 
     const handleFileSelect = (event) => {
@@ -54,23 +48,22 @@ function Upload(props) {
     return (
         <div className="page_container">
             <DotLoaderOverlay loading={loading} overlayColor="rgba(0,153,255,0.2)" message=<h4>uploading...</h4> />
-
             <h1>Upload Video</h1>
             <div className="video_form">
                 <form method="post" encType="multipart/form-data" onSubmit={uploadVideo}>
                     <label htmlFor="title">Title</label>
-                    <input type="text" id="title" name="firstname" placeholder="Your video title.." required="required"></input>
+                    <input type="text" id="title" name="firstname" placeholder="Your video title.." required="required" />
 
                     <label htmlFor="desc">Description</label>
-                    <textarea rows="10" cols="45" id="desc" placeholder="Description for video.." required="required"></textarea>
+                    <textarea rows="10" cols="45" id="desc" placeholder="Description for video.." required="required" />
 
                     <label htmlFor="file">Choose file to upload</label>
-                    <input type="file" id="file" name="file" onChange={handleFileSelect} required="required"></input>
+                    <input type="file" id="file" name="file" onChange={handleFileSelect} required="required" />
 
                     <label htmlFor="htag">Hashtags</label>
-                    <input type="text" id="htag" name="firstname" placeholder="Your video title.." required="required"></input>
+                    <input type="text" id="htag" name="firstname" placeholder="Your video title.." required="required" />
 
-                    <input type="submit" value="Submit"></input>
+                    <input type="submit" value="Submit" />
                 </form>
             </div>
         </div>

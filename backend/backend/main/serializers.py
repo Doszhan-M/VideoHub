@@ -8,6 +8,7 @@ from rest_framework.serializers import (
     PrimaryKeyRelatedField,
     CharField,
     DateTimeField,
+    SerializerMethodField,
 )
 
 from .models import Video, Channel, Comment
@@ -20,6 +21,7 @@ class VideoSerializer(ModelSerializer):
     username = CharField(source="channel.owner.first_name", read_only=True)
     user_avatar = CharField(source="channel.owner.avatar.url")
     upload_date = DateTimeField(format="%d-%m-%Y")
+    imagekit_url = SerializerMethodField()
 
     class Meta:
         model = Video
@@ -35,7 +37,15 @@ class VideoSerializer(ModelSerializer):
             "username",
             "user_avatar",
             "views",
+            "imagekit_url",
         )
+
+    def get_imagekit_url(self, obj):
+        print(obj.video_file.url)
+        aws_url = "mediastatic.s3.amazonaws.com"
+        imagekit_url = "ik.imagekit.io/videohub"
+        url = obj.video_file.url.replace(aws_url, imagekit_url)
+        return url
 
 
 class UpdateCreateVideoSerializer(ModelSerializer):

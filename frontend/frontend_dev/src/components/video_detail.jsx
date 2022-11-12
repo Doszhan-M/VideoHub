@@ -43,7 +43,7 @@ function VideoDetail(props) {
     useEffect(() => {
         const fetchVideoData = async () => {
             const response = await api.getVideo(id)
-            const link = response.video_file + "#t=0.9"
+            const link = response.imagekit_url + "#t=0.9"
             setVideoLink(link)
             setUserAvatar(response.user_avatar)
             setUserName(response.username)

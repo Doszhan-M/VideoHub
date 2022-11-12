@@ -1,5 +1,4 @@
 .page_container {
-    padding: 15px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -11,7 +10,7 @@
     }
 
     .discover {
-        padding: 10px;
+        padding: 5px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -24,6 +23,7 @@
             align-items: center;
             font-size: 30px;
             font-weight: 550;
+            margin-top: -5px;
         }
 
         .discover_container {

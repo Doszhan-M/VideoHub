@@ -7,7 +7,7 @@ import HoverVideoPlayer from 'react-hover-video-player';
 
 function VideoCard(props) {
 
-    const scr = props.video.video_file
+    const scr = props.video.imagekit_url
     const user_avatar = props.video.user_avatar
     const author = props.video.username
     const title = props.video.title

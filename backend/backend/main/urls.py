@@ -14,6 +14,7 @@ from .views import (
     SubscribedVideos,
     UserVideos,
     RelatedVideos,
+    DiscoverVideos,
 )
 
 
@@ -31,8 +32,12 @@ urlpatterns = [
     path("like_video/<int:pk>/", LikeVideo.as_view(), name="like_video"),
     path("create_comment/", CreateComment.as_view(), name="create_comment"),
     path("video_comments/<int:pk>/", VideoComments.as_view(), name="video_comments"),
-    path("subscribe_channel/<int:pk>/", SubscribeVideoChannel.as_view(), name="subscribe_channel"),
+    path(
+        "subscribe_channel/<int:pk>/",
+        SubscribeVideoChannel.as_view(),
+        name="subscribe_channel",
+    ),
     path("subscribed_videos/", SubscribedVideos.as_view(), name="subscribed_videos"),
     path("user_videos/", UserVideos.as_view(), name="user_videos"),
-
+    path("discover_videos/", DiscoverVideos.as_view(), name="discover_videos"),
 ]

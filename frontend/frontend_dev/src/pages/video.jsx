@@ -9,7 +9,6 @@ import Chat from "../components/chat"
 import VideoColumn from "../components/video_column"
 
 
-// TODO:  слева сделать ваши видео если getMe, иначе чат и внизу related videos
 function VideoPage(props) {
     const { id } = useParams()
     const isAuth = useSelector(state => state.user.isAuth)
