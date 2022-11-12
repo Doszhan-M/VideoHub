@@ -41,7 +41,8 @@ class VideoSerializer(ModelSerializer):
         )
 
     def get_imagekit_url(self, obj):
-        print(obj.video_file.url)
+        if not obj.video_file:
+            return None
         aws_url = "mediastatic.s3.amazonaws.com"
         imagekit_url = "ik.imagekit.io/videohub"
         url = obj.video_file.url.replace(aws_url, imagekit_url)
