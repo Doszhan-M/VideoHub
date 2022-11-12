@@ -58,7 +58,13 @@ class GetVideo(RetrieveAPIView):
 
     queryset = Video.objects.all()
     serializer_class = VideoSerializer
-    
+
+    def get(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.views += 1
+        instance.save(update_fields=['views'])
+        return self.retrieve(request, *args, **kwargs)
+
 
 class CreateVideo(CreateAPIView):
     """Create video"""
@@ -67,7 +73,7 @@ class CreateVideo(CreateAPIView):
     serializer_class = UpdateCreateVideoSerializer
     parser_classes = (MultiPartParser,)
     permission_classes = (IsAuthenticated,)
-    
+
     def perform_create(self, serializer):
         serializer.save(channel=self.request.user.user_channel)
 
@@ -182,4 +188,17 @@ class UserVideos(ListAPIView):
     def get_queryset(self):
         channel_id = self.request.user.user_channel
         queryset = Video.objects.filter(channel=channel_id)
+        return queryset
+
+
+class RelatedVideos(ListAPIView):
+    """Get all videos to authenticated user"""
+
+    serializer_class = VideoSerializer
+
+    def get_queryset(self):
+        id = self.kwargs.get("pk")
+        video = Video.objects.get(id=id)
+        channel = video.channel
+        queryset = Video.objects.filter(channel=channel)
         return queryset

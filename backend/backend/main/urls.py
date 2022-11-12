@@ -1,14 +1,23 @@
 from django.urls import path
 
 from .views import (
-    SearchVideo, All_Videos, GetVideo, CreateVideo,
-    DeleteVideo, UpdateVideo, LikeVideo, CreateComment,
-    VideoComments, SubscribeVideoChannel, SubscribedVideos,
-    UserVideos
+    SearchVideo,
+    All_Videos,
+    GetVideo,
+    CreateVideo,
+    DeleteVideo,
+    UpdateVideo,
+    LikeVideo,
+    CreateComment,
+    VideoComments,
+    SubscribeVideoChannel,
+    SubscribedVideos,
+    UserVideos,
+    RelatedVideos,
 )
 
 
-app_name = 'main'
+app_name = "main"
 
 
 urlpatterns = [
@@ -18,6 +27,7 @@ urlpatterns = [
     path("create_video/", CreateVideo.as_view(), name="create_video"),
     path("delete_video/<int:pk>/", DeleteVideo.as_view(), name="delete_video"),
     path("update_video/<int:pk>/", UpdateVideo.as_view(), name="update_video"),
+    path("related_videos/<int:pk>/", RelatedVideos.as_view(), name="related_videos"),
     path("like_video/<int:pk>/", LikeVideo.as_view(), name="like_video"),
     path("create_comment/", CreateComment.as_view(), name="create_comment"),
     path("video_comments/<int:pk>/", VideoComments.as_view(), name="video_comments"),

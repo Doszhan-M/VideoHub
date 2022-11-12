@@ -22,8 +22,11 @@
         align-items: center;
 
         .chat {
-            align-self: flex-end;
-            width: 90%;
+            align-self: center;
+            width: 85%;
+        }
+        .related_videos {
+            margin: 5% 0;
         }
     }
 }

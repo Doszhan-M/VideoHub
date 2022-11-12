@@ -17,7 +17,7 @@ function VideoPage(props) {
     const [videoChannelId, setVideoChannelId] = useState('')
     const [videoOwner, setVideoOwner] = useState(false)
     const [userVideoList, setUserVideoList] = useState([])
-    const columnTitle = "Your Videos"
+    const [columnTitle, setColumnTitle] = useState('')
 
     const checkChannelOwner = async () => {
         if (isAuth & authUserChannelId == videoChannelId) {
@@ -25,13 +25,20 @@ function VideoPage(props) {
             const videoList = await api.getUserVideos()
             const slicedVideoList = videoList.slice(0, 3);
             setUserVideoList(slicedVideoList)
-
+            setColumnTitle("Your Videos")
+        } else {
+            const videoList = await api.getRelatedVideos(id)
+            const slicedVideoList = videoList.slice(0, 2);
+            setUserVideoList(slicedVideoList)
+            setColumnTitle("Related Videos")
         }
     }
 
     useEffect(() => {
         const getVideoOwner = async () => {
             const response = await api.getVideo(id)
+            console.log(response)
+
             setVideoChannelId(response.channel)
             if (isAuth & authUserChannelId == response.channel) {
                 setVideoOwner(true)
@@ -50,9 +57,15 @@ function VideoPage(props) {
             </div>
             <div className="video_right_container">
                 {videoOwner ? (
-                    <VideoColumn  videoList={userVideoList} title={columnTitle} />
+                    <VideoColumn videoList={userVideoList} title={columnTitle} />
                 ) : (
-                    <Chat />
+                    <>
+                        <Chat />
+                        <div className="related_videos">
+                            <VideoColumn videoList={userVideoList} title={columnTitle} />
+                        </div>
+                    </>
+
                 )}
 
             </div>

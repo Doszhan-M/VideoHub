@@ -9,13 +9,17 @@ User = get_user_model()
 
 class Channel(models.Model):
     owner = models.OneToOneField(
-        User, on_delete=models.CASCADE, related_name='user_channel')
-    title = models.CharField(max_length=256,)
+        User, on_delete=models.CASCADE, related_name="user_channel"
+    )
+    title = models.CharField(max_length=256)
     description = models.CharField(max_length=256, blank=True)
     subscribers = models.ManyToManyField(
-        User, blank=True, through='SubscribeChannel',
-        through_fields=('channel', 'user'),
-        related_name='channel_subscribers')
+        User,
+        blank=True,
+        through="SubscribeChannel",
+        through_fields=("channel", "user"),
+        related_name="channel_subscribers",
+    )
 
     def save(self, *args, **kwargs):
         if len(self.title) == 0:
@@ -28,21 +32,28 @@ class Channel(models.Model):
 
 class Video(models.Model):
     channel = models.ForeignKey(
-        Channel, on_delete=models.CASCADE, related_name='video_channel')
-    title = models.CharField(max_length=256,)
+        Channel, on_delete=models.CASCADE, related_name="video_channel"
+    )
+    title = models.CharField(max_length=256)
     video_file = models.FileField(
-        upload_to='videos/',
-        validators=[FileExtensionValidator(
-            allowed_extensions=['MOV', 'avi', 'mp4', 'webm', 'mkv'])])
+        upload_to="videos/",
+        validators=[
+            FileExtensionValidator(
+                allowed_extensions=["MOV", "avi", "mp4", "webm", "mkv"]
+            )
+        ],
+    )
     description = models.TextField(blank=True)
     hashtag = models.TextField(blank=True)
     upload_date = models.DateTimeField(default=timezone.now)
-    likes = models.ManyToManyField(User, blank=True, through='LikeVideo',
-                                   through_fields=('video', 'user'),)
+    views = models.PositiveIntegerField(default=0)
+    likes = models.ManyToManyField(
+        User, blank=True, through="LikeVideo", through_fields=("video", "user")
+    )
 
     def __str__(self):
         return self.title
-    
+
 
 class Comment(models.Model):
     text = models.TextField(blank=True)
@@ -59,12 +70,14 @@ class SubscribeChannel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
-        constraints = [models.UniqueConstraint(
-            fields=['user', 'channel'],
-            name='user_and_channel_unique',)]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user", "channel"], name="user_and_channel_unique"
+            )
+        ]
 
     def __str__(self):
-        return f'{self.user.__str__()} + {self.channel.__str__()}'
+        return f"{self.user.__str__()} + {self.channel.__str__()}"
 
 
 class LikeVideo(models.Model):
@@ -72,9 +85,11 @@ class LikeVideo(models.Model):
     video = models.ForeignKey(Video, on_delete=models.CASCADE)
 
     class Meta:
-        constraints = [models.UniqueConstraint(
-            fields=['user', 'video'],
-            name='user_and_video_unique',)]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user", "video"], name="user_and_video_unique"
+            )
+        ]
 
     def __str__(self):
-        return f'{self.user.__str__()} + {self.video.__str__()}'
+        return f"{self.user.__str__()} + {self.video.__str__()}"

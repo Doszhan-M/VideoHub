@@ -5,9 +5,7 @@ import VideoCard from "./video_card"
 
 
 function VideoColumn(props) {
-    console.log(props.videoList)
     const userVideoList = props.videoList
-
 
     return (
         <div className="video_detail_column">
