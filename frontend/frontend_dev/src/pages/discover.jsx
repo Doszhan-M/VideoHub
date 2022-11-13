@@ -10,15 +10,29 @@ import api from "../api/requests"
 function Discover(props) {
 
     const [discoverVideos, setDiscoverVideos] = useState(null)
+    const [mostWatchedVideos, setMostWatchedVideos] = useState(null)
+    const [allVideos, setAllVideos] = useState(null)
 
     const getDiscoverVideos = async () => {
         const videoList = await api.discoverVideos()
         setDiscoverVideos(videoList)
     }
 
-    console.log(discoverVideos)
+    const getMostWatchedVideos = async () => {
+        const videoList = await api.mostWatchedVideos()
+        setMostWatchedVideos(videoList)
+    }
 
-    useEffect(() => { getDiscoverVideos() }, []);
+    const getAllVideos = async () => {
+        const videoList = await api.allVideos()
+        setAllVideos(videoList)
+    }
+
+    useEffect(() => { 
+        getDiscoverVideos(); 
+        getMostWatchedVideos(); 
+        getAllVideos(); 
+    }, []);
 
     return (
         <div className="page_container">
@@ -32,7 +46,7 @@ function Discover(props) {
                         ) : (<></>)}
                     </div>
                     <div className="video_thin">
-                    {discoverVideos ? (
+                        {discoverVideos ? (
                             <VideoCard video={discoverVideos[1]} />
                         ) : (<></>)}
                     </div>
@@ -41,10 +55,17 @@ function Discover(props) {
             <div className="page_most_watched">
                 <div className="title">Most Watched</div>
                 <div className="page_most_watched_container">
-                    <VideoLine />
-                    <VideoLine />
-                    <VideoLine />
-                    <VideoLine />
+                    {mostWatchedVideos?.map(video => {
+                        return <VideoCard key={video.id} video={video} />
+                    })}
+                </div>
+            </div>
+            <div className="page_most_watched">
+                <div className="title">More Videos</div>
+                <div className="page_most_watched_container">
+                    {allVideos?.map(video => {
+                        return <VideoCard key={video.id} video={video} />
+                    })}
                 </div>
             </div>
         </div>

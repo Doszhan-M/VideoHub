@@ -86,8 +86,34 @@ const getRelatedVideos = async (id) => {
     return response
 }
 
-const discoverVideos = async (id) => {
+const discoverVideos = async () => {
     const url = `/api/web/discover_videos/`
+    const response = await axios(
+        {
+            method: "get",
+            url: url,
+        }
+    ).then(response => {
+        return response.data
+    })
+    return response
+}
+
+const mostWatchedVideos = async () => {
+    const url = `/api/web/most_watched/`
+    const response = await axios(
+        {
+            method: "get",
+            url: url,
+        }
+    ).then(response => {
+        return response.data
+    })
+    return response
+}
+
+const allVideos = async () => {
+    const url = `/api/web/all_videos/`
     const response = await axios(
         {
             method: "get",
@@ -109,5 +135,7 @@ export default {
     getVideo, 
     getUserVideos, 
     getRelatedVideos, 
-    discoverVideos
+    discoverVideos,
+    mostWatchedVideos,
+    allVideos
 }

@@ -15,6 +15,7 @@ from .views import (
     UserVideos,
     RelatedVideos,
     DiscoverVideos,
+    MostWatchedVideos,
 )
 
 
@@ -23,7 +24,7 @@ app_name = "main"
 
 urlpatterns = [
     path("search/video/<str:query>/", SearchVideo.as_view(), name="search_video"),
-    path("search/all_videos/", All_Videos.as_view(), name="all_videos"),
+    path("all_videos/", All_Videos.as_view(), name="all_videos"),
     path("get_video/<int:pk>/", GetVideo.as_view(), name="get_video"),
     path("create_video/", CreateVideo.as_view(), name="create_video"),
     path("delete_video/<int:pk>/", DeleteVideo.as_view(), name="delete_video"),
@@ -40,4 +41,5 @@ urlpatterns = [
     path("subscribed_videos/", SubscribedVideos.as_view(), name="subscribed_videos"),
     path("user_videos/", UserVideos.as_view(), name="user_videos"),
     path("discover_videos/", DiscoverVideos.as_view(), name="discover_videos"),
+    path("most_watched/", MostWatchedVideos.as_view(), name="most_watched"),
 ]

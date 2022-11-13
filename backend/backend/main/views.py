@@ -216,3 +216,13 @@ class DiscoverVideos(ListAPIView):
         if len(queryset) < 2:
             queryset = self.get_queryset()
         return queryset
+
+
+class MostWatchedVideos(ListAPIView):
+    """Get first 4 videos order by views"""
+
+    serializer_class = VideoSerializer
+
+    def get_queryset(self):
+        queryset = Video.objects.all().order_by('-views')[:4]
+        return queryset
