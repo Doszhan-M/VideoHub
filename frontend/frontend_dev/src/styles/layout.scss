@@ -12,24 +12,12 @@ html {
     &::-webkit-scrollbar {
         width: 8px;
         border-radius: 10px;
-
-        @media screen and (max-width: 812px) {
-            & {
-                width: 2px;
-            }
-        }
     }
 
     &::-webkit-scrollbar-thumb {
 
         background-color: rgba(21, 20, 26, .63);
         border-radius: 10px;
-
-        @media screen and (max-width: 812px) {
-            & {
-                width: 3px;
-            }
-        }
     }
 
     h4 {
@@ -141,6 +129,13 @@ main {
         align-items: center;
         color: rgb(122, 132, 141);
         font-size: small;
+        margin-top: 1%;
+
+        @media screen and (max-width: 812px) {
+            & {
+                margin-top: 5%;
+            }
+        }
     }
 
 }
