@@ -11,12 +11,13 @@ import Sidebar from "./sidebar"
 
 import api from "../api/requests"
 import { checkAuth } from "../store/userSlice"
-
+import getDate from "../utils/datetime"
 
 const Layout = (props) => {
 
     const dispatch = useDispatch()
     const isMobile = useMediaQuery({ query: '(max-width: 812px)' })
+    // const today = new Date().format('m-d-Y')
 
     useEffect(() => {
         api.check_session().then(response => {
@@ -25,26 +26,24 @@ const Layout = (props) => {
         });
     }, []);
 
-
     return (
         <main>
             <Header tasks={props.all_tasks} />
             <div className="container">
                 {isMobile ? (
                     <Burger
-                        customCrossIcon={<img src="/images/icons/icons8-close-30.png" />}
+                        customCrossIcon={<img src="/images/icons/icon_close.png" />}
                         customBurgerIcon={<img src="/images/icons/burger.png" />}>
                         <Sidebar />
                     </Burger>
                 ) : (
                     <Sidebar />
-
                 )}
-
                 <div className="pages">
                     <Outlet />
                 </div>
             </div>
+            <footer>{getDate()}</footer>
         </main>
     )
 }

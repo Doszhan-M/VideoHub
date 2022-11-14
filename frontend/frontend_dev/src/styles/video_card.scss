@@ -35,6 +35,12 @@
             display: block;
             cursor: pointer;
             transition: .4s;
+
+            @media screen and (max-width: 812px) {
+                & {
+                    height: 100%;
+                }
+            }
         }
 
         .author-img__wrapper {

@@ -24,6 +24,13 @@
             font-size: 30px;
             font-weight: 550;
             margin-top: -5px;
+
+            @media screen and (max-width: 812px) {
+                & {
+                    font-size: 35px;
+                    margin-top: 0px;
+                }
+            }
         }
 
         .discover_container {
@@ -32,15 +39,34 @@
             align-items: center;
             width: 100%;
 
+
+            @media screen and (max-width: 812px) {
+                & {
+                    flex-direction: column;
+                }
+            }
+
             .video_width {
                 width: 60%;
                 margin: 20px;
+
+                @media screen and (max-width: 812px) {
+                    & {
+                        width: 100%;
+                    }
+                }
 
                 [data-testid] {
                     display: flex !important;
 
                     video {
                         height: 300px;
+
+                        @media screen and (max-width: 812px) {
+                            & {
+                                height: 100%;
+                            }
+                        }
                     }
                 }
 
@@ -50,11 +76,24 @@
                 width: 40%;
                 margin: 20px;
 
+                @media screen and (max-width: 812px) {
+                    & {
+                        width: 100%;
+                        margin: 0px;
+                    }
+                }
+
                 [data-testid] {
                     display: flex !important;
 
                     video {
                         height: 300px;
+
+                        @media screen and (max-width: 812px) {
+                            & {
+                                height: 100%;
+                            }
+                        }
                     }
                 }
             }
@@ -76,6 +115,13 @@
             font-size: 30px;
             font-weight: 550;
             margin-bottom: 20px;
+
+            @media screen and (max-width: 812px) {
+                & {
+                    font-size: 35px;
+                    margin-top: 20px;
+                }
+            }
         }
 
         .page_most_watched_container {
@@ -86,6 +132,12 @@
             grid-row-gap: 20px;
             padding: 15px;
 
+            @media screen and (max-width: 812px) {
+                & {
+                    grid-template-columns: repeat(1, 1fr);
+                    padding: 5px;
+                }
+            }
         }
     }
 }

@@ -7,16 +7,29 @@
 
 html {
     background-color: #1f1d2b;
+    overflow-x: hidden;
 
     &::-webkit-scrollbar {
         width: 8px;
         border-radius: 10px;
+
+        @media screen and (max-width: 812px) {
+            & {
+                width: 2px;
+            }
+        }
     }
 
     &::-webkit-scrollbar-thumb {
 
         background-color: rgba(21, 20, 26, .63);
         border-radius: 10px;
+
+        @media screen and (max-width: 812px) {
+            & {
+                width: 3px;
+            }
+        }
     }
 
     h4 {
@@ -50,6 +63,7 @@ main {
                 left: 0;
                 background-color: #1f1d2b;
                 z-index: 10;
+                width: 100% !important;
             }
 
             .bm-burger-button {
@@ -89,10 +103,6 @@ main {
                 background-color: #1f1d2b;
             }
 
-            .bm-menu-wrap {
-                min-width: 100vw;
-            }
-
         }
 
     }
@@ -120,6 +130,17 @@ main {
             opacity: 1;
             transform: none
         }
+    }
+
+    footer {
+        min-height: 20px;
+        min-width: 100%;
+        background-color: #171922;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: rgb(122, 132, 141);
+        font-size: small;
     }
 
 }
