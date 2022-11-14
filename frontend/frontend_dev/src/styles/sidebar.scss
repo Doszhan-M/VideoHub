@@ -5,10 +5,19 @@ aside {
     justify-content: center;
     width: 24%;
     padding: 10px;
-    position:sticky;
+    position: sticky;
     top: 0;
     margin-bottom: 4%;
 
+    @media screen and (max-width: 812px) {
+        & {
+            position: fixed;
+            width: 90px;
+            z-index: 10;
+            padding: 0px;
+            top: 100px;
+        }
+    }
 
     .sidebar {
         display: flex;
@@ -20,6 +29,7 @@ aside {
         font-weight: 500;
         padding: 30px;
         height: 100%;
+
 
 
         li {
@@ -35,18 +45,35 @@ aside {
                 font-size: 16px;
                 color: #808191;
                 align-self: flex-start;
+
+                @media screen and (max-width: 812px) {
+                    & {
+                        // display: none;
+                    }
+                }
             }
 
             span {
-                margin-left: 20px
+                margin-left: 20px;
+
+                @media screen and (max-width: 812px) {
+                    & {
+                        // display: none;   
+                    }
+                }
             }
 
-            ;
+
         }
 
         li:first-child {
-            // height: 25px;
+            @media screen and (max-width: 812px) {
+                & {
+                    display: none;
+                }
+            }
         }
+
         li:last-child {
             margin: 5px 5px -15px 5px;
         }
