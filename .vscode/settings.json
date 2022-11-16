@@ -10,6 +10,7 @@
     "websocket": "Wordpress",
     "frontend_build": "Base",
     "frontend_dev": "Redux-store",
+    "store": "Redux-store",
     "venv": "Python",
   },
   // - - - PythonPath settings- - - - - - - - - - - - - 

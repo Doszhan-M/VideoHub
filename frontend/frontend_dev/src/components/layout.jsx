@@ -17,7 +17,7 @@ const Layout = (props) => {
 
     const dispatch = useDispatch()
     const isMobile = useMediaQuery({ query: '(max-width: 812px)' })
-    // const today = new Date().format('m-d-Y')
+
 
     useEffect(() => {
         api.check_session().then(response => {

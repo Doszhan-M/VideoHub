@@ -36,7 +36,7 @@ services:
     ports:
       - "8000:8000"
     env_file:
-      - .env
+      - dev.env
 
   celery_backend:
     build:
@@ -46,7 +46,7 @@ services:
     volumes:
       - ./backend/backend:/backend/
     env_file:
-      - .env
+      - dev.env
     depends_on:
       - backend
       - redis
@@ -57,7 +57,7 @@ services:
       dockerfile: ./websocket.dockerfile
     restart: always
     env_file:
-      - .env
+      - dev.env
     volumes:
       - ./websocket/websocket_app:/websocket_app
     ports:
