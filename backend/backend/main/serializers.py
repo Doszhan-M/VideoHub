@@ -1,6 +1,5 @@
 from os.path import splitext
 
-from django.conf import settings
 from rest_framework.exceptions import ValidationError
 from rest_framework.serializers import (
     ModelSerializer,

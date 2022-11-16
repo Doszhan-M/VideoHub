@@ -7,6 +7,10 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
 module.exports = {
     mode: "production",
     entry: "./src/index.js",
+    performance: {
+        maxEntrypointSize: 612000,
+        maxAssetSize: 612000
+    },
     resolve: {
         extensions: [".js", ".jsx"]
     },

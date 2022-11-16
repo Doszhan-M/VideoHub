@@ -43,7 +43,6 @@ class Video(models.Model):
             )
         ],
     )
-    # imagekit_url = models.CharField(max_length=256, blank=True, null=True)
     description = models.TextField(blank=True)
     hashtag = models.TextField(blank=True)
     upload_date = models.DateTimeField(default=timezone.now)

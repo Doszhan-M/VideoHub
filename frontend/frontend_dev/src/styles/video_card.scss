@@ -7,6 +7,12 @@
         transition: .4s;
         margin-top: 8%;
         width: 85%;
+
+        @media screen and (max-width: 812px) {
+            & {
+                width: 95%;
+            }
+        }
     }
 
     .video:hover video {

@@ -1,6 +1,8 @@
 import React from "react";
 import "../styles/css/video_card.min.css";
 import { Link } from "react-router-dom"
+import "../styles/css/video_line.min.css";
+
 
 import HoverVideoPlayer from 'react-hover-video-player';
 

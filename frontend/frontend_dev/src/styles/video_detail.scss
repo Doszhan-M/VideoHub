@@ -63,11 +63,25 @@
                 font-size: 14px;
                 cursor: pointer;
 
+                @media screen and (max-width: 812px) {
+                    & {
+                        width: 50px;
+                    }
+                }
+
                 &:active {
                     border-color: rgba(0, 0, 0, 0.15);
                     box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
                     color: rgba(0, 0, 0, 0.65);
                     transform: scale(1.05);
+                }
+
+                span {
+                    @media screen and (max-width: 812px) {
+                        & {
+                            display: none;
+                        }
+                    }
                 }
             }
 
@@ -89,11 +103,25 @@
                     cursor: pointer;
                     text-decoration: none;
 
+                    @media screen and (max-width: 812px) {
+                        & {
+                            width: 50px;
+                        }
+                    }
+
                     &:hover {
                         border-color: rgba(0, 0, 0, 0.15);
                         box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
                         color: rgba(0, 0, 0, 0.65);
                         transform: scale(1.05);
+                    }
+
+                    span {
+                        @media screen and (max-width: 812px) {
+                            & {
+                                display: none;
+                            }
+                        }
                     }
 
                     svg {
@@ -114,7 +142,15 @@
         font-weight: 400;
         font-size: 18px;
         height: 100%;
-        font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+        @media screen and (max-width: 812px) {
+            & {
+                align-self: center;
+                max-width: 97%;
+                text-align: justify;
+            }
+        }
     }
 
     .load_date {
@@ -219,6 +255,12 @@
                 cursor: pointer;
                 margin-bottom: 5%;
 
+                @media screen and (max-width: 812px) {
+                    & {
+                        width: 100%;
+                    }
+                }
+
                 &:active {
                     border-color: rgba(0, 0, 0, 0.15);
                     box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
@@ -277,6 +319,11 @@
                     width: 100%;
                     color: $gray;
 
+                    @media screen and (max-width: 812px) {
+                        & {
+                            text-align: justify;
+                        }
+                    }
                 }
 
             }

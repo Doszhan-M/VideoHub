@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import "../styles/css/video_detail.min.css";
 import { FaHeart, FaTelegramPlane } from 'react-icons/fa';
 import { BsFillGearFill } from 'react-icons/bs';
 import { Link } from "react-router-dom"
 
 import api from "../api/requests"
-import { userInfo } from "../store/userSlice"
 import { TelegramShareButton } from "react-share";
 
 
@@ -25,7 +24,7 @@ function VideoDetail(props) {
 
 
     const checkChannelOwner = () => {
-        if (isAuth & authUserChannelId == videoChannelId) {
+        if (isAuth && authUserChannelId == videoChannelId) {
             return <div className="like">
                 <Link to={`/edit/${id}`}>
                     <BsFillGearFill />

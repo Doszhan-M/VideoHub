@@ -47,7 +47,7 @@ class SearchVideo(ListAPIView):
         return queryset
 
 
-class All_Videos(ListAPIView):
+class AllVideos(ListAPIView):
     """Get all video"""
 
     queryset = Video.objects.all().order_by("-upload_date")
@@ -198,8 +198,8 @@ class RelatedVideos(ListAPIView):
     serializer_class = VideoSerializer
 
     def get_queryset(self):
-        id = self.kwargs.get("pk")
-        video = Video.objects.get(id=id)
+        video_id = self.kwargs.get("pk")
+        video = Video.objects.get(id=video_id)
         channel = video.channel
         queryset = Video.objects.filter(channel=channel)
         return queryset
@@ -224,5 +224,5 @@ class MostWatchedVideos(ListAPIView):
     serializer_class = VideoSerializer
 
     def get_queryset(self):
-        queryset = Video.objects.all().order_by('-views')[:4]
+        queryset = Video.objects.all().order_by("-views")[:4]
         return queryset

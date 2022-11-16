@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "../styles/css/video_column.min.css";
 
 import VideoCard from "./video_card"
 
 
 function VideoColumn(props) {
-    const userVideoList = props.videoList
+    const videoList = props.videoList
 
     return (
         <div className="video_detail_column">
             <div className="title">{props.title}</div>
-            {userVideoList?.map(video => {
+            {videoList?.map(video => {
                 return <VideoCard key={video.id} video={video} />
             })}
         </div>

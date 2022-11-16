@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/css/update.min.css";
+import "../styles/css/upload.min.css";
 import { useNavigate } from 'react-router-dom'
 
 import api from "../api/requests"
@@ -46,7 +46,7 @@ function Upload(props) {
     }
 
     return (
-        <div className="page_container">
+        <div className="upload_page_container">
             <DotLoaderOverlay loading={loading} overlayColor="rgba(0,153,255,0.2)" message=<h4>uploading...</h4> />
             <h1>Upload Video</h1>
             <div className="video_form">

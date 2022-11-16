@@ -5,6 +5,15 @@
     align-items: flex-start;
     width: 100%;
 
+    @media screen and (max-width: 812px) {
+        & {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2%;
+        }
+      }
+
     .video_detail_container {
         width: 65%;
         display: flex;
@@ -12,6 +21,12 @@
         justify-content: space-between;
         align-items: center;
         margin-right: 1%;
+
+        @media screen and (max-width: 812px) {
+            & {
+                width: 95%;
+            }
+        }
     }
 
     .video_right_container {
@@ -21,6 +36,12 @@
         justify-content: center;
         align-items: center;
 
+        @media screen and (max-width: 812px) {
+            & {
+                width: 100%;
+            }
+        }
+        
         .chat {
             align-self: center;
             width: 85%;

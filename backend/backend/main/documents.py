@@ -9,16 +9,16 @@ class VideoDocument(Document):
     id = fields.IntegerField()
 
     class Index:
-        name = 'videos'
+        name = "videos"
         settings = {
-            'number_of_shards': 1,
-            'number_of_replicas': 0,
+            "number_of_shards": 1,
+            "number_of_replicas": 0,
         }
 
     class Django:
         model = Video
         fields = [
-            'title',
-            'description',
-            'hashtag',
-        ]        
+            "title",
+            "description",
+            "hashtag",
+        ]

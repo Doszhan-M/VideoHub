@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles/css/video.min.css";
 import { useParams } from "react-router-dom"
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 
 import api from "../api/requests"
 import VideoDetail from "../components/video_detail"
@@ -64,9 +64,7 @@ function VideoPage(props) {
                             <VideoColumn videoList={userVideoList} title={columnTitle} />
                         </div>
                     </>
-
                 )}
-
             </div>
         </div>
     )

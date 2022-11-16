@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../styles/css/discover.min.css";
 
-import VideoLine from "../components/video_line"
 import VideoCard from "../components/video_card"
 import api from "../api/requests"
 
