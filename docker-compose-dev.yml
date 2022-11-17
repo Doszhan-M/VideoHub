@@ -75,21 +75,21 @@ services:
       retries: 5
       start_period: 3s
 
-  elastic:
-    image: elasticsearch:8.4.2
-    restart: always
-    environment:
-      - xpack.security.enabled=false
-      - "discovery.type=single-node"
-    ports:
-      - 9200:9200
-    volumes:
-      - elasticdata:/usr/share/elasticsearch/data
-    mem_limit: 2g
-    healthcheck:
-      test: curl -fs http://127.0.0.1:9200/_cat/health || exit 1
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 30s
+  # elastic:
+  #   image: elasticsearch:8.4.2
+  #   restart: always
+  #   environment:
+  #     - xpack.security.enabled=false
+  #     - "discovery.type=single-node"
+  #   ports:
+  #     - 9200:9200
+  #   volumes:
+  #     - elasticdata:/usr/share/elasticsearch/data
+  #   mem_limit: 2g
+  #   healthcheck:
+  #     test: curl -fs http://127.0.0.1:9200/_cat/health || exit 1
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
+  #     start_period: 30s
 # -------------------------------------------------------------------------------------------------
