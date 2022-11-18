@@ -1,4 +1,4 @@
-from random import choices
+from random import choices, choice, shuffle
 from elasticsearch_dsl import Q
 
 from rest_framework import status
@@ -201,7 +201,14 @@ class RelatedVideos(ListAPIView):
         video_id = self.kwargs.get("pk")
         video = Video.objects.get(id=video_id)
         channel = video.channel
-        queryset = Video.objects.filter(channel=channel)
+        orders = [
+            "id",
+            "title",
+            "-upload_date",
+            "views",
+        ]
+        order = choice(orders)
+        queryset = Video.objects.filter(channel=channel).order_by(order)
         return queryset
 
 
