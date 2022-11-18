@@ -4,7 +4,6 @@ import "../styles/css/discover.min.css";
 import VideoCard from "../components/video_card"
 import api from "../api/requests"
 
-// TODO: сделать страницу полностью
 
 function Discover(props) {
 
