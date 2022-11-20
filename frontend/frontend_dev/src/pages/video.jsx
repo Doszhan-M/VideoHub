@@ -36,8 +36,6 @@ function VideoPage(props) {
     useEffect(() => {
         const getVideoOwner = async () => {
             const response = await api.getVideo(id)
-            console.log(response)
-
             setVideoChannelId(response.channel)
             if (isAuth & authUserChannelId == response.channel) {
                 setVideoOwner(true)
