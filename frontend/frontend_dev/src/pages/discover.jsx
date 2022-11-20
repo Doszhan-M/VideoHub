@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
 import "../styles/css/discover.min.css";
+import { useSelector, useDispatch } from "react-redux"
 
 import VideoCard from "../components/video_card"
 import api from "../api/requests"
 
 
 function Discover(props) {
+    const dispatch = useDispatch()
+
+    const discoverVideosTest = useSelector(state => state.videos.discoverVideosList)
+    console.log(discoverVideosTest)
+
+
 
     const [discoverVideos, setDiscoverVideos] = useState(null)
     const [mostWatchedVideos, setMostWatchedVideos] = useState(null)
