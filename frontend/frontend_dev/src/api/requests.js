@@ -125,17 +125,31 @@ const allVideos = async () => {
     return response
 }
 
+const search = async (searchValue) => {
+    const url = `/api/web/search/video/${searchValue}/`
+    const response = await axios(
+        {
+            method: "get",
+            url: url,
+        }
+    ).then(response => {
+        return response.data
+    })
+    return response
+}
 
 
-export default { 
-    check_session, 
-    csrf, 
-    getMe, 
-    uploadVideo, 
-    getVideo, 
-    getUserVideos, 
-    getRelatedVideos, 
+
+export default {
+    check_session,
+    csrf,
+    getMe,
+    uploadVideo,
+    getVideo,
+    getUserVideos,
+    getRelatedVideos,
     discoverVideos,
     mostWatchedVideos,
-    allVideos
+    allVideos,
+    search
 }

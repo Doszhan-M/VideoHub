@@ -40,7 +40,7 @@ class SearchVideo(ListAPIView):
                 "description",
                 "hashtag",
             ],
-            fuzziness="auto",
+            type="phrase_prefix",
         )
         search = VideoDocument.search().query(query)
         queryset = search.to_queryset()

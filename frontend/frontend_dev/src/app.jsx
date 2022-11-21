@@ -5,6 +5,7 @@ import Layout from "./components/layout"
 import Discover from "./pages/discover"
 import Upload from "./pages/upload"
 import VideoPage from "./pages/video"
+import Search from "./pages/search"
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route index element={<Discover />} />
           <Route path="upload" element={<Upload />} />
           <Route path="video/:id" element={<VideoPage />} />
+          <Route path="search/:searchText" element={<Search />} />
         </Route>
       </Routes>
   );

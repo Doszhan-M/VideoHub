@@ -17,6 +17,7 @@ function Header(props) {
     const isAuth = useSelector(state => state.user.isAuth)
     const username = useSelector(state => state.user.username)
     const avatar = useSelector(state => state.user.avatar)
+    const [searchText, setSearchText] = useState('')
 
     const getUserData = () => {
         api.getMe().then(response => {
@@ -58,8 +59,6 @@ function Header(props) {
         }
     }
 
-    const [searchText, setSearchText] = useState('')
-
     const searchInput = (event) => {
         let text = event.target.value.toLowerCase();
         setSearchText(text);
@@ -77,7 +76,7 @@ function Header(props) {
                 <Link to={`/`}>Video Hub</Link>
             </div>
             <div className="search">
-                <input type="text" placeholder="Search" onChange={searchInput} onKeyPress={pressEnter}/>
+                <input type="text" placeholder="Search" onChange={searchInput} onKeyPress={pressEnter} />
                 <Link className="search_btn" to={`/search/${searchText}`}></Link>
             </div>
             <div className="right_block">
