@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import "../styles/css/header.min.css";
 
 import { FaBell } from 'react-icons/fa';
@@ -12,6 +12,7 @@ import { userInfo } from "../store/userSlice"
 
 
 function Header(props) {
+    let navigate = useNavigate();
     const dispatch = useDispatch()
     const isAuth = useSelector(state => state.user.isAuth)
     const username = useSelector(state => state.user.username)
@@ -57,13 +58,27 @@ function Header(props) {
         }
     }
 
+    const [searchText, setSearchText] = useState('')
+
+    const searchInput = (event) => {
+        let text = event.target.value.toLowerCase();
+        setSearchText(text);
+    }
+
+    const pressEnter = (event) => {
+        if (event.key === 'Enter') {
+            return navigate(`/search/${searchText}`);
+        }
+    }
+
     return (
         <header>
             <div className="title">
                 <Link to={`/`}>Video Hub</Link>
             </div>
             <div className="search">
-                <input type="text" placeholder="Search" />
+                <input type="text" placeholder="Search" onChange={searchInput} onKeyPress={pressEnter}/>
+                <Link className="search_btn" to={`/search/${searchText}`}></Link>
             </div>
             <div className="right_block">
                 {authStatusVideoUploadButton()}

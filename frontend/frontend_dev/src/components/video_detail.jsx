@@ -60,7 +60,7 @@ function VideoDetail(props) {
         <div className="video_detail" controls>
             <video controls src={videoLink} preload="true" loop></video>
             <div className="details">
-                <img src={userAvatar}></img>
+                <img src={userAvatar} alt="avatar"></img>
                 <div className="author">{userName}</div>
                 <div className="button_wrapper">
                     <div className="share">

@@ -43,7 +43,8 @@ main {
         justify-content: flex-start;
         align-items: flex-start;
         width: 100%;
-
+        flex: 1 0 auto;
+        
         @media screen and (max-width: 812px) {
             .bm-menu-wrap {
                 position: absolute;
@@ -130,6 +131,7 @@ main {
         color: rgb(122, 132, 141);
         font-size: small;
         margin-top: 1%;
+        flex: 0 0 auto;
 
         @media screen and (max-width: 812px) {
             & {
