@@ -6,6 +6,8 @@ import Discover from "./pages/discover"
 import Upload from "./pages/upload"
 import VideoPage from "./pages/video"
 import Search from "./pages/search"
+import Trending from "./pages/trending"
+import MostPopular from "./pages/most_popular"
 
 
 function App() {
@@ -32,6 +34,9 @@ function App() {
           <Route path="upload" element={<Upload />} />
           <Route path="video/:id" element={<VideoPage />} />
           <Route path="search/:searchText" element={<Search />} />
+          <Route path="search/" element={<Discover />} />
+          <Route path="trending/" element={<Trending />} />
+          <Route path="most_popular/" element={<MostPopular />} />
         </Route>
       </Routes>
   );

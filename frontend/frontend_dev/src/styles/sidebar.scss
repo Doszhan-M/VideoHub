@@ -44,6 +44,16 @@ aside {
             margin: 5px;
             padding: 5px;
 
+            a {
+                text-decoration: none;
+                color: aliceblue;
+            }
+
+            .active {
+                color: aqua;
+                text-decoration: underline;
+            }
+
             .side_title {
                 font-size: 16px;
                 color: #808191;

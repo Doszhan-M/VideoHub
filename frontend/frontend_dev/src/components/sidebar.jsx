@@ -1,13 +1,16 @@
 import React from "react";
 import "../styles/css/sidebar.min.css";
+import {NavLink} from "react-router-dom"
 
 import Chat from "./chat"
 
-import { AiFillHome } from 'react-icons/ai';
-import { AiTwotoneFire } from 'react-icons/ai';
-import { AiFillLike } from 'react-icons/ai';
-import { AiFillEye } from 'react-icons/ai';
-import { AiFillUpCircle } from 'react-icons/ai';
+import { 
+    AiFillHome, 
+    AiTwotoneFire, 
+    AiFillLike, 
+    AiFillEye, 
+    AiFillUpCircle 
+} from 'react-icons/ai';
 
 
 function Sidebar(props) {
@@ -18,11 +21,11 @@ function Sidebar(props) {
             <div className="sidebar">
                 <ul>
                     <li><div className="side_title">Menu</div></li>
-                    <li><AiFillHome/><span>Discover</span></li>
-                    <li><AiTwotoneFire/><span>Trending</span></li>
-                    <li><AiFillLike/><span>Most Popular</span></li>
-                    <li><AiFillEye/><span>Subscribe</span></li>
-                    <li><AiFillUpCircle/><span>For You</span></li>
+                    <li><AiFillHome/><span><NavLink to="/">Discover</NavLink></span></li>
+                    <li><AiTwotoneFire/><span><NavLink to="/trending">Trending</NavLink></span></li>
+                    <li><AiFillLike/><span><NavLink to="/most_popular">Most Popular</NavLink></span></li>
+                    <li><AiFillEye/><span><NavLink to="/subscribe">Subscribe</NavLink></span></li>
+                    <li><AiFillUpCircle/><span><NavLink to="/for_you">For You</NavLink></span></li>
                 </ul>
             </div>
             <div className="groupe_chat">

@@ -233,3 +233,23 @@ class MostWatchedVideos(ListAPIView):
     def get_queryset(self):
         queryset = Video.objects.all().order_by("-views")[:4]
         return queryset
+    
+    
+class Trending(ListAPIView):
+    """Get most liked videos"""
+
+    serializer_class = VideoSerializer
+
+    def get_queryset(self):
+        queryset = Video.objects.all().order_by("-likes")
+        return queryset
+    
+    
+class MostPopular(ListAPIView):
+    """Get most viewed videos"""
+
+    serializer_class = VideoSerializer
+
+    def get_queryset(self):
+        queryset = Video.objects.all().order_by("-views")
+        return queryset

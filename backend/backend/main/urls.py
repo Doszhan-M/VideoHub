@@ -16,6 +16,8 @@ from .views import (
     RelatedVideos,
     DiscoverVideos,
     MostWatchedVideos,
+    Trending,
+    MostPopular,
 )
 
 
@@ -42,4 +44,6 @@ urlpatterns = [
     path("user_videos/", UserVideos.as_view(), name="user_videos"),
     path("discover_videos/", DiscoverVideos.as_view(), name="discover_videos"),
     path("most_watched/", MostWatchedVideos.as_view(), name="most_watched"),
+    path("trending/", Trending.as_view(), name="trending"),
+    path("most_popular/", MostPopular.as_view(), name="most_popular"),
 ]

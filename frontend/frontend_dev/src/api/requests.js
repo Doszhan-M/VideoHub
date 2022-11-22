@@ -138,6 +138,32 @@ const search = async (searchValue) => {
     return response
 }
 
+const trending = async (searchValue) => {
+    const url = `/api/web/trending/`
+    const response = await axios(
+        {
+            method: "get",
+            url: url,
+        }
+    ).then(response => {
+        return response.data
+    })
+    return response
+}
+
+const most_popular = async (searchValue) => {
+    const url = `/api/web/most_popular/`
+    const response = await axios(
+        {
+            method: "get",
+            url: url,
+        }
+    ).then(response => {
+        return response.data
+    })
+    return response
+}
+
 
 
 export default {
@@ -151,5 +177,7 @@ export default {
     discoverVideos,
     mostWatchedVideos,
     allVideos,
-    search
+    search,
+    trending,
+    most_popular,
 }
