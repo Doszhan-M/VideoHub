@@ -8,6 +8,7 @@ import VideoDetail from "../components/video_detail"
 import Chat from "../components/chat"
 import VideoColumn from "../components/video_column"
 
+// TODO: subscribe button
 
 function VideoPage(props) {
     const { id } = useParams()

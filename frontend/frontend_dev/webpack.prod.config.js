@@ -8,7 +8,7 @@ module.exports = {
     mode: "production",
     entry: "./src/index.js",
     performance: {
-        maxEntrypointSize: 612000,
+        maxEntrypointSize: 712000,
         maxAssetSize: 712000
     },
     resolve: {
