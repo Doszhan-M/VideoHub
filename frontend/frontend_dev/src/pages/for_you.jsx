@@ -3,11 +3,11 @@ import "../styles/css/search.min.css";
 import { useSelector, useDispatch } from "react-redux"
 
 import api from "../api/requests"
-import VideoCard from "../components/video_card"
+import VideoGrid from "../components/video_grid"
 import { refreshForYou } from "../store/videoSlice"
 
 
-function forYou(props) {
+function ForYou(props) {
     const dispatch = useDispatch()
 
     const forYouVideos = useSelector(state => state.videos.forYou)
@@ -20,23 +20,8 @@ function forYou(props) {
 
     return (
         <div className="search_page_container">
-            <div className="found_videos">
-                <div className="title" style={forYouVideos != null && forYouVideos.length > 0 ?
-                    { display: 'flex' } : { display: 'none' }}>
-                    For You
-                </div>
-                <div className="found_videos_container">
-                    {forYouVideos != null && forYouVideos.length > 0 ?
-                        forYouVideos.map(video => {
-                            return <VideoCard key={video.id} video={video} />
-                        }) :
-                        forYouVideos != null && forYouVideos.length == 0 ?
-                            <div className="not_found">Not videos...</div>
-                            : <></>
-                    }
-                </div>
-            </div>
+            <VideoGrid videos={forYouVideos} title={"For You"} not_video={"Not videos"} />
         </div>
     )
 }
-export default forYou;
+export default ForYou;

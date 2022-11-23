@@ -9,7 +9,7 @@ import Search from "./pages/search"
 import Trending from "./pages/trending"
 import MostPopular from "./pages/most_popular"
 import Subscribe from "./pages/subscribe"
-import forYou from "./pages/for_you"
+import ForYou from "./pages/for_you"
 
 
 function App() {
@@ -40,7 +40,7 @@ function App() {
           <Route path="trending/" element={<Trending />} />
           <Route path="most_popular/" element={<MostPopular />} />
           <Route path="subscribe/" element={<Subscribe />} />
-          <Route path="for_you/" element={<forYou />} />
+          <Route path="for_you/" element={<ForYou />} />
         </Route>
       </Routes>
   );

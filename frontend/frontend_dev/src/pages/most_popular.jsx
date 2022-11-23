@@ -3,7 +3,7 @@ import "../styles/css/search.min.css";
 import { useSelector, useDispatch } from "react-redux"
 
 import api from "../api/requests"
-import VideoCard from "../components/video_card"
+import VideoGrid from "../components/video_grid"
 import { refreshMostPopular } from "../store/videoSlice"
 
 
@@ -20,22 +20,7 @@ function MostPopular(props) {
 
     return (
         <div className="search_page_container">
-            <div className="found_videos">
-                <div className="title" style={mostPopularVideos != null && mostPopularVideos.length > 0 ?
-                    { display: 'flex' } : { display: 'none' }}>
-                    Most Popular
-                </div>
-                <div className="found_videos_container">
-                    {mostPopularVideos != null && mostPopularVideos.length > 0 ?
-                        mostPopularVideos.map(video => {
-                            return <VideoCard key={video.id} video={video} />
-                        }) :
-                        mostPopularVideos != null && mostPopularVideos.length == 0 ?
-                            <div className="not_found">Nothing found, please search again...</div>
-                            : <></>
-                    }
-                </div>
-            </div>
+                <VideoGrid videos={mostPopularVideos} title={"Most Popular"} not_video={"Not videos"} />
         </div>
     )
 }
