@@ -1,3 +1,4 @@
+from os import getenv
 from os.path import splitext
 
 from rest_framework.exceptions import ValidationError
@@ -42,8 +43,11 @@ class VideoSerializer(ModelSerializer):
     def get_imagekit_url(self, obj):
         if not obj.video_file:
             return None
+        elif getenv('IMAGEKIT') == 'imagekit':   
+            imagekit_url = "ik.imagekit.io/videohub"
+        elif getenv('IMAGEKIT') == 'imgix':       
+            imagekit_url = "doszhan.imgix.net"
         aws_url = "mediastatic.s3.amazonaws.com"
-        imagekit_url = "ik.imagekit.io/videohub"
         url = obj.video_file.url.replace(aws_url, imagekit_url)
         return url
 

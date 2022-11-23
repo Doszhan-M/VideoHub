@@ -9,7 +9,7 @@ module.exports = {
     entry: "./src/index.js",
     performance: {
         maxEntrypointSize: 612000,
-        maxAssetSize: 612000
+        maxAssetSize: 712000
     },
     resolve: {
         extensions: [".js", ".jsx"]

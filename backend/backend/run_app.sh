@@ -4,11 +4,11 @@
 python3 manage.py migrate
 python3 manage.py createcachetable
 # python3 manage.py search_index --rebuild --parallel --force-color
+# python3 manage.py collectstatic --noinput
 
 if [ "$DEPLOY" = "TRUE" ]; then
     echo "------------------------------------------------------------------------------------"
     echo "RUNNING DEPLOY"
-    # python3 manage.py collectstatic --noinput
     echo "------------------------------------------------------------------------------------"
     gunicorn --workers 4 --threads 4 root.wsgi --bind [::]:8000 --log-level=debug \
      --access-logfile '-' --error-logfile '-' \

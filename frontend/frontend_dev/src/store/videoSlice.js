@@ -10,6 +10,8 @@ const videoSlice = createSlice({
         allVideos: null,
         trendVideos: null,
         mostPopular: null,
+        subscribed: null,
+        forYou: null,
     },
     reducers: {
         refreshDiscoverVideos(state, action) {
@@ -27,6 +29,12 @@ const videoSlice = createSlice({
         refreshMostPopular(state, action) {
             state.mostPopular = action.payload;
         },
+        refreshSubscribed(state, action) {
+            state.subscribed = action.payload;
+        },
+        refreshForYou(state, action) {
+            state.forYou = action.payload;
+        },
     },
 });
 
@@ -36,6 +44,8 @@ export const {
     refreshAllVideos, 
     refreshTrendVideos,
     refreshMostPopular,
+    refreshSubscribed,
+    refreshForYou,
 } = videoSlice.actions;
 
 export default videoSlice.reducer;

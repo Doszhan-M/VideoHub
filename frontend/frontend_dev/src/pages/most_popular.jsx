@@ -23,7 +23,7 @@ function MostPopular(props) {
             <div className="found_videos">
                 <div className="title" style={mostPopularVideos != null && mostPopularVideos.length > 0 ?
                     { display: 'flex' } : { display: 'none' }}>
-                    Trending
+                    Most Popular
                 </div>
                 <div className="found_videos_container">
                     {mostPopularVideos != null && mostPopularVideos.length > 0 ?

@@ -176,22 +176,23 @@ if os.getenv("USE_S3") == "TRUE":
     }
     # static
     AWS_LOCATION = "static"
-    STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-    STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+    # STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+    # STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
     AWS_DEFAULT_ACL = None
     # media
     DEFAULT_FILE_STORAGE = "root.storage_backends.MediaStorage"
     MEDIA_LOCATION = "media"
     MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/"
 else:
-    # static
-    STATIC_URL = "/static/"
-    STATIC_ROOT = os.path.join(BASE_DIR, "static")
-    STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
     # media
     MEDIA_URL = "/media/"
     MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
+# static
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+    
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 SIMPLE_JWT = {

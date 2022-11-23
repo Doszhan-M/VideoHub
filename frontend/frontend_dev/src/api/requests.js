@@ -138,7 +138,7 @@ const search = async (searchValue) => {
     return response
 }
 
-const trending = async (searchValue) => {
+const trending = async () => {
     const url = `/api/web/trending/`
     const response = await axios(
         {
@@ -151,8 +151,34 @@ const trending = async (searchValue) => {
     return response
 }
 
-const most_popular = async (searchValue) => {
+const most_popular = async () => {
     const url = `/api/web/most_popular/`
+    const response = await axios(
+        {
+            method: "get",
+            url: url,
+        }
+    ).then(response => {
+        return response.data
+    })
+    return response
+}
+
+const subscribedVideos = async () => {
+    const url = `/api/web/subscribed_videos/`
+    const response = await axios(
+        {
+            method: "get",
+            url: url,
+        }
+    ).then(response => {
+        return response.data
+    })
+    return response
+}
+
+const forYou = async () => {
+    const url = `/api/web/for_you/`
     const response = await axios(
         {
             method: "get",
@@ -180,4 +206,6 @@ export default {
     search,
     trending,
     most_popular,
+    subscribedVideos,
+    forYou,
 }

@@ -233,8 +233,8 @@ class MostWatchedVideos(ListAPIView):
     def get_queryset(self):
         queryset = Video.objects.all().order_by("-views")[:4]
         return queryset
-    
-    
+
+
 class Trending(ListAPIView):
     """Get most liked videos"""
 
@@ -243,8 +243,8 @@ class Trending(ListAPIView):
     def get_queryset(self):
         queryset = Video.objects.all().order_by("-likes")
         return queryset
-    
-    
+
+
 class MostPopular(ListAPIView):
     """Get most viewed videos"""
 
@@ -253,3 +253,16 @@ class MostPopular(ListAPIView):
     def get_queryset(self):
         queryset = Video.objects.all().order_by("-views")
         return queryset
+
+
+class ForYou(ListAPIView):
+    """Get all videos shuffle random"""
+
+    serializer_class = VideoSerializer
+
+    def get_queryset(self):
+        queryset = Video.objects.all()
+        list_queryset = []
+        [list_queryset.append(item) for item in queryset]
+        shuffle(list_queryset)
+        return list_queryset

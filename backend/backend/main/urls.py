@@ -18,6 +18,7 @@ from .views import (
     MostWatchedVideos,
     Trending,
     MostPopular,
+    ForYou,
 )
 
 
@@ -46,4 +47,5 @@ urlpatterns = [
     path("most_watched/", MostWatchedVideos.as_view(), name="most_watched"),
     path("trending/", Trending.as_view(), name="trending"),
     path("most_popular/", MostPopular.as_view(), name="most_popular"),
+    path("for_you/", ForYou.as_view(), name="for_you"),
 ]
