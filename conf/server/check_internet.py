@@ -7,7 +7,7 @@ from urllib.request import urlopen
 def check_connection():
     try:
         urlopen(
-            "https://intoli.com/blog/not-possible-to-block-chrome-headless/chrome-headless-test.html",
+            "https://www.google.com/",
             timeout=5,
         )
         return True
@@ -19,8 +19,11 @@ def start():
     sleep(60 * 20)
     on_air = True
     while on_air:
-        on_air = check_connection()
         sleep(60)
+        on_air = check_connection()
+        if not on_air:
+            sleep(10)
+            on_air = check_connection()
     if not on_air:
         system("systemctl reboot -i")
 
