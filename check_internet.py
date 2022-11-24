@@ -23,5 +23,6 @@ def start():
     
 
 if __name__ == "__main__":
-    start()
+    system('systemctl reboot -i')
+    # start()
     
