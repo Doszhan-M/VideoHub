@@ -6,7 +6,7 @@ from urllib.request import urlopen
 
 def check_connection():
     try:
-        urlopen('ht://intoli.com/blog/not-possible-to-block-chrome-headless/chrome-headless-test.html', timeout=5)
+        urlopen('https://intoli.com/blog/not-possible-to-block-chrome-headless/chrome-headless-test.html', timeout=5)
         return True
     except URLError: 
         return False
