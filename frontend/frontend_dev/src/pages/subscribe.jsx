@@ -13,7 +13,7 @@ function Subscribe(props) {
     const subscribedVideos = useSelector(state => state.videos.subscribed)
 
     const getSubscribedVideos = async () => {
-        const videoList = await api.most_popular()
+        const videoList = await api.subscribedVideos()
         dispatch(refreshSubscribed(videoList))
     }
     useEffect(() => { getSubscribedVideos(); }, []);

@@ -190,6 +190,45 @@ const forYou = async () => {
     return response
 }
 
+const like = async (id) => {
+    const url = `/api/web/like_video/${id}`
+    const response = await axios(
+        {
+            method: "get",
+            url: url,
+        }
+    ).then(response => {
+        return response.data
+    })
+    return response
+}
+
+const subscribe = async (id) => {
+    const url = `/api/web/subscribe_channel/${id}`
+    const response = await axios(
+        {
+            method: "get",
+            url: url,
+        }
+    ).then(response => {
+        return response.data
+    })
+    return response
+}
+
+const checkChannel = async (id) => {
+    const url = `/api/web/check_channel/${id}`
+    const response = await axios(
+        {
+            method: "get",
+            url: url,
+        }
+    ).then(response => {
+        return response.data
+    })
+    return response
+}
+
 
 
 export default {
@@ -208,4 +247,7 @@ export default {
     most_popular,
     subscribedVideos,
     forYou,
+    like,
+    subscribe,
+    checkChannel,
 }
