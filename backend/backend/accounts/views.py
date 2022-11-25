@@ -1,16 +1,14 @@
 
-import email
 from rest_framework.views import APIView
 from django.middleware.csrf import get_token
 from rest_framework.response import Response
 from django.http import HttpResponseRedirect
-from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import login, logout
-from rest_framework.authentication import SessionAuthentication
+from rest_framework.generics import RetrieveAPIView
 
 from .models import User
 from .managers.sso import SsoManager
-
+from . import serializers
 
 class LoginAuth0(APIView):
     ''' Authorize the user if he passed
@@ -67,3 +65,10 @@ class UserId(APIView):
         user_id = User.objects.get(email=email).id
         return Response(user_id)
     
+    
+class UserInfo(RetrieveAPIView):
+    ''' Get user info by id
+    '''
+    queryset = User.objects.all()
+    serializer_class = serializers.UserInfo
+    lookup_field = "pk"

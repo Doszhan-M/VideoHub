@@ -2,7 +2,7 @@ from django.urls import path
 
 from .views import (
     LoginAuth0, SessionCheck, LogoutAuth0, GenerateCsrf,
-    SessionId, UserId
+    SessionId, UserId, UserInfo
 )
 
 
@@ -13,4 +13,5 @@ urlpatterns = [
     path("csrf/", GenerateCsrf.as_view(), name="csrf"),
     path("session_id/", SessionId.as_view(), name="session_id"),
     path("user_id_by_email/", UserId.as_view(), name="user_id_by_email"),
+    path("user_info/<int:pk>/", UserInfo.as_view(), name="user_info"),
 ]

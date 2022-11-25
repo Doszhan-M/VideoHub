@@ -9,8 +9,8 @@ import { loginUrl } from "../utils/env_variables"
 
 import api from "../api/requests"
 import { TelegramShareButton } from "react-share";
+import Comments from "./comments"
 
-// TODO: comment_blog
 
 function VideoDetail(props) {
 
@@ -80,7 +80,6 @@ function VideoDetail(props) {
     useEffect(() => {
         const fetchVideoData = async () => {
             const response = await api.getVideo(id)
-            console.log(response)
             const link = response.imagekit_url + "#t=0.9"
             setVideoLink(link)
             setUserAvatar(response.user_avatar)
@@ -118,35 +117,7 @@ function VideoDetail(props) {
             <h2>{title}</h2>
             <div className="description">{description}</div>
             <div className="load_date">upload date {upload_date}</div>
-            <div className="comment_blog">
-                <form method="post">
-                    <div className="form__group field">
-                        <textarea type="input" className="form__field" placeholder="Enter your comment" id='comment' required />
-                        <label htmlFor="comment" className="form__label">Enter your comment</label>
-                    </div>
-                    <input type="submit" value="send"></input>
-                </form>
-                <div className="comments">
-                    <div className="message">
-                        <div className="author_wrapper">
-                            <img src="https://images.unsplash.com/photo-1560941001-d4b52ad00ecc?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1650&amp;q=80" />
-                            <div className="author_name">Andy William</div>
-                        </div>
-                        <div className="msg_content">
-                            Lorem ipsum clor sit, ame conse quae debitis Lorem ipsum clor sit, ame conse quae debitis Lorem ipsum clor sit, ame conse quae debitis Lorem ipsum clor sit, ame conse quae debitis
-                        </div>
-                    </div>
-                    <div className="message">
-                        <div className="author_wrapper">
-                            <img src="https://images.unsplash.com/photo-1560941001-d4b52ad00ecc?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1650&amp;q=80" />
-                            <div className="author_name">Andy William</div>
-                        </div>
-                        <div className="msg_content">
-                            Lorem ipsum clor sit, ame conse quae debitis Lorem ipsum clor sit, ame conse quae debitis Lorem ipsum clor sit, ame conse quae debitis Lorem ipsum clor sit, ame conse quae debitis
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Comments id={id}/>
         </div>
     )
 }

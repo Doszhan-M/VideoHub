@@ -35,7 +35,7 @@ const uploadVideo = async (formData) => {
             withCredentials: true,
             headers: {
                 'Access-Control-Allow-Origin': '*',
-                'Content-Type': '"multipart/form-data',
+                'Content-Type': 'multipart/form-data',
                 'Accept': 'application/json',
                 'X-CSRFToken': await csrf()
             }
@@ -229,6 +229,56 @@ const checkChannel = async (id) => {
     return response
 }
 
+const videoComments = async (id) => {
+    const url = `/api/web/video_comments/${id}`
+    const response = await axios(
+        {
+            method: "get",
+            url: url,
+        }
+    ).then(response => {
+        return response.data
+    })
+    return response
+}
+
+const createComment = async (id, comment) => {
+    const url = `api/web/create_comment/`
+    const response = await axios(
+        {
+            method: "post",
+            url: url,
+            data: {
+                "text": comment,
+                "video": id
+            },
+            withCredentials: true,
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRFToken': await csrf()
+            }
+        }
+    ).then(response => {
+        return response
+    })
+    return response
+}
+
+
+const userInfo = async (id) => {
+    const url = `/api/web/accounts/user_info/${id}`
+    const response = await axios(
+        {
+            method: "get",
+            url: url,
+        }
+    ).then(response => {
+        return response.data
+    })
+    return response
+}
 
 
 export default {
@@ -250,4 +300,7 @@ export default {
     like,
     subscribe,
     checkChannel,
+    createComment,
+    videoComments,
+    userInfo,
 }

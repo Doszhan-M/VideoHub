@@ -156,7 +156,7 @@ class SubscribeVideoChannel(GenericAPIView):
 
     def get(self, request, pk):
         video = self.get_object()
-        SubscribeChannel.objects.create(channel=video.channel, user=request.user)
+        SubscribeChannel.objects.get_or_create(channel=video.channel, user=request.user)
         return Response(status=status.HTTP_200_OK)
 
     def get_serializer_class(self):
@@ -178,6 +178,24 @@ class SubscribedVideos(ListAPIView):
             channel_videos = Video.objects.filter(channel=channel)
             queryset.union(channel_videos)
         return queryset
+
+
+class SubscribeChannelCheck(GenericAPIView):
+    """Check channel subscribe by video"""
+
+    queryset = Video.objects.all()
+    serializer_class = None
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request, pk):
+        video = self.get_object()
+        has_subscribe = SubscribeChannel.objects.filter(
+            channel=video.channel,
+            user=request.user,
+        )
+        if has_subscribe:
+            return Response('subscribed')
+        return Response('subscribe')
 
 
 class UserVideos(ListAPIView):
