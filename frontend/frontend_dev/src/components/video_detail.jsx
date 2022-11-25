@@ -18,7 +18,7 @@ function VideoDetail(props) {
     const isAuth = useSelector(state => state.user.isAuth)
     const authUserChannelId = useSelector(state => state.user.channel_id)
 
-    const [videoLink, setVideoLink] = useState('')
+    const [videoLink, setVideoLink] = useState(null)
     const [userAvatar, setUserAvatar] = useState('')
     const [userName, setUserName] = useState('')
     const [videoChannelId, setVideoChannelId] = useState(null)
@@ -73,7 +73,6 @@ function VideoDetail(props) {
                     }
                 </>
             }
-
         }
     }
 
@@ -100,24 +99,29 @@ function VideoDetail(props) {
 
     return (
         <div className="video_detail" controls>
-            <video controls src={videoLink} preload="true" loop></video>
-            <div className="details">
-                <img src={userAvatar} alt="avatar"></img>
-                <div className="author">{userName}</div>
-                <div className="button_wrapper">
-                    {checkChannelOwner()}
-                    <div className="share">
-                        <TelegramShareButton url={window.location.href}>
-                            <FaTelegramPlane />
-                            <span>share</span>
-                        </TelegramShareButton>
+            {videoLink ?
+                <>
+                    <video controls src={videoLink} preload="true" loop></video>
+                    <div className="details">
+                        <img src={userAvatar} alt="avatar"></img>
+                        <div className="author">{userName}</div>
+                        <div className="button_wrapper">
+                            {checkChannelOwner()}
+                            <div className="share">
+                                <TelegramShareButton url={window.location.href}>
+                                    <FaTelegramPlane />
+                                    <span>share</span>
+                                </TelegramShareButton>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <h2>{title}</h2>
-            <div className="description">{description}</div>
-            <div className="load_date">upload date {upload_date}</div>
-            <Comments id={id}/>
+                    <h2>{title}</h2>
+                    <div className="description">{description}</div>
+                    <div className="load_date">upload date {upload_date}</div>
+                    <Comments id={id} /></>
+                :
+                <></>
+            }
         </div>
     )
 }
