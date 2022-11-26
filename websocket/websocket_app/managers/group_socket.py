@@ -21,7 +21,7 @@ class ConnectionManager:
         for connection in self.active_connections:
             await connection[0].send_json(data)
 
-    async def history_load(self, message_dal: MessageDAL):
+    async def history_load(self, websocket, message_dal: MessageDAL):
         has_history = False
         messages = await message_dal.get_message_by_chat_id(self.chat_id)
         if len(messages) > 0:
@@ -29,11 +29,13 @@ class ConnectionManager:
         if has_history:
             for message in messages:
                 msg = {
+                    "id": message.id,
                     "user": message.user,
                     "message": message.message,
                     "avatar": message.avatar,
                 }
-                await self.broadcast(msg)
+                print(msg)
+                await websocket.send_json(msg)
 
     async def save_message_db(
         self,
@@ -42,4 +44,10 @@ class ConnectionManager:
         avatar: str,
         message_dal: MessageDAL,
     ):
-        await message_dal.create_message(user, message, avatar, self.chat_id)
+        message_id = await message_dal.create_message(
+            user,
+            message,
+            avatar,
+            self.chat_id,
+        )
+        return message_id

@@ -23,11 +23,10 @@ function Header(props) {
         api.getMe().then(response => {
             dispatch(userInfo(response.data))
         });
-
     }
     const authStatus = () => {
         if (isAuth) {
-            { getUserData() }
+            // { getUserData() }
             return <div>
                 <img className="user_img" src={avatar}></img>
                 <div className="username"><Link to={`/profile`}>{username}</Link></div>

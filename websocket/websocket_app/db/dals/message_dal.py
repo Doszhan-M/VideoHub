@@ -19,6 +19,7 @@ class MessageDAL:
         )
         self.db_session.add(new_message)
         await self.db_session.flush()
+        return new_message.id
 
     async def get_message_by_chat_id(self, chat_id: int) -> List[Message]:
         q = await self.db_session.execute(

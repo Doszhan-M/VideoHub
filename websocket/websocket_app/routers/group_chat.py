@@ -25,20 +25,21 @@ async def chat(
     message_dal: MessageDAL = Depends(get_message_dal),
 ):
     await manager.connect(websocket, sender)
-    await manager.history_load(message_dal)
+    await manager.history_load(websocket, message_dal)
     try:
         while True:
             data = await websocket.receive_json()
             message = {"user": sender, "message": data["message"], "avatar": avatar}
+            message_id = await manager.save_message_db(
+                sender,
+                data["message"],
+                avatar,
+                message_dal,
+            )
+            message["id"] = message_id
             await manager.broadcast(message)
-            await manager.save_message_db(sender, data["message"], avatar, message_dal)
     except WebSocketDisconnect:
         manager.disconnect(websocket, sender)
-
-
-@router.get("/")
-def get_home(request: Request):
-    return templates.TemplateResponse("home.html", {"request": request})
 
 
 @router.get("/chat")

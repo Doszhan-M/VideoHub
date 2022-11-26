@@ -26,3 +26,9 @@ wss://video.localhost/websocket/private_chat/items/
 sudo vim /etc/nginx/sites-enabled/
 
 
+docker exec -it videohub_postgres_1 bash 
+su - postgres
+psql
+create database websocket;
+pk@uchet.kz
+4fXGqRHTAasUfpMh

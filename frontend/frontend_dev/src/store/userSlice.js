@@ -5,11 +5,12 @@ import { createSlice } from '@reduxjs/toolkit';
 const userSlice = createSlice({
     name: 'user',
     initialState: {
-        isAuth: false,
+        isAuth: null,
         email: null,
         avatar: null,
         username: null,
         channel_id: null,
+        socket: null,
     },
     reducers: {
         checkAuth(state, action) {
@@ -21,9 +22,12 @@ const userSlice = createSlice({
             state.username = action.payload.first_name;
             state.channel_id = action.payload.user_channel;
         },
+        websocket(state, action) {
+            state.socket = action.payload;
+        },
     },
 });
 
-export const { checkAuth, userInfo, } = userSlice.actions;
+export const { checkAuth, userInfo, websocket,} = userSlice.actions;
 
 export default userSlice.reducer;

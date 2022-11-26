@@ -4,7 +4,7 @@ import axios from "./axios_conf"
 const check_session = async () => {
     const url = `/api/web/accounts/check_session/`
     const response = await axios.get(url).then(response => {
-        return response;
+        return response.data.isAuthenticated;
     })
     return response
 }
