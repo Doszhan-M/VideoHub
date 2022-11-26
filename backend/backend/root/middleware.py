@@ -8,4 +8,5 @@ class UserSubMiddleware:
         if request.user.is_authenticated:
             response['X-USER-ID'] = request.user.id
             response['X-USER-EMAIL'] = request.user.email
+            response['X-USER-NAME'] = request.user.first_name
         return response

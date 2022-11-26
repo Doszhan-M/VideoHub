@@ -8,5 +8,6 @@ class Message(Base):
 
     id = Column(Integer, primary_key=True)
     user = Column(String, nullable=False)
+    avatar = Column(String, nullable=False)
     message = Column(String, nullable=False)
     chat_id = Column(Integer, nullable=False)

@@ -6,9 +6,9 @@ const userSlice = createSlice({
     name: 'user',
     initialState: {
         isAuth: false,
-        email: '',
-        avatar: '',
-        username: '',
+        email: null,
+        avatar: null,
+        username: null,
         channel_id: null,
     },
     reducers: {

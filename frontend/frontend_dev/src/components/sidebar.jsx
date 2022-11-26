@@ -12,7 +12,6 @@ import {
     AiFillUpCircle 
 } from 'react-icons/ai';
 
-// TODO: Chat
 
 function Sidebar(props) {
 

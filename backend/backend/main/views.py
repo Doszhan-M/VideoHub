@@ -171,13 +171,15 @@ class SubscribedVideos(ListAPIView):
     serializer_class = VideoSerializer
 
     def get_queryset(self):
-        queryset = QuerySet(Video)
-        subscribes = SubscribeChannel.objects.filter(user=self.request.user)
-        for subscribe in subscribes:
-            channel = subscribe.channel
-            channel_videos = Video.objects.filter(channel=channel)
-            queryset.union(channel_videos)
-        return queryset
+        if self.request.user.is_authenticated:
+            queryset = QuerySet(Video)
+            subscribes = SubscribeChannel.objects.filter(user=self.request.user)
+            for subscribe in subscribes:
+                channel = subscribe.channel
+                channel_videos = Video.objects.filter(channel=channel)
+                queryset.union(channel_videos)
+            return queryset
+        return None
 
 
 class SubscribeChannelCheck(GenericAPIView):

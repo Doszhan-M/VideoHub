@@ -40,6 +40,12 @@ class ConnectionManager:
                 msg = {message.user: message.message}
                 await self.broadcast(chat_id, msg)
 
-    async def save_message_db(self,  chat_id: int, user: str,
-                              message: str, message_dal: MessageDAL):
+    async def save_message_db(
+        self,
+        chat_id: int,
+        user: str,
+        message: str,
+        message_dal: MessageDAL,
+    ):
+        print('create')
         await message_dal.create_message(user, message, chat_id)

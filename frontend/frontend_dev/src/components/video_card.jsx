@@ -9,13 +9,13 @@ import HoverVideoPlayer from 'react-hover-video-player';
 
 function VideoCard(props) {
 
+    const id = props.video.id
     const scr = props.video.imagekit_url
     const user_avatar = props.video.user_avatar
     const author = props.video.username
     const title = props.video.title
     const upload_date = props.video.upload_date
     const views_count = props.video.views
-    const id = props.video.id
 
     return (
         <div className="video anim">

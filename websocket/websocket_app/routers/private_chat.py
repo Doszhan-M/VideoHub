@@ -1,7 +1,5 @@
 from fastapi.templating import Jinja2Templates
-from fastapi import (
-    APIRouter,  WebSocketDisconnect, Request, 
-    WebSocket, Depends)
+from fastapi import APIRouter, WebSocketDisconnect, Request, WebSocket, Depends
 
 from dependencies import get_message_dal
 from db.dals.message_dal import MessageDAL
@@ -12,12 +10,15 @@ from managers.private_socket import ConnectionManager
 router = APIRouter()
 manager = ConnectionManager()
 templates = Jinja2Templates(directory="templates")
-    
 
 
 @router.websocket("/ws/{my_email}/{companion_email}")
-async def websocket_endpoint(websocket: WebSocket, my_email: str,
-                             companion_email: str, message_dal: MessageDAL = Depends(get_message_dal)):
+async def websocket_endpoint(
+    websocket: WebSocket,
+    my_email: str,
+    companion_email: str,
+    message_dal: MessageDAL = Depends(get_message_dal),
+):
     companion_id = await user_id_by_email(companion_email)
     my_id = await user_id_by_email(my_email)
     chat_id = my_id + companion_id
@@ -37,5 +38,4 @@ async def websocket_endpoint(websocket: WebSocket, my_email: str,
 
 @router.get("/")
 def test_page(request: Request):
-    return templates.TemplateResponse(
-        "private_chat.html", {"request": request})
+    return templates.TemplateResponse("private_chat.html", {"request": request})

@@ -1,10 +1,14 @@
-
-from pydantic import BaseModel
 from fastapi.templating import Jinja2Templates
 from fastapi import (
-    APIRouter,  WebSocketDisconnect, 
-    WebSocket, Request, Response)
+    WebSocketDisconnect,
+    APIRouter,
+    WebSocket,
+    Request,
+    Depends,
+)
 
+from dependencies import get_message_dal
+from db.dals.message_dal import MessageDAL
 from managers.group_socket import ConnectionManager
 
 
@@ -13,39 +17,24 @@ manager = ConnectionManager()
 templates = Jinja2Templates(directory="templates")
 
 
-@router.websocket("/api/chat")
-async def chat(websocket: WebSocket):
-    sender = websocket.cookies.get("X-Authorization")
-    print(sender)
-    if sender:
-        await manager.connect(websocket, sender)
-        response = {
-            "sender": sender,
-            "message": "got connected"
-        }
-        await manager.broadcast(response)
-        try:
-            while True:
-                data = await websocket.receive_json()
-                await manager.broadcast(data)
-        except WebSocketDisconnect:
-            manager.disconnect(websocket, sender)
-            response['message'] = "left"
-            await manager.broadcast(response)
-            
-            
+@router.websocket("/api/chat/{sender}/{avatar}")
+async def chat(
+    websocket: WebSocket,
+    sender: str,
+    avatar: str,
+    message_dal: MessageDAL = Depends(get_message_dal),
+):
+    await manager.connect(websocket, sender)
+    await manager.history_load(message_dal)
+    try:
+        while True:
+            data = await websocket.receive_json()
+            message = {"user": sender, "message": data["message"], "avatar": avatar}
+            await manager.broadcast(message)
+            await manager.save_message_db(sender, data["message"], avatar, message_dal)
+    except WebSocketDisconnect:
+        manager.disconnect(websocket, sender)
 
-@router.get("/api/current_user")
-def get_user(request: Request):
-    return request.cookies.get("X-Authorization")
-
-class RegisterValidator(BaseModel):
-    username: str
-
-@router.post("/api/register/{user}")
-def register_user(user: str, response: Response):
-    response.set_cookie(key="X-Authorization", value=user, httponly=True)
-    
 
 @router.get("/")
 def get_home(request: Request):
