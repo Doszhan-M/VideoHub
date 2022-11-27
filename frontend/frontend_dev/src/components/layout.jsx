@@ -9,6 +9,7 @@ import Header from "./header"
 import Sidebar from "./sidebar"
 
 import api from "../api/requests"
+import { websocketUrl } from "../utils/env_variables"
 import { checkAuth, websocket, userInfo } from "../store/userSlice"
 import getDate from "../utils/datetime"
 
@@ -25,11 +26,11 @@ const Layout = (props) => {
             await api.getMe().then(response => {
                 dispatch(userInfo(response.data))
                 let socketAvatar = response.data.avatar.replaceAll('/', '+')
-                const socket = new WebSocket(`wss://video.localhost/websocket/api/chat/${response.data.first_name}/${socketAvatar}`)
+                const socket = new WebSocket(`${websocketUrl}/websocket/api/chat/${response.data.first_name}/${socketAvatar}`)
                 dispatch(websocket(socket))
             });
         } else {
-            const socket = new WebSocket(`wss://video.localhost/websocket/api/chat/${null}/${null}`)
+            const socket = new WebSocket(`${websocketUrl}/websocket/api/chat/${null}/${null}`)
             dispatch(websocket(socket))
         }
     }

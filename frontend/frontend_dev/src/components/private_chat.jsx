@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { ToastContainer, toast } from 'react-toastify';
 
 import { privateSocket } from "../store/userSlice"
+import { websocketUrl } from "../utils/env_variables"
 import { BsFillPersonCheckFill } from 'react-icons/bs';
 import Message from "./message"
 
@@ -21,7 +22,7 @@ function PrivateChat(props) {
     if (my_email != null && avatar != null && socket == null) {
         const socketAvatar = avatar.replaceAll('/', '+')
         const companion_email = props.ownerEmail
-        const websocket = new WebSocket(`wss://video.localhost/websocket/private_chat/ws/${my_email}/${socketAvatar}/${companion_email}`)
+        const websocket = new WebSocket(`${websocketUrl}/websocket/private_chat/ws/${my_email}/${socketAvatar}/${companion_email}`)
         dispatch(privateSocket(websocket))
     }
 
