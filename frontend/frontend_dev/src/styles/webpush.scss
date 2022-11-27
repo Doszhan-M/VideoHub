@@ -1,0 +1,41 @@
+.web_push_toast {
+
+    width: 250px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(63, 60, 60);
+    border-radius: 20px;
+
+    .question {
+        text-align: center;
+        color: rgb(15, 15, 15);
+        margin-bottom: 15px;
+    }
+
+    .btns {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 80%;
+    }
+
+    button {
+        width: 80px;
+        height: 30px;
+        text-transform: uppercase;
+        border: 1px solid #ec1840;
+        background-color: rgb(122, 116, 116);
+        border-radius: 10px;
+
+        &:hover {
+            background-color: rgb(207, 195, 195);
+        }
+    }
+
+    .accept {
+        border: 1px solid greenyellow;
+    }
+}

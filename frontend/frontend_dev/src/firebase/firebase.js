@@ -21,6 +21,7 @@ export const fetchToken = (setTokenFound) => {
     if (currentToken) {
       console.log('current token for client: ', currentToken);
       setTokenFound(true);
+      return currentToken
     } else {
       console.log('No registration token available. Request permission to generate one.');
       setTokenFound(false);

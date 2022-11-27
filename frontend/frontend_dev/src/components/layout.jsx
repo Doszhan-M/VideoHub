@@ -12,31 +12,11 @@ import api from "../api/requests"
 import { websocketUrl } from "../utils/env_variables"
 import { checkAuth, websocket, userInfo } from "../store/userSlice"
 import getDate from "../utils/datetime"
-
-import { ToastContainer, toast } from 'react-toastify';
-import { fetchToken, onMessageListener } from '../firebase/firebase';
+import WebPush from "./webpush"
 
 
 const Layout = (props) => {
 
-    const [notification, setNotification] = useState('');
-    const [isTokenFound, setTokenFound] = useState(false);
-    // fetchToken(setTokenFound);
-
-    onMessageListener().then(payload => {
-        setNotification(payload.notification.title)
-        console.log(payload);
-        toast(notification)
-    }).catch(err => console.log('failed: ', err));
-
-    const onShowNotificationClicked = () => {
-        fetchToken(setTokenFound);
-
-        toast(notification)
-    }
-
-
-    // --------------------------------------------
     const dispatch = useDispatch()
     const isMobile = useMediaQuery({ query: '(max-width: 812px)' })
 
@@ -58,17 +38,11 @@ const Layout = (props) => {
 
     useEffect(() => { checkSessionActions(); }, []);
 
+
+
     return (
         <main>
-
-
-            <button onClick={onShowNotificationClicked}>Show Toast</button>
-            {isTokenFound && <h1> Notification permission enabled 👍🏻 </h1>}
-            {!isTokenFound && <h1> Need notification permission ❗️ </h1>}
-
-            <ToastContainer position="top-left" theme="dark" />
-
-
+            <WebPush/>
             <Header tasks={props.all_tasks} />
             <div className="container">
                 {isMobile ? (
@@ -84,7 +58,6 @@ const Layout = (props) => {
                     <Outlet />
                 </div>
             </div>
-
             <footer>{getDate()}</footer>
         </main>
     )
