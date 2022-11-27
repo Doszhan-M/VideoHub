@@ -5,19 +5,19 @@ import { useSelector } from "react-redux"
 
 import api from "../api/requests"
 import VideoDetail from "../components/video_detail"
-import Chat from "../components/chat"
+import PrivateChat from "../components/private_chat"
 import VideoColumn from "../components/video_column"
 
-// TODO: subscribe button
 
 function VideoPage(props) {
     const { id } = useParams()
     const isAuth = useSelector(state => state.user.isAuth)
     const authUserChannelId = useSelector(state => state.user.channel_id)
     const [videoChannelId, setVideoChannelId] = useState('')
-    const [videoOwner, setVideoOwner] = useState(false)
+    const [videoOwner, setVideoOwner] = useState(null)
     const [userVideoList, setUserVideoList] = useState([])
     const [columnTitle, setColumnTitle] = useState('')
+    const [ownerEmail, setOwnerEmail] = useState(null)
 
     const checkChannelOwner = async () => {
         if (isAuth & authUserChannelId == videoChannelId) {
@@ -38,15 +38,15 @@ function VideoPage(props) {
         const getVideoOwner = async () => {
             const response = await api.getVideo(id)
             setVideoChannelId(response.channel)
+            setOwnerEmail(response.user_email)
             if (isAuth & authUserChannelId == response.channel) {
                 setVideoOwner(true)
-            }
+            } else {setVideoOwner(false)}
         }
         getVideoOwner()
     }, [id,]);
 
     useEffect(() => { checkChannelOwner() }, [videoChannelId,]);
-
 
     return (
         <div className="page_video">
@@ -56,13 +56,13 @@ function VideoPage(props) {
             <div className="video_right_container">
                 {videoOwner ? (
                     <VideoColumn videoList={userVideoList} title={columnTitle} />
-                ) : (
+                ) : (videoOwner == false ?
                     <>
-                        <Chat />
+                        <PrivateChat ownerEmail={ownerEmail}/>
                         <div className="related_videos">
                             <VideoColumn videoList={userVideoList} title={columnTitle} />
                         </div>
-                    </>
+                    </> : <></>
                 )}
             </div>
         </div>

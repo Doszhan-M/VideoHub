@@ -1,32 +1,23 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
 import "../styles/css/header.min.css";
 
 import { FaBell } from 'react-icons/fa';
 import { RiVideoUploadLine, RiLoginBoxLine } from 'react-icons/ri';
 
-import api from "../api/requests"
 import { loginUrl, loginUrlRedirectVideoUpload } from "../utils/env_variables"
-import { userInfo } from "../store/userSlice"
 
 
 function Header(props) {
     let navigate = useNavigate();
-    const dispatch = useDispatch()
     const isAuth = useSelector(state => state.user.isAuth)
     const username = useSelector(state => state.user.username)
     const avatar = useSelector(state => state.user.avatar)
     const [searchText, setSearchText] = useState('')
 
-    const getUserData = () => {
-        api.getMe().then(response => {
-            dispatch(userInfo(response.data))
-        });
-    }
     const authStatus = () => {
         if (isAuth) {
-            // { getUserData() }
             return <div>
                 <img className="user_img" src={avatar}></img>
                 <div className="username"><Link to={`/profile`}>{username}</Link></div>

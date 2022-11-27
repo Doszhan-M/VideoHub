@@ -11,6 +11,7 @@ const userSlice = createSlice({
         username: null,
         channel_id: null,
         socket: null,
+        privateSocket: null,
     },
     reducers: {
         checkAuth(state, action) {
@@ -25,9 +26,12 @@ const userSlice = createSlice({
         websocket(state, action) {
             state.socket = action.payload;
         },
+        privateSocket(state, action) {
+            state.privateSocket = action.payload;
+        },
     },
 });
 
-export const { checkAuth, userInfo, websocket,} = userSlice.actions;
+export const { checkAuth, userInfo, websocket, privateSocket} = userSlice.actions;
 
 export default userSlice.reducer;

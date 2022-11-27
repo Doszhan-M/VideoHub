@@ -12,28 +12,35 @@ manager = ConnectionManager()
 templates = Jinja2Templates(directory="templates")
 
 
-@router.websocket("/ws/{my_email}/{companion_email}")
+@router.websocket("/ws/{my_email}/{avatar}/{companion_email}")
 async def websocket_endpoint(
     websocket: WebSocket,
     my_email: str,
     companion_email: str,
+    avatar: str,
     message_dal: MessageDAL = Depends(get_message_dal),
 ):
     companion_id = await user_id_by_email(companion_email)
     my_id = await user_id_by_email(my_email)
     chat_id = my_id + companion_id
-    print(chat_id)
     await manager.connect_private_chat(chat_id, websocket)
     await manager.history_load(chat_id, message_dal)
     try:
         while True:
-            msg = await websocket.receive_text()
-            await manager.broadcast(chat_id, {my_email: msg})
-            await manager.save_message_db(chat_id, my_email, msg, message_dal)
+            data = await websocket.receive_text()
+            message = {"user": my_email, "message": data, "avatar": avatar}
+            message_id = await manager.save_message_db(
+                chat_id,
+                my_email,
+                data,
+                avatar,
+                message_dal,
+            )
+            message["id"] = message_id
+            print("message", message)
+            await manager.broadcast(chat_id, message)
     except WebSocketDisconnect:
         manager.disconnect(chat_id, websocket)
-        msg = f"Client #{my_id} left the chat"
-        await manager.broadcast(chat_id, msg)
 
 
 @router.get("/")

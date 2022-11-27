@@ -1,40 +1,56 @@
 import React, { useEffect, useState, useRef } from "react";
 import "../styles/css/chat.min.css";
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { ToastContainer, toast } from 'react-toastify';
 
-import { MdPeopleAlt } from 'react-icons/md';
+import { privateSocket } from "../store/userSlice"
+import { BsFillPersonCheckFill } from 'react-icons/bs';
 import Message from "./message"
 
 
-function Chat(props) {
+function PrivateChat(props) {
+
+    const dispatch = useDispatch()
     const bottomRef = useRef(null);
     const isAuth = useSelector(state => state.user.isAuth)
-    const socket = useSelector(state => state.user.socket)
     const [messages, setMessages] = useState([])
-    const [people, setPeople] = useState(5)
+    const socket = useSelector(state => state.user.privateSocket)
+    const my_email = useSelector(state => state.user.email)
+    const avatar = useSelector(state => state.user.avatar)
 
+    if (my_email != null && avatar != null && socket == null) {
+        const socketAvatar = avatar.replaceAll('/', '+')
+        const companion_email = props.ownerEmail
+        const websocket = new WebSocket(`wss://video.localhost/websocket/private_chat/ws/${my_email}/${socketAvatar}/${companion_email}`)
+        dispatch(privateSocket(websocket))
+    }
 
     const websocket = () => {
         if (socket) {
             socket.onmessage = function (event) {
                 const data = JSON.parse(event.data)
                 setMessages(messages => [...messages, data])
-                setPeople(Math.round(Math.random() * 20))
                 bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
             }
         }
     }
 
+    const websocketClose = () => {
+        dispatch(privateSocket(null))
+    }
+
+
     useEffect(() => { websocket() }, [socket]);
+    useEffect(()=>{
+        return ()=> websocketClose()
+    },[])
 
     const pressEnter = (event) => {
         if (isAuth) {
             if (event.key === 'Enter') {
                 let msg = event.target.value;
-                let data = { message: msg }
                 event.target.value = ''
-                socket.send(JSON.stringify(data))
+                socket.send(JSON.stringify(msg))
                 bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
             }
         } else {
@@ -45,10 +61,10 @@ function Chat(props) {
     return (
         <div className="chat">
             <div className="chat-header anim">
-                Live Chat
+                Private chat
                 <div className="people">
-                    <MdPeopleAlt />
-                    <span>{people} people</span>
+                    <BsFillPersonCheckFill />
+                    <span>{props.ownerEmail}</span>
                 </div>
             </div>
             <div className="message-container">
@@ -66,4 +82,4 @@ function Chat(props) {
         </div>
     )
 }
-export default Chat;
+export default PrivateChat;

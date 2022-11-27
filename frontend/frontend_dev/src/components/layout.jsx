@@ -1,7 +1,6 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { slide as Burger } from 'react-burger-menu'
 import "../styles/css/layout.min.css";
 import { useMediaQuery } from 'react-responsive'

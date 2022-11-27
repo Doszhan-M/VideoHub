@@ -30,13 +30,17 @@
   "cSpell.words": [
     "aiohttp",
     "aioredis",
+    "dals",
     "DJOSER",
     "doszhan",
+    "fastapi",
     "imagekit",
     "imgix",
     "mediastatic",
     "simplejwt",
+    "templating",
     "testpass",
+    "toastify",
     "Twotone",
     "videohub",
     "yasg"

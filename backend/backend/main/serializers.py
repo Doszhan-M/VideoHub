@@ -19,6 +19,7 @@ class VideoSerializer(ModelSerializer):
     video_file = FileField(required=False)
     channel = PrimaryKeyRelatedField(queryset=Channel.objects.all(), required=False)
     username = CharField(source="channel.owner.first_name", read_only=True)
+    user_email = CharField(source="channel.owner.email", read_only=True)
     user_avatar = CharField(source="channel.owner.avatar.url")
     upload_date = DateTimeField(format="%d-%m-%Y")
     imagekit_url = SerializerMethodField()
@@ -35,6 +36,7 @@ class VideoSerializer(ModelSerializer):
             "upload_date",
             "likes",
             "username",
+            "user_email",
             "user_avatar",
             "views",
             "imagekit_url",

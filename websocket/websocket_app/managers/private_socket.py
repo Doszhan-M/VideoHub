@@ -37,7 +37,12 @@ class ConnectionManager:
             has_history = True
         if has_history:
             for message in messages:
-                msg = {message.user: message.message}
+                msg = {
+                    "id": message.id,
+                    "user": message.user,
+                    "message": message.message,
+                    "avatar": message.avatar,
+                }
                 await self.broadcast(chat_id, msg)
 
     async def save_message_db(
@@ -45,7 +50,13 @@ class ConnectionManager:
         chat_id: int,
         user: str,
         message: str,
+        avatar: str,
         message_dal: MessageDAL,
     ):
-        print('create')
-        await message_dal.create_message(user, message, chat_id)
+        message_id = await message_dal.create_message(
+            user,
+            message,
+            avatar,
+            chat_id,
+        )
+        return message_id

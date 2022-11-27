@@ -34,7 +34,6 @@ class ConnectionManager:
                     "message": message.message,
                     "avatar": message.avatar,
                 }
-                print(msg)
                 await websocket.send_json(msg)
 
     async def save_message_db(
