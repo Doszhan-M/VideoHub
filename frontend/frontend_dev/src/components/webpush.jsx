@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import toast, { Toaster } from 'react-hot-toast';
 import { fetchToken, onMessageListener } from '../firebase/firebase';
 import "../styles/css/webpush.min.css";
@@ -7,18 +7,16 @@ import api from "../api/requests"
 
 const WebPush = (props) => {
 
-    const [notification, setNotification] = useState('');
-    const [isTokenFound, setTokenFound] = useState(false);
-
     onMessageListener().then(payload => {
-        setNotification(payload.notification.title)
         console.log(payload);
-        // toast(notification)
     }).catch(err => console.log('failed: ', err));
 
-    const activateWebPush = (t) => {
+    const activateWebPush = async (t) => {
+        const token = await fetchToken();
         toast.remove(t.id)
-        fetchToken(setTokenFound);
+        console.log('token', token)
+        const response = await api.saveWebPushToken(token)
+        console.log(response)
     }
 
     const webPushNotify = () => toast.custom((t) => (
@@ -33,19 +31,22 @@ const WebPush = (props) => {
         </div>
     ));
 
-    const checkClient = async() => {
-        const token = fetchToken(setTokenFound);
-        const response = await api.ckeckWebPushToken(token)
-        if (response.status == 200) {
-            console.log('token already exist')
-        } else {
-            console.log('token not exist')
+    const checkClient = async () => {
+        if (Notification.permission !== "granted") {
             webPushNotify()
+        } else {
+            const foundToken = await fetchToken();
+            const response = await api.checkWebPushToken(foundToken)
+            if (response.status == 200) {
+                console.log("webPush token already register")
+            } else {
+                webPushNotify()
+            }
         }
-    }
-    // TODO: на фронте сделать реквест ckeckWebPushToken, на бекенде сделать роут проверки токена в базе данных
 
-    setTimeout(() => { checkClient() }, 1000)
+    }
+
+    useEffect(() => { setTimeout(() => { checkClient() }, 1000) }, []);
 
     return (
         <>
@@ -53,7 +54,7 @@ const WebPush = (props) => {
                 position="top-center"
                 toastOptions={{
                     duration: 20000,
-                  }}
+                }}
             />
         </>
     )

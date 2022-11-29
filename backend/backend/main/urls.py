@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import include, path
 
 from .views import (
     SearchVideo,
@@ -20,10 +20,16 @@ from .views import (
     Trending,
     MostPopular,
     ForYou,
+    WebPushTokens,
 )
 
 
 app_name = "main"
+
+from rest_framework.routers import DefaultRouter, SimpleRouter
+
+router = SimpleRouter()
+router.register(r"tokens", WebPushTokens)
 
 
 urlpatterns = [
@@ -54,4 +60,5 @@ urlpatterns = [
     path("trending/", Trending.as_view(), name="trending"),
     path("most_popular/", MostPopular.as_view(), name="most_popular"),
     path("for_you/", ForYou.as_view(), name="for_you"),
+    path("web_push/", include(router.urls)),
 ]

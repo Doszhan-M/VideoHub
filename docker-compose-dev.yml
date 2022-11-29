@@ -38,18 +38,18 @@ services:
     env_file:
       - dev.env
 
-  # celery_backend:
-  #   build:
-  #     context: ./backend
-  #     dockerfile: ./celery.dockerfile
-  #   restart: always
-  #   volumes:
-  #     - ./backend/backend:/backend/
-  #   env_file:
-  #     - dev.env
-  #   depends_on:
-  #     - backend
-  #     - redis
+  celery_backend:
+    build:
+      context: ./backend
+      dockerfile: ./celery.dockerfile
+    restart: always
+    volumes:
+      - ./backend/backend:/backend/
+    env_file:
+      - dev.env
+    depends_on:
+      - backend
+      - redis
 
   websocket:
     build:

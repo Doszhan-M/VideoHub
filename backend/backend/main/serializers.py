@@ -11,7 +11,7 @@ from rest_framework.serializers import (
     SerializerMethodField,
 )
 
-from .models import Video, Channel, Comment
+from .models import Video, Channel, Comment, WebPushToken
 
 
 class VideoSerializer(ModelSerializer):
@@ -45,9 +45,9 @@ class VideoSerializer(ModelSerializer):
     def get_imagekit_url(self, obj):
         if not obj.video_file:
             return None
-        elif getenv('IMAGEKIT') == 'imagekit':   
+        elif getenv("IMAGEKIT") == "imagekit":
             imagekit_url = "ik.imagekit.io/videohub"
-        elif getenv('IMAGEKIT') == 'imgix':       
+        elif getenv("IMAGEKIT") == "imgix":
             imagekit_url = "doszhan.imgix.net"
         aws_url = "mediastatic.s3.amazonaws.com"
         url = obj.video_file.url.replace(aws_url, imagekit_url)
@@ -79,7 +79,10 @@ class CommentSerializer(ModelSerializer):
 class CreateCommentSerializer(ModelSerializer):
     class Meta:
         model = Comment
-        fields = (
-            "text",
-            "video",
-        )
+        fields = ("text", "video")
+        
+        
+class WebPushSerializer(ModelSerializer):
+    class Meta:
+        model = WebPushToken
+        fields = "__all__"

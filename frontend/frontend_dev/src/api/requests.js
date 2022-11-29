@@ -281,6 +281,49 @@ const userInfo = async (id) => {
 }
 
 
+const checkWebPushToken = async (token) => {
+    const url = `/api/web/web_push/tokens/${token}/`
+    const response = await axios(
+        {
+            method: "get",
+            url: url,
+        }
+    ).then(response => {
+        return response
+    }).catch((error) => {
+        if (error.response.status === 404) {
+            // console.clear();
+            return error.response
+        }
+    })
+    return response
+}
+
+
+const saveWebPushToken = async (token) => {
+    const url = `/api/web/web_push/tokens/`
+    const response = await axios(
+        {
+            method: "post",
+            url: url,
+            data: {
+                "token": token
+            },
+            withCredentials: true,
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRFToken': await csrf()
+            }
+        }
+    ).then(response => {
+        return response
+    })
+    return response
+}
+
+
 export default {
     check_session,
     csrf,
@@ -303,4 +346,6 @@ export default {
     createComment,
     videoComments,
     userInfo,
+    checkWebPushToken,
+    saveWebPushToken,
 }

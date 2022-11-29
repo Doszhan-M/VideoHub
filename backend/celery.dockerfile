@@ -21,4 +21,5 @@ COPY backend/ ./
 RUN chown -R backend:backend ./
 USER backend
 
-ENTRYPOINT celery -A root worker -l INFO
+# ENTRYPOINT celery -A root worker -l INFO
+ENTRYPOINT watchfiles --filter python 'celery -A root worker -l INFO'

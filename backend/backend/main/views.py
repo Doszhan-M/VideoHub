@@ -4,8 +4,9 @@ from elasticsearch_dsl import Q
 from rest_framework import status
 from django.db.models.query import QuerySet
 from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
 from rest_framework.parsers import MultiPartParser
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import (
     ListAPIView,
     RetrieveAPIView,
@@ -21,8 +22,14 @@ from .serializers import (
     UpdateCreateVideoSerializer,
     CreateCommentSerializer,
     CommentSerializer,
+    WebPushSerializer,
 )
-from .models import Video, Comment, SubscribeChannel
+from .models import (
+    Video,
+    Comment,
+    SubscribeChannel,
+    WebPushToken,
+)
 
 
 class SearchVideo(ListAPIView):
@@ -196,8 +203,8 @@ class SubscribeChannelCheck(GenericAPIView):
             user=request.user,
         )
         if has_subscribe:
-            return Response('subscribed')
-        return Response('subscribe')
+            return Response("subscribed")
+        return Response("subscribe")
 
 
 class UserVideos(ListAPIView):
@@ -286,3 +293,13 @@ class ForYou(ListAPIView):
         [list_queryset.append(item) for item in queryset]
         shuffle(list_queryset)
         return list_queryset
+
+
+class WebPushTokens(ModelViewSet):
+    """
+    A simple ViewSet for viewing and editing accounts.
+    """
+
+    queryset = WebPushToken.objects.all()
+    serializer_class = WebPushSerializer
+    lookup_field = 'token'

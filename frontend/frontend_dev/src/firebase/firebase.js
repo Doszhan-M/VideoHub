@@ -16,15 +16,14 @@ const firebaseApp = initializeApp(firebaseConfig);
 const messaging = getMessaging(firebaseApp);
 
 
-export const fetchToken = (setTokenFound) => {
-  return getToken(messaging, { vapidKey: 'BF1UfpCDbV3onNFVK4nVG6_diu5KdSAttn2ZMcOYS6e5d-Peah5_vOgRUnaiWC_zKRGQ5iK7qx2WZDInycyxClo' }).then((currentToken) => {
+export const fetchToken = async (setToken) => {
+  const vapid = 'BF1UfpCDbV3onNFVK4nVG6_diu5KdSAttn2ZMcOYS6e5d-Peah5_vOgRUnaiWC_zKRGQ5iK7qx2WZDInycyxClo'
+  return getToken(messaging, { vapidKey:  vapid}).then((currentToken) => {
     if (currentToken) {
-      console.log('current token for client: ', currentToken);
-      setTokenFound(true);
+      // console.log('current token for client: ', currentToken);
       return currentToken
     } else {
       console.log('No registration token available. Request permission to generate one.');
-      setTokenFound(false);
     }
   }).catch((err) => {
     console.log('An error occurred while retrieving token. ', err);

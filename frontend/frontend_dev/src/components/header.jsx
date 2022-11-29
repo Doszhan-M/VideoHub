@@ -15,7 +15,8 @@ function Header(props) {
     const username = useSelector(state => state.user.username)
     const avatar = useSelector(state => state.user.avatar)
     const [searchText, setSearchText] = useState('')
-
+    const [notifyCount, setNotifyCount] = useState(0)
+    // TODO: notifyCount in useSelector
     const authStatus = () => {
         if (isAuth) {
             return <div>
@@ -76,7 +77,12 @@ function Header(props) {
                 </div>
                 <div className="notification">
                     <FaBell />
-                    <span className="badge" style={{ backgroundColor: "red" }}>2</span>
+                    <span className="badge" style={
+                        notifyCount > 0
+                            ? { backgroundColor: "red" }
+                            : { backgroundColor: "blue" }}>
+                        {notifyCount}
+                    </span>
                 </div>
             </div>
         </header>

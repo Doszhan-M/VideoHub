@@ -93,3 +93,10 @@ class LikeVideo(models.Model):
 
     def __str__(self):
         return f"{self.user.__str__()} + {self.video.__str__()}"
+
+
+class WebPushToken(models.Model):
+    token = models.TextField(unique=True)
+
+    def __str__(self):
+        return self.token

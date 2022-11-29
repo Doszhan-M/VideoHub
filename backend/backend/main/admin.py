@@ -6,6 +6,7 @@ from .models import (
     Comment,
     SubscribeChannel,
     LikeVideo,
+    WebPushToken,
 )
 
 
@@ -23,37 +24,16 @@ class LikeVideoInline(admin.TabularInline):
 
 
 class VideoDash(AdminUpdatedFields):
-    list_display = (
-        "id",
-        "title",
-        "channel",
-        "upload_date",
-        "id",
-    )
+    list_display = ("id", "title", "channel", "upload_date", "id")
     list_display_links = ("channel", "title", "upload_date")
-    search_fields = (
-        "channel",
-        "title",
-    )
-    list_filter = [
-        "channel",
-    ]
+    search_fields = ("channel", "title")
+    list_filter = ["channel"]
     inlines = (LikeVideoInline,)
 
 
 class CommentDash(AdminUpdatedFields):
-    list_display = (
-        "user",
-        "video",
-        "create",
-        "id",
-    )
-    list_display_links = (
-        "user",
-        "video",
-        "create",
-        "id",
-    )
+    list_display = ("user", "video", "create", "id")
+    list_display_links = ("user", "video", "create", "id")
 
 
 admin.site.register(Video, VideoDash)
@@ -61,3 +41,4 @@ admin.site.register(Channel)
 admin.site.register(Comment, CommentDash)
 admin.site.register(LikeVideo)
 admin.site.register(SubscribeChannel)
+admin.site.register(WebPushToken)
