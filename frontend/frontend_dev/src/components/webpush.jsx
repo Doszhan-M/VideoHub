@@ -1,14 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import toast, { Toaster } from 'react-hot-toast';
 import { fetchToken, onMessageListener } from '../firebase/firebase';
+import { useDispatch } from "react-redux"
 import "../styles/css/webpush.min.css";
 import api from "../api/requests"
+import { changeNotifyCount, pushDataList } from "../store/pushSlice"
 
 
 const WebPush = (props) => {
 
+    const dispatch = useDispatch()
+
     onMessageListener().then(payload => {
-        console.log(payload);
+        dispatch(changeNotifyCount(1))
+        dispatch(pushDataList(payload.notification))
     }).catch(err => console.log('failed: ', err));
 
     const activateWebPush = async (t) => {

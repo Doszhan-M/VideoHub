@@ -213,24 +213,30 @@ header {
             display: flex;
             align-items: center;
             border-radius: 2px;
+            
+                &:active {
+                    transform: scale(1.1);
+                }
 
-            & svg {
-                width: 25px;
-                height: 25px;
-            }
+                & svg {
+                    width: 25px;
+                    height: 25px;
+                }
+    
+                &:hover {
+                    background: red;
+                }
+    
+                & .badge {
+                    position: absolute;
+                    top: -5px;
+                    right: -5px;
+                    padding: 1px 5px;
+                    border-radius: 50%;
+                    color: white;
+                }
 
-            &:hover {
-                background: red;
-            }
 
-            & .badge {
-                position: absolute;
-                top: -5px;
-                right: -5px;
-                padding: 1px 5px;
-                border-radius: 50%;
-                color: white;
-            }
         }
 
 

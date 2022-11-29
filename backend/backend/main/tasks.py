@@ -13,7 +13,7 @@ def send_web_push(_token, video_id, title, description):
         {
             "notification": {
                 "title": title,
-                "body": description,
+                "body": video_id,
                 "icon": "https://doszhan.online/images/icons/android-icon-192x192.png",
                 "click_action": f"https://doszhan.online/video/{video_id}",
             },

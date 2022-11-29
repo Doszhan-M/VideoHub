@@ -8,8 +8,8 @@ module.exports = {
     mode: "production",
     entry: "./src/index.js",
     performance: {
-        maxEntrypointSize: 712000,
-        maxAssetSize: 712000
+        maxEntrypointSize: 812000,
+        maxAssetSize: 812000
     },
     resolve: {
         extensions: [".js", ".jsx"]

@@ -28,6 +28,7 @@ class VideoDash(AdminUpdatedFields):
     list_display_links = ("channel", "title", "upload_date")
     search_fields = ("channel", "title")
     list_filter = ["channel"]
+    save_on_top = True
     inlines = (LikeVideoInline,)
 
 

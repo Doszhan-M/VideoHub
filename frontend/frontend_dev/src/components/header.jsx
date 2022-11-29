@@ -1,22 +1,26 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
+import toast, { Toaster } from 'react-hot-toast';
 import "../styles/css/header.min.css";
 
 import { FaBell } from 'react-icons/fa';
 import { RiVideoUploadLine, RiLoginBoxLine } from 'react-icons/ri';
 
 import { loginUrl, loginUrlRedirectVideoUpload } from "../utils/env_variables"
+import { changeNotifyCount, clearDataList } from "../store/pushSlice"
 
 
 function Header(props) {
+    const dispatch = useDispatch()
     let navigate = useNavigate();
     const isAuth = useSelector(state => state.user.isAuth)
     const username = useSelector(state => state.user.username)
     const avatar = useSelector(state => state.user.avatar)
+    const notifyCount = useSelector(state => state.push.notifyCount)
+    const dataList = useSelector(state => state.push.dataList)
     const [searchText, setSearchText] = useState('')
-    const [notifyCount, setNotifyCount] = useState(0)
-    // TODO: notifyCount in useSelector
+
     const authStatus = () => {
         if (isAuth) {
             return <div>
@@ -61,6 +65,23 @@ function Header(props) {
         }
     }
 
+    const showPushNotify = () => {
+        dispatch(changeNotifyCount(-1))
+        dispatch(clearDataList())
+        {
+            dataList.length > 0 ?
+                dataList.map(data => {
+                    return toast.custom((t) => (
+                        <div className="web_push_toast">
+                            <a href={`video/${data.body}`}>
+                                <div className="question">{data.title}</div>
+                            </a>
+                        </div>
+                    ));
+                }) : <></>
+        }
+    }
+
     return (
         <header>
             <div className="title">
@@ -75,7 +96,7 @@ function Header(props) {
                 <div className="user">
                     {authStatus()}
                 </div>
-                <div className="notification">
+                <div className="notification" onClick={showPushNotify}>
                     <FaBell />
                     <span className="badge" style={
                         notifyCount > 0
