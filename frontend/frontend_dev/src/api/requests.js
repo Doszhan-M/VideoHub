@@ -281,6 +281,27 @@ const userInfo = async (id) => {
 }
 
 
+const deleteVideo = async (id) => {
+    const url = `/api/web/delete_video/${id}`
+    const response = await axios(
+        {
+            method: "delete",
+            url: url,
+            withCredentials: true,
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRFToken': await csrf()
+            }
+        }
+    ).then(response => {
+        return response.data
+    })
+    return response
+}
+
+
 const checkWebPushToken = async (token) => {
     const url = `/api/web/web_push/tokens/${token}/`
     const response = await axios(
@@ -292,7 +313,6 @@ const checkWebPushToken = async (token) => {
         return response
     }).catch((error) => {
         if (error.response.status === 404) {
-            // console.clear();
             return error.response
         }
     })
@@ -309,6 +329,28 @@ const saveWebPushToken = async (token) => {
             data: {
                 "token": token
             },
+            withCredentials: true,
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRFToken': await csrf()
+            }
+        }
+    ).then(response => {
+        return response
+    })
+    return response
+}
+
+
+const updateVideo = async (id, data) => {
+    const url = `/api/web/update_video/${id}/`
+    const response = await axios(
+        {
+            method: "put",
+            url: url,
+            data: data,
             withCredentials: true,
             headers: {
                 'Access-Control-Allow-Origin': '*',
@@ -348,4 +390,6 @@ export default {
     userInfo,
     checkWebPushToken,
     saveWebPushToken,
+    updateVideo,
+    deleteVideo,
 }

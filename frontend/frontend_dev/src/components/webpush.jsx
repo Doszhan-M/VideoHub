@@ -48,7 +48,6 @@ const WebPush = (props) => {
                 webPushNotify()
             }
         }
-
     }
 
     useEffect(() => { setTimeout(() => { checkClient() }, 60000) }, []);
@@ -58,7 +57,7 @@ const WebPush = (props) => {
             <Toaster
                 position="top-center"
                 toastOptions={{
-                    duration: 20000,
+                    duration: 120000,
                 }}
             />
         </>

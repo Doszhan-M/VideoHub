@@ -10,6 +10,7 @@ import Trending from "./pages/trending"
 import MostPopular from "./pages/most_popular"
 import Subscribe from "./pages/subscribe"
 import ForYou from "./pages/for_you"
+import Manage from "./pages/manage"
 
 
 
@@ -23,6 +24,7 @@ function App() {
           <Route index element={<Discover />} />
           <Route path="upload" element={<Upload />} />
           <Route path="video/:id" element={<VideoPage />} />
+          <Route path="edit/:id" element={<Manage />} />
           <Route path="search/:searchText" element={<Search />} />
           <Route path="search/" element={<Discover />} />
           <Route path="trending/" element={<Trending />} />
