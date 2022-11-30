@@ -1,3 +1,4 @@
+from time import sleep
 from os import getenv
 from json import dumps
 from base64 import b64decode
@@ -8,6 +9,7 @@ from root.celery import app
 
 @app.task
 def send_web_push(_token, video_id, title, description):
+    sleep(300)
     url = "https://fcm.googleapis.com/fcm/send"
     payload = dumps(
         {
