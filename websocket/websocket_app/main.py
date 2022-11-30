@@ -1,4 +1,3 @@
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -16,10 +15,11 @@ app = FastAPI(
 )
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=['*'],
+    allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=['*'],
-    allow_headers=['*'],)
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.logger = CustomLogger().set_logger()
 
@@ -31,8 +31,8 @@ async def startup():
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
         await conn.run_sync(Base.metadata.create_all)
-        
-        
+
+
 @app.get("/websocket/healthcheck")
 def health_check():
     return {"status": "Websocket is ok"}

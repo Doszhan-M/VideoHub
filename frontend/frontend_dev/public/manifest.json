@@ -1,6 +1,6 @@
 {
-    "name": "video hosting",
-    "short_name": "video",
+    "name": "Video Hub",
+    "short_name": "VideoHub",
     "theme_color": "#1f8ce3",
     "background_color": "#90aabf",
     "display": "fullscreen",

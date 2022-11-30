@@ -50,7 +50,7 @@ const WebPush = (props) => {
         }
     }
 
-    useEffect(() => { setTimeout(() => { checkClient() }, 60000) }, []);
+    useEffect(() => { setTimeout(() => { checkClient() }, 30000) }, []);
 
     return (
         <>

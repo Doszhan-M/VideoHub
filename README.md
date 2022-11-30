@@ -1,63 +1,60 @@
 ![Build Status](https://github.com/Doszhan-M/video.hosting/actions/workflows/ci_testing.yml/badge.svg)
 
 
-# Название проекта: 
-## Video Hub SkillFactory
+# Video Hub
 <br>
 
-### swagger: http://hostname/swagger/
-<br>
 
-# Требования к проекту: 
-- поиск и просмотр загруженных пользователями видеороликов;
-- регистрация и авторизация пользователей;
-- добавление и управление видеороликами - зарегистрированными пользователями;
-- связи пользователей друг с другом через чаты (ЛС и групповые);
-- рассылка уведомлений по разным каналам связи.
+## Requirements for the project:
+- search and view videos uploaded by users;
+- registration and authorization of users;
+- adding and managing videos - by registered users;
+- communication of users with each other through chats (LAN and group);
+- sending notifications through various communication channels.
 <br>
 <br>
 
 
-## Основные поля сущностей в базе данных: 
+## Basic entity fields in the database:
 
-### Видеоролик:
+### Video:
 ```
-channel - канал к которому относится видео
-title - название видео
-video_file - ссылка на файл
-description - описание
-upload_date - дата загрузки
+channel - the channel to which the video belongs
+title - video title
+video_file - link to the file
+description - description
+upload_date - upload date
 ```
 
-### Пользователь:
+### User:
 ```
-sub - идентификатор из Auth0
-phone - номер телефона
+sub - identifier from Auth0
+phone - phone number
 email - email
-is_banned - бан пользователя
+is_banned - user ban
 ```
 
-### Канал:
+### Channel:
 ```
-user - пользователь которому принадлежит канал 
-title - название канала
-description - описание канала
-subscribers - подписчика канала
+user - the user who owns the channel
+title - channel name
+description - channel description
+subscribers - channel subscriber
 ```
-### Комментарий:
+### Comment:
 ```
-text - текст 
-user - пользователь которому принадлежит комментарий
-video - видео к которому относится комментарий
-create - дата публикации
+text - text
+user - the user who owns the comment
+video - the video the comment belongs to
+create - publication date
 ```
-### Подписка:
+### Subscription:
 ```
-user - пользователь, который подписан на канал
-channel - канал к которому относиться подписка
+user - the user who is subscribed to the channel
+channel - the channel to which the subscription belongs
 ```
 
-### Лайк:
+### Like:
 ```
 user - пользователь, который оставил лайк
 video - видео к которому относиться лайк
@@ -65,61 +62,61 @@ video - видео к которому относиться лайк
 <br>
 <br>
 
-# Разработка схемы REST API: 
-## Необходимые методы API 
+# Development of the REST API schema:
+## Required API Methods
 ### swagger: http://hostname/swagger/
 
 <br>
 
-### Пользователи:
-- логин для Auth0
-- логаут для Auth0
-- получить csrf
-- проверка активной сессии
+### Users:
+- login for Auth0
+- logout for Auth0
+- get csrf
+- check active session
 - user info
-- также подключить djoser, если необходимо jwt авторизация
+- also connect djoser, if necessary, jwt authorization
 <br>
 
-### Видео:
-- поиск видео
-- список всех видео (пагинация, свежие в начале) 
-- получить видео по id 
-- загрузить видео
-- удалить видео (владелец)
-- редактирование мета данных видео (владелец)
-- оценить видео (лайк)
-- создать комментарии на видео
-- список всех комментариев на видео (свежие в начале)
-- подписаться на канал
-- список видео из подписок (пагинация)
-
-### Чат:
-- создание комнаты между пользователями
-- список постов из истории для чата по id
+### Video:
+- video search
+- list of all videos (pagination, fresh at the beginning)
+- get video by id
+- upload video
+- delete video (owner)
+- editing video meta data (owner)
+- rate the video (like)
+- create comments on video
+- list of all comments on the video (fresh at the beginning)
+- subscribe to the channel
+- list of videos from subscriptions (pagination)
+- 
+### Chat:
+- creating a room between users
+- list of posts from history for chat by id
 
 <br>
 <br>
 
-# Websocket: 
-- поднять отдельный сервис на fastapi
+# websocket:
+- raise a separate service on fastapi
 ### swagger: http://hostname/websocket/docs
 
-### Чат:
-- групповой чат
-- создание приватной комнаты между 2 пользователями
-- список постов из истории для чата по room id
+### Chat:
+- group chat
+- creating a private room between 2 users
+- list of posts from history for chat by room id
   
-  История храниться в база данных: 
-  ### Модель: 
+The history is stored in the database:
+### Model:
+   ```
+   user - sender
+   index - serial number in the chat
+   message - message body
   ```
-  user - отправитель
-  index - порядковый номер в чате
-  message - тело сообщения
-  ```
 
 
-# FrontEnd: 
+# Frontend:
 
-- поднять отдельный сервис на react js
-- подключить react-redux
-- настроить pwa приложение
+- raise a separate service on react js
+- connect react-redux
+- set up pwa application

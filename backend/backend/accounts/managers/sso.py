@@ -1,5 +1,6 @@
 from os import getenv
 from requests import request
+from base64 import b64decode
 from json import dumps, loads
 from logging import getLogger
 from urllib.parse import urlparse
@@ -45,7 +46,8 @@ class SsoManager:
 
     def sso_data_request(self) -> dict:
         """Send request to sso get authentication details"""
-        payload = getenv("SSO_TOKEN_URL").format(self.code, self.domain)
+        client_secret = b64decode(getenv("CLIENT_SECRET")).decode('utf-8')
+        payload = getenv("SSO_TOKEN_URL").format(client_secret, self.code, self.domain)
         response = request(
             "POST", self.sso_token_endpoint, headers=self.headers, data=payload
         ).json()
