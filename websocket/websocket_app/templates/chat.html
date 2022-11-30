@@ -55,7 +55,7 @@
         // create websocket
         let name = 'dos2'
         let avatar = 'https:++mediastatic.s3.amazonaws.com+media+images+avatar+accounts+avatars+avatar1487_GDodmBS.jpg'
-        var socket = new WebSocket(`wss://video.localhost/websocket/api/chat/${name}/${avatar}`)
+        var socket = new WebSocket(`wss://doszhan.online/websocket/api/chat/${name}/${avatar}`)
         socket.onmessage = function (event) {
           var parent = $('#messages')
           var data = JSON.parse(event.data)
