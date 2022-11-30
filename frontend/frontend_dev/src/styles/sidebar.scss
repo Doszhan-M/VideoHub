@@ -28,7 +28,7 @@ aside {
         height: 100%;
 
         @media screen and (max-width: 812px) {
-            & {
+            & { 
                 justify-content: center;
                 font-size: 24px;
                 padding: 5%;
@@ -62,14 +62,6 @@ aside {
 
             span {
                 margin-left: 20px;
-            }
-        }
-
-        li:first-child {
-            @media screen and (max-width: 812px) {
-                & {
-                    display: none;
-                }
             }
         }
 
