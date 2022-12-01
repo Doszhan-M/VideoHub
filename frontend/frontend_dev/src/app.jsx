@@ -11,6 +11,7 @@ import MostPopular from "./pages/most_popular"
 import Subscribe from "./pages/subscribe"
 import ForYou from "./pages/for_you"
 import Manage from "./pages/manage"
+import Profile from "./pages/profile"
 
 
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="most_popular/" element={<MostPopular />} />
           <Route path="subscribe/" element={<Subscribe />} />
           <Route path="for_you/" element={<ForYou />} />
+          <Route path="profile/" element={<Profile />} />
         </Route>
       </Routes>
   );
