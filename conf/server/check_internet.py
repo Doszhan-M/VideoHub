@@ -16,7 +16,7 @@ def check_connection():
 
 
 def start():
-    sleep(60 * 20)
+    sleep(60 * 10)
     on_air = True
     while on_air:
         sleep(60)
