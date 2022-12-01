@@ -49,6 +49,9 @@ class VideoSerializer(ModelSerializer):
             imagekit_url = "ik.imagekit.io/videohub"
         elif getenv("IMAGEKIT") == "imgix":
             imagekit_url = "doszhan.imgix.net"
+        else:
+            imagekit_url = obj.video_file.url
+            return imagekit_url
         aws_url = "mediastatic.s3.amazonaws.com"
         url = obj.video_file.url.replace(aws_url, imagekit_url)
         return url
