@@ -2,8 +2,7 @@
 
 
 # Video Hub
-<br>
-
+![picture](https://doszhan-m.github.io/storage/videohub0.png)
 
 ## Requirements for the project:
 - search and view videos uploaded by users;
